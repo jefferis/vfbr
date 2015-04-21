@@ -25,5 +25,7 @@ appropriate query url embedding a JSON query, GETs the server response and
 }
 \examples{
 vfb_generic_query(list(query_type="descendant_class", query="FBbt:00003679"))
+
+vfb_generic_query(list(query_type="individuals", query="FBbt:00003679"))
 }
 
