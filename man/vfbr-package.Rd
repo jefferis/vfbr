@@ -8,6 +8,13 @@
 \description{
 Programmatic access to the VFB API
 }
+\section{package options}{
+
+
+You can set a default server to connect to with the option:
+
+\code{options(vfbr.server="http://vfbsandbox.inf.ed.ac.uk")}.
+}
 \examples{
 \dontrun{
 ##
