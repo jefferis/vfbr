@@ -11,8 +11,10 @@
 #' @param ... additional arguments passed to
 #' @export
 #' @examples
+#' # query for descendant classes of Fan-Shaped Body
 #' vfb_generic_query(list(query_type="descendant_class", query="FBbt:00003679"))
 #'
+#' # query for individual neurons overlapping with Fan-Shaped Body
 #' vfb_generic_query(list(query_type="individuals", query="FBbt:00003679"))
 vfb_generic_query<-function(query, path="do/jsonQuery.html?json=",
                              server= getOption("vfbr.server"), parse.json=TRUE, ...) {

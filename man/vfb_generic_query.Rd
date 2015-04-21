@@ -24,8 +24,10 @@ appropriate query url embedding a JSON query, GETs the server response and
 (by default) parses the JSON result.
 }
 \examples{
+# query for descendant classes of Fan-Shaped Body
 vfb_generic_query(list(query_type="descendant_class", query="FBbt:00003679"))
 
+# query for individual neurons overlapping with Fan-Shaped Body
 vfb_generic_query(list(query_type="individuals", query="FBbt:00003679"))
 }
 
