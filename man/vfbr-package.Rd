@@ -11,17 +11,24 @@ Programmatic access to the VFB API
 \section{package options}{
 
 
-You can set a default server to connect to with the option:
-
-\code{options(vfbr.server="http://vfbsandbox.inf.ed.ac.uk")}.
+  You can set a default server to connect to with the option
+  \code{vfbr.server}. This is presently set on package load as follows:
+  \code{options(vfbr.server="http://vfbsandbox.inf.ed.ac.uk")} unless you
+  have previously set it (e.g. in your \code{\link[base]{Rprofile}}) to a
+  different value.
 }
 \examples{
+# Show state of vfbr package options
+options()[grep('^vfbr', names(options()))]
 \dontrun{
-##
+example(vfb_generic_query)
 }
 }
 \references{
-See
+See \url{http://virtualflybrain.org}
+}
+\seealso{
+\code{\link{vfb_generic_query}}
 }
 \keyword{package}
 
