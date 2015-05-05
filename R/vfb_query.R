@@ -31,8 +31,8 @@ vfb_generic_query<-function(query, path="do/jsonQuery.html?json=",
   }
 }
 
-vfb_parse_json <- function(req, ...) {
+vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
   text <- content(req, as = "text")
   if (identical(text, "")) stop("No output to parse", call. = FALSE)
-  jsonlite::fromJSON(text, simplifyVector = FALSE, ...)
+  jsonlite::fromJSON(text, simplifyVector = simplifyVector, ...)
 }
