@@ -1,23 +1,33 @@
 #' Generic query against VFB API
 #'
-#' This function epects an R list or vector describing a query and constructs an
-#' appropriate query url embedding a JSON query, GETs the server response and
-#' (by default) parses the JSON result.
+#' @description This function epects an R list or vector describing a query and
+#'   constructs an appropriate query url embedding a JSON query, GETs the server
+#'   response and (by default) parses the JSON result.
+#'
+#' @details Note that the VFB OWL query endpoint default wraps all results
+#'   inside in a JSON result object called \code{results}. When
+#'   \code{parse.json=TRUE}, the returned results will be unwrapped to remove
+#'   this outer layer.
 #'
 #' @param query A key-value list specifying the query
 #' @param path The path on the server containing the query page
 #' @param server The base url of the server
 #' @param parse.json Whether or no to parse the response (default: TRUE)
 #' @param ... additional arguments passed to
+#'   \code{jsonlite::\link[jsonlite]{fromJSON}}
 #' @export
+#' @seealso \code{\link[jsonlite]{fromJSON}}
 #' @examples
 #' # query for descendant classes of Fan-Shaped Body
 #' vfb_generic_query(list(query_type="descendant_class", query="FBbt:00003679"))
 #'
 #' # query for individual neurons overlapping with Fan-Shaped Body
-#' vfb_generic_query(list(query_type="individuals", query="FBbt:00003679"))
+#' neurondf=vfb_generic_query(list(query_type="individuals", query="FBbt:00003679"))
+#' # show the first few rows of the returned data.frame
+#' head(neurondf)
+#'
 vfb_generic_query<-function(query, path="do/jsonQuery.html?json=",
-                             server= getOption("vfbr.server"), parse.json=TRUE, ...) {
+                            server= getOption("vfbr.server"), parse.json=TRUE, ...) {
   queryj=minify(toJSON(query, auto_unbox=TRUE))
   queryj=utils::URLencode(queryj)
   url=paste0(server, "/", path, queryj)
@@ -25,7 +35,9 @@ vfb_generic_query<-function(query, path="do/jsonQuery.html?json=",
   res=GET(url)
 
   if(parse.json) {
-    vfb_parse_json(res, ...)
+    res=vfb_parse_json(res, ...)
+    if(is.list(res) && length(res)==1 && names(res)=='results')
+      res$results else res
   } else {
     res
   }
