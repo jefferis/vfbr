@@ -1,4 +1,4 @@
-#' Generic query against VFB API
+#' Generic query against VFB OWL API
 #'
 #' @description This function epects an R list or vector describing a query and
 #'   constructs an appropriate query url embedding a JSON query, GETs the server
@@ -19,14 +19,14 @@
 #' @seealso \code{\link[jsonlite]{fromJSON}}
 #' @examples
 #' # query for descendant classes of Fan-Shaped Body
-#' vfb_generic_query(list(query_type="descendant_class", query="FBbt:00003679"))
+#' vfb_owl_query(list(query_type="descendant_class", query="FBbt:00003679"))
 #'
 #' # query for individual neurons overlapping with Fan-Shaped Body
-#' neurondf=vfb_generic_query(list(query_type="individuals", query="FBbt:00003679"))
+#' neurondf=vfb_owl_query(list(query_type="individuals", query="FBbt:00003679"))
 #' # show the first few rows of the returned data.frame
 #' head(neurondf)
 #'
-vfb_generic_query<-function(query, path="do/jsonQuery.html?json=",
+vfb_owl_query<-function(query, path="do/jsonQuery.html?json=",
                             server= getOption("vfbr.server"), parse.json=TRUE, ...) {
   queryj=minify(toJSON(query, auto_unbox=TRUE))
   queryj=utils::URLencode(queryj)
@@ -51,7 +51,7 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
 
 #' Title
 #'
-#' @inheritParams vfb_generic_query
+#' @inheritParams vfb_owl_query
 #' @param sort Character vector naming one or more fields (+ delimited) to use
 #'   for sorting the results.
 #' @param rows Maximum number of rows to return

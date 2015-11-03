@@ -21,14 +21,14 @@ Programmatic access to the VFB API
 # Show state of vfbr package options
 options()[grep('^vfbr', names(options()))]
 \dontrun{
-example(vfb_generic_query)
+example(vfb_solr_query)
 }
 }
 \references{
 See \url{http://virtualflybrain.org}
 }
 \seealso{
-\code{\link{vfb_generic_query}}
+\code{\link{vfb_solr_query}}
 }
 \keyword{package}
 
