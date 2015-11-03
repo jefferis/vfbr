@@ -2,5 +2,6 @@
 
 export(vfb_owl_query)
 export(vfb_solr_query)
+export(vfb_stack_url)
 import(httr)
 import(jsonlite)
