@@ -48,3 +48,41 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
   if (identical(text, "")) stop("No output to parse", call. = FALSE)
   jsonlite::fromJSON(text, simplifyVector = simplifyVector, ...)
 }
+
+#' Title
+#'
+#' @inheritParams vfb_generic_query
+#' @param sort Character vector naming one or more fields (+ delimited) to use
+#'   for sorting the results.
+#' @param rows Maximum number of rows to return
+#' @param fields Which fields to return (+delimited). A value of \code{""}
+#'   implies all fields.
+#' @return When \code{parse.json=TRUE}, a list containing the parsed response
+#'   with the main information contained in \code{rval$response$docs}. Otherwise
+#'   an \code{httr::response} object
+#' @export
+#'
+#' @examples
+#' # Find VFB ids matching a given GMR line
+#' vfb_solr_query("fq=VFB_*&q=label:GMR_10A07*")
+#' \dontrun{
+#' # VFB id for all GMRs
+#' vfb_solr_query("fq=VFB_*&q=label:GMR_*")
+#' }
+#' @seealso \code{\link[httr]{response}}
+vfb_solr_query<-function(query, path="search/select?wt=json&df=short_form",
+                         fields="label+short_form", sort="score+desc", rows=30L,
+                         server= getOption("vfbr.server"), parse.json=TRUE, ...) {
+  fullquery=paste(paste0("sort=", sort), paste0("fl=", fields), paste0("rows=",rows), sep = "&", query)
+  url=paste0(server, "/", path, "&", fullquery)
+  url=utils::URLencode(url)
+  if(is.null(server)) stop ("You must specify a server!")
+  res=GET(url)
+
+  if(parse.json) {
+    rawres=vfb_parse_json(res, ...)
+    res=rawres[['response']]
+    attr(res, 'responseHeader')=rawres[['responseHeader']]
+  }
+  res
+}
