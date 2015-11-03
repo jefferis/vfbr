@@ -1,6 +1,6 @@
 .onLoad <- function(libname, pkgname) {
   op.vfbr=list(
-    vfbr.server="http://vfbsandbox.inf.ed.ac.uk"
+    vfbr.server="http://vfbdev.inf.ed.ac.uk"
   )
   op<-options()
   toset <- !(names(op.vfbr) %in% names(op))
