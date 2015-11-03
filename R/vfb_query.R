@@ -57,17 +57,33 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
 #' @param rows Maximum number of rows to return
 #' @param fields Which fields to return (+delimited). A value of \code{""}
 #'   implies all fields.
-#' @return When \code{parse.json=TRUE}, a list containing the parsed response
-#'   with the main information contained in \code{rval$response$docs}. Otherwise
-#'   an \code{httr::response} object
+#' @return When \code{parse.json=TRUE}, a data.frame containing the parsed
+#'   response (originally the \code{response$docs} field in the parsed JSON)
+#'   along with additional attributes including
+#'
+#'   \itemize{
+#'
+#'   \item numFound
+#'
+#'   \item start
+#'
+#'   \item responseHeader
+#'
+#'   }
+#'
+#'   When \code{parse.json=FALSE} an \code{httr::response} object
 #' @export
 #'
 #' @examples
 #' # Find VFB ids matching a given GMR line
 #' vfb_solr_query("fq=VFB_*&q=label:GMR_10A07*")
 #' \dontrun{
-#' # VFB id for all GMRs
-#' vfb_solr_query("fq=VFB_*&q=label:GMR_*")
+#' # VFB id for all GMR lines
+#' vfb_solr_query("fq=VFB_*&q=label:GMR_*", rows=4000)
+#'
+#' #' # VFB id for all FlyCircuit neurons
+#' y=vfb_solr_query("fq=VFB_*&q=source_data_link_annotation:*flycircuit*",
+#'   rows=20000)
 #' }
 #' @seealso \code{\link[httr]{response}}
 vfb_solr_query<-function(query, path="search/select?wt=json&df=short_form",
@@ -81,7 +97,15 @@ vfb_solr_query<-function(query, path="search/select?wt=json&df=short_form",
 
   if(parse.json) {
     rawres=vfb_parse_json(res, ...)
-    res=rawres[['response']]
+    # get main response data.frame
+    response=rawres[['response']]
+    res=response[['docs']]
+    # make an empty data.frame if we got no response
+    if(!length(res)) res=data.frame()
+    # copy over other fields
+    otherfields=setdiff(names(response),'docs')
+    for(n in otherfields) attr(res, n)=response[[n]]
+    # add response header as attribute as well
     attr(res, 'responseHeader')=rawres[['responseHeader']]
   }
   res

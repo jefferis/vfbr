@@ -29,9 +29,21 @@ for sorting the results.}
 \code{jsonlite::\link[jsonlite]{fromJSON}}}
 }
 \value{
-When \code{parse.json=TRUE}, a list containing the parsed response
-  with the main information contained in \code{rval$response$docs}. Otherwise
-  an \code{httr::response} object
+When \code{parse.json=TRUE}, a data.frame containing the parsed
+  response (originally the \code{response$docs} field in the parsed JSON)
+  along with additional attributes including
+
+  \itemize{
+
+  \item numFound
+
+  \item start
+
+  \item responseHeader
+
+  }
+
+  When \code{parse.json=FALSE} an \code{httr::response} object
 }
 \description{
 Title
@@ -40,8 +52,12 @@ Title
 # Find VFB ids matching a given GMR line
 vfb_solr_query("fq=VFB_*&q=label:GMR_10A07*")
 \dontrun{
-# VFB id for all GMRs
-vfb_solr_query("fq=VFB_*&q=label:GMR_*")
+# VFB id for all GMR lines
+vfb_solr_query("fq=VFB_*&q=label:GMR_*", rows=4000)
+
+#' # VFB id for all FlyCircuit neurons
+y=vfb_solr_query("fq=VFB_*&q=source_data_link_annotation:*flycircuit*",
+  rows=20000)
 }
 }
 \seealso{
