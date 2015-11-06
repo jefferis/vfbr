@@ -2,16 +2,18 @@
 % Please edit documentation in R/vfb_query.R
 \name{vfb_solr_query}
 \alias{vfb_solr_query}
-\title{Title}
+\title{Query VFB via solr indexing system}
 \usage{
-vfb_solr_query(query, path = "search/select?wt=json&df=short_form",
-  fields = "label+short_form", sort = "score+desc", rows = 30L,
+vfb_solr_query(query = "*:*", filterquery = NULL,
+  fields = "label+short_form", sort = "score+desc",
+  defaultfield = "short_form", rows = 30L, path = "search/select?wt=json",
   server = getOption("vfbr.server"), parse.json = TRUE, ...)
 }
 \arguments{
 \item{query}{A key-value list specifying the query}
 
-\item{path}{The path on the server containing the query page}
+\item{filterquery}{A character vector (of length one or more) describing
+filter queries for solr (see Details for regular vs filter queries)}
 
 \item{fields}{Which fields to return (+delimited). A value of \code{""}
 implies all fields.}
@@ -19,7 +21,12 @@ implies all fields.}
 \item{sort}{Character vector naming one or more fields (+ delimited) to use
 for sorting the results.}
 
+\item{defaultfield}{Character vector naming default field used for filter
+queries (defaults to \code{short_form})}
+
 \item{rows}{Maximum number of rows to return}
+
+\item{path}{The path on the server containing the query page}
 
 \item{server}{The base url of the server}
 
@@ -46,23 +53,41 @@ When \code{parse.json=TRUE}, a data.frame containing the parsed
   When \code{parse.json=FALSE} an \code{httr::response} object
 }
 \description{
-Title
+Solr provides an extremely fast way to query all key content on
+  VFB and is the backend used for most queries run on the website. It is
+  pre-populated from the OWL ontology documents describing all the
+  information on the site and their relationships. More details on Solr and
+  its query syntax can be found at \url{http://lucene.apache.org/solr/}.
+}
+\details{
+The \code{query} arguments maps onto the general solr \code{q=}
+  query while \code{filterqueries} maps onto one or more \code{fl=} terms.
+  The
+  \href{https://cwiki.apache.org/confluence/display/solr/Common+Query+Parameters}{solr
+   wiki} says this about the difference:
+
+  The fq parameter defines a query that can be used to restrict the superset
+  of documents that can be returned, without influencing score. It can be
+  very useful for speeding up complex queries, since the queries specified
+  with fq are cached independently of the main query. When a later query uses
+  the same filter, there's a cache hit, and filter results are returned
+  quickly from the cache.
 }
 \examples{
 # Find VFB ids matching a given GMR line
-vfb_solr_query("fq=VFB_*&q=label:GMR_10A07*")
+vfb_solr_query(filterquery="VFB_*",query="label:GMR_10A07*")
 
 # how many GMR lines can we find
 # note use of rows = 0 so we do not fetch results (but still get totals)
-r=vfb_solr_query("fq=VFB_*&q=label:GMR_*", rows=0)
+r=vfb_solr_query(filterquery="VFB_*",query="label:GMR_*", rows=0)
 attr(r,'numFound')
 \dontrun{
 # VFB id for all GMR lines
-vfb_solr_query("fq=VFB_*&q=label:GMR_*", rows=4000)
+vfb_solr_query(filterquery="VFB_*",query="label:GMR_*", rows=4000)
 
 #' # VFB id for all FlyCircuit neurons
-y=vfb_solr_query("fq=VFB_*&q=source_data_link_annotation:*flycircuit*",
-  rows=20000)
+y=vfb_solr_query(filterquery="VFB_*",
+  query="source_data_link_annotation:*flycircuit*", rows=20000)
 }
 }
 \seealso{

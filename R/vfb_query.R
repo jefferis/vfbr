@@ -49,11 +49,32 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
   jsonlite::fromJSON(text, simplifyVector = simplifyVector, ...)
 }
 
-#' Title
+#' Query VFB via solr indexing system
 #'
+#' @description Solr provides an extremely fast way to query all key content on
+#'   VFB and is the backend used for most queries run on the website. It is
+#'   pre-populated from the OWL ontology documents describing all the
+#'   information on the site and their relationships. More details on Solr and
+#'   its query syntax can be found at \url{http://lucene.apache.org/solr/}.
+#' @details The \code{query} arguments maps onto the general solr \code{q=}
+#'   query while \code{filterqueries} maps onto one or more \code{fl=} terms.
+#'   The
+#'   \href{https://cwiki.apache.org/confluence/display/solr/Common+Query+Parameters}{solr
+#'    wiki} says this about the difference:
+#'
+#'   The fq parameter defines a query that can be used to restrict the superset
+#'   of documents that can be returned, without influencing score. It can be
+#'   very useful for speeding up complex queries, since the queries specified
+#'   with fq are cached independently of the main query. When a later query uses
+#'   the same filter, there's a cache hit, and filter results are returned
+#'   quickly from the cache.
 #' @inheritParams vfb_owl_query
+#' @param filterquery A character vector (of length one or more) describing
+#'   filter queries for solr (see Details for regular vs filter queries)
 #' @param sort Character vector naming one or more fields (+ delimited) to use
 #'   for sorting the results.
+#' @param defaultfield Character vector naming default field used for filter
+#'   queries (defaults to \code{short_form})
 #' @param rows Maximum number of rows to return
 #' @param fields Which fields to return (+delimited). A value of \code{""}
 #'   implies all fields.
@@ -76,25 +97,33 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
 #'
 #' @examples
 #' # Find VFB ids matching a given GMR line
-#' vfb_solr_query("fq=VFB_*&q=label:GMR_10A07*")
+#' vfb_solr_query(filterquery="VFB_*",query="label:GMR_10A07*")
 #'
 #' # how many GMR lines can we find
 #' # note use of rows = 0 so we do not fetch results (but still get totals)
-#' r=vfb_solr_query("fq=VFB_*&q=label:GMR_*", rows=0)
+#' r=vfb_solr_query(filterquery="VFB_*",query="label:GMR_*", rows=0)
 #' attr(r,'numFound')
 #' \dontrun{
 #' # VFB id for all GMR lines
-#' vfb_solr_query("fq=VFB_*&q=label:GMR_*", rows=4000)
+#' vfb_solr_query(filterquery="VFB_*",query="label:GMR_*", rows=4000)
 #'
 #' #' # VFB id for all FlyCircuit neurons
-#' y=vfb_solr_query("fq=VFB_*&q=source_data_link_annotation:*flycircuit*",
-#'   rows=20000)
+#' y=vfb_solr_query(filterquery="VFB_*",
+#'   query="source_data_link_annotation:*flycircuit*", rows=20000)
 #' }
 #' @seealso \code{\link[httr]{response}}
-vfb_solr_query<-function(query, path="search/select?wt=json&df=short_form",
-                         fields="label+short_form", sort="score+desc", rows=30L,
+vfb_solr_query<-function(query="*:*", filterquery=NULL,
+                         fields="label+short_form", sort="score+desc",
+                         defaultfield="short_form", rows=30L,
+                         path="search/select?wt=json",
                          server= getOption("vfbr.server"), parse.json=TRUE, ...) {
-  fullquery=paste(paste0("sort=", sort), paste0("fl=", fields), paste0("rows=",rows), sep = "&", query)
+  params=c(fl=fields, sort=sort, rows=rows, df=defaultfield, q=query)
+  # filterquery can be vectorised
+  if(length(filterquery)) {
+    names(filterquery)=rep("fq", length(filterquery))
+    params=c(params, filterquery)
+  }
+  fullquery=paste(names(params), sep="=", params, collapse = "&")
   url=paste0(server, "/", path, "&", fullquery)
   url=utils::URLencode(url)
   if(is.null(server)) stop ("You must specify a server!")
