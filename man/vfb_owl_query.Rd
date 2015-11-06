@@ -31,6 +31,7 @@ Note that the VFB OWL query endpoint default wraps all results
   this outer layer.
 }
 \examples{
+\dontrun{
 # query for descendant classes of Fan-Shaped Body
 vfb_owl_query(list(query_type="descendant_class", query="FBbt:00003679"))
 
@@ -38,6 +39,7 @@ vfb_owl_query(list(query_type="descendant_class", query="FBbt:00003679"))
 neurondf=vfb_owl_query(list(query_type="individuals", query="FBbt:00003679"))
 # show the first few rows of the returned data.frame
 head(neurondf)
+}
 }
 \seealso{
 \code{\link[jsonlite]{fromJSON}}

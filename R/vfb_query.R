@@ -18,6 +18,7 @@
 #' @export
 #' @seealso \code{\link[jsonlite]{fromJSON}}
 #' @examples
+#' \dontrun{
 #' # query for descendant classes of Fan-Shaped Body
 #' vfb_owl_query(list(query_type="descendant_class", query="FBbt:00003679"))
 #'
@@ -25,7 +26,7 @@
 #' neurondf=vfb_owl_query(list(query_type="individuals", query="FBbt:00003679"))
 #' # show the first few rows of the returned data.frame
 #' head(neurondf)
-#'
+#' }
 vfb_owl_query<-function(query, path="do/jsonQuery.html?json=",
                             server= getOption("vfbr.server"), parse.json=TRUE, ...) {
   queryj=minify(toJSON(query, auto_unbox=TRUE))
