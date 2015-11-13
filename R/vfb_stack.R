@@ -14,6 +14,6 @@
 #' \dontrun{
 #' browseURL(u)
 #' }
-vfb_stack_url<-function(ids, path='/site/stacks/index.htm?', server= getOption("vfbr.server")) {
+vfb_stack_url<-function(ids, path='/site/stacks', server= getOption("vfbr.server")) {
   paste0(server, path, "/", "index.htm?add=", paste(ids, collapse = ","))
 }

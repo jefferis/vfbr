@@ -4,8 +4,7 @@
 \alias{vfb_stack_url}
 \title{Make a URL for a set of VFB ids to be displayed in the stack browser}
 \usage{
-vfb_stack_url(ids, path = "/site/stacks/index.htm?",
-  server = getOption("vfbr.server"))
+vfb_stack_url(ids, path = "/site/stacks", server = getOption("vfbr.server"))
 }
 \arguments{
 \item{ids}{A character vector of IDs}
