@@ -26,6 +26,6 @@ a data.frame in descending score order with columns \itemize{
 Query vfb opencpu server to obtain pre-computed nblast scores
 }
 \examples{
-vfb_nblast('fru-M-200266', n=10)
+vfb_nblast('fru-M-200266')
 }
 
