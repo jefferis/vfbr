@@ -76,7 +76,8 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
 #'   for sorting the results.
 #' @param defaultfield Character vector naming default field used for filter
 #'   queries (defaults to \code{short_form})
-#' @param rows Maximum number of rows to return
+#' @param rows Maximum number of rows to return. The special value of Inf
+#'   implies all matching rows.
 #' @param fields Which fields to return (+delimited). A value of \code{""}
 #'   implies all fields.
 #' @return When \code{parse.json=TRUE}, a data.frame containing the parsed
@@ -108,9 +109,10 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
 #' # VFB id for all GMR lines
 #' vfb_solr_query(filterquery="VFB_*",query="label:GMR_*", rows=4000)
 #'
-#' #' # VFB id for all FlyCircuit neurons
+#' # VFB id for all FlyCircuit neurons
+#' # note use of rows=Inf to fetch all rows
 #' y=vfb_solr_query(filterquery="VFB_*",
-#'   query="source_data_link_annotation:*flycircuit*", rows=20000)
+#'   query="source_data_link_annotation:*flycircuit*", rows=Inf)
 #' }
 #' @seealso \code{\link[httr]{response}}
 vfb_solr_query<-function(query="*:*", filterquery=NULL,
@@ -118,6 +120,14 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
                          defaultfield="short_form", rows=30L,
                          path="search/select?wt=json",
                          server= getOption("vfbr.server"), parse.json=TRUE, ...) {
+  if(!is.finite(rows)) {
+    # check how many rows there are
+    rowr=vfb_solr_query(query=query, filterquery = filterquery, fields = fields, sort=sort,
+                   defaultfield = defaultfield, rows=0L, path=path,
+                   server = server, parse.json = T)
+    rows=attr(rowr,'numFound')
+    # now we will return them all
+  }
   params=c(fl=fields, sort=sort, rows=rows, df=defaultfield, q=query)
   # filterquery can be vectorised
   if(length(filterquery)) {

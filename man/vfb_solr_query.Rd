@@ -24,7 +24,8 @@ for sorting the results.}
 \item{defaultfield}{Character vector naming default field used for filter
 queries (defaults to \code{short_form})}
 
-\item{rows}{Maximum number of rows to return}
+\item{rows}{Maximum number of rows to return. The special value of Inf
+implies all matching rows.}
 
 \item{path}{The path on the server containing the query page}
 
@@ -85,9 +86,10 @@ attr(r,'numFound')
 # VFB id for all GMR lines
 vfb_solr_query(filterquery="VFB_*",query="label:GMR_*", rows=4000)
 
-#' # VFB id for all FlyCircuit neurons
+# VFB id for all FlyCircuit neurons
+# note use of rows=Inf to fetch all rows
 y=vfb_solr_query(filterquery="VFB_*",
-  query="source_data_link_annotation:*flycircuit*", rows=20000)
+  query="source_data_link_annotation:*flycircuit*", rows=Inf)
 }
 }
 \seealso{
