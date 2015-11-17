@@ -3,6 +3,8 @@
 #' @param ids A character vector of IDs
 #' @param terminfo A VFB id used to choose which term information will be
 #'   displayed next to the stack browser.
+#' @param clear Whether to clear items already displayed in the stack browser
+#'   (default FALSE)
 #' @inheritParams vfb_solr_query
 #'
 #' @return character vector to open stack browser
@@ -16,13 +18,14 @@
 #'
 #' # find vfb id for this class of neuron often called fruitless mAL neuron
 #' resdf=vfb_solr_query("synonym:mAL",filterquery = c("label:female","label:neuron"))
-#' u=vfb_stack_url(c(template, ids), terminfo=resdf$short_form[1])
+#' u=vfb_stack_url(c(template, ids), terminfo=resdf$short_form[1], clear=TRUE)
 #' \dontrun{
 #' browseURL(u)
 #' }
-vfb_stack_url<-function(ids, terminfo=NULL, path='/site/stacks', server= getOption("vfbr.server")) {
+vfb_stack_url<-function(ids, terminfo=NULL, clear=FALSE, path='/site/stacks', server= getOption("vfbr.server")) {
   u=paste0(server, path, "/", "index.htm?add=", paste(ids, collapse = ","))
   if(!is.null(terminfo)) u=paste0(u, "&id=", terminfo)
+  if(clear) u=paste0(u, "&clear=true")
   u
 }
 

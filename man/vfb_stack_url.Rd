@@ -4,7 +4,7 @@
 \alias{vfb_stack_url}
 \title{Make a URL for a set of VFB ids to be displayed in the stack browser}
 \usage{
-vfb_stack_url(ids, terminfo = NULL, path = "/site/stacks",
+vfb_stack_url(ids, terminfo = NULL, clear = FALSE, path = "/site/stacks",
   server = getOption("vfbr.server"))
 }
 \arguments{
@@ -12,6 +12,9 @@ vfb_stack_url(ids, terminfo = NULL, path = "/site/stacks",
 
 \item{terminfo}{A VFB id used to choose which term information will be
 displayed next to the stack browser.}
+
+\item{clear}{Whether to clear items already displayed in the stack browser
+(default FALSE)}
 
 \item{path}{The path on the server containing the query page}
 
