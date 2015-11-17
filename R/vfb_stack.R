@@ -1,6 +1,8 @@
 #' Make a URL for a set of VFB ids to be displayed in the stack browser
 #'
 #' @param ids A character vector of IDs
+#' @param terminfo A VFB id used to choose which term information will be
+#'   displayed next to the stack browser.
 #' @inheritParams vfb_solr_query
 #'
 #' @return character vector to open stack browser
@@ -10,12 +12,18 @@
 #' # some gmr lines
 #' ids=c("VFB_00004657","VFB_00023207","VFB_00023120","VFB_00022264")
 #' template="VFBt_00100000"
-#' u=vfb_stack_url(c(template, ids), add=FALSE)
+#' u=vfb_stack_url(c(template, ids))
+#'
+#' # find vfb id for this class of neuron often called fruitless mAL neuron
+#' resdf=vfb_solr_query("synonym:mAL",filterquery = c("label:female","label:neuron"))
+#' u=vfb_stack_url(c(template, ids), terminfo=resdf$short_form[1])
 #' \dontrun{
 #' browseURL(u)
 #' }
-vfb_stack_url<-function(ids, path='/site/stacks', server= getOption("vfbr.server")) {
-  paste0(server, path, "/", "index.htm?add=", paste(ids, collapse = ","))
+vfb_stack_url<-function(ids, terminfo=NULL, path='/site/stacks', server= getOption("vfbr.server")) {
+  u=paste0(server, path, "/", "index.htm?add=", paste(ids, collapse = ","))
+  if(!is.null(terminfo)) u=paste0(u, "&id=", terminfo)
+  u
 }
 
 

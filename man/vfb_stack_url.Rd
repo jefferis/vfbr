@@ -4,10 +4,14 @@
 \alias{vfb_stack_url}
 \title{Make a URL for a set of VFB ids to be displayed in the stack browser}
 \usage{
-vfb_stack_url(ids, path = "/site/stacks", server = getOption("vfbr.server"))
+vfb_stack_url(ids, terminfo = NULL, path = "/site/stacks",
+  server = getOption("vfbr.server"))
 }
 \arguments{
 \item{ids}{A character vector of IDs}
+
+\item{terminfo}{A VFB id used to choose which term information will be
+displayed next to the stack browser.}
 
 \item{path}{The path on the server containing the query page}
 
@@ -23,7 +27,11 @@ Make a URL for a set of VFB ids to be displayed in the stack browser
 # some gmr lines
 ids=c("VFB_00004657","VFB_00023207","VFB_00023120","VFB_00022264")
 template="VFBt_00100000"
-u=vfb_stack_url(c(template, ids), add=FALSE)
+u=vfb_stack_url(c(template, ids))
+
+# find vfb id for this class of neuron often called fruitless mAL neuron
+resdf=vfb_solr_query("synonym:mAL",filterquery = c("label:female","label:neuron"))
+u=vfb_stack_url(c(template, ids), terminfo=resdf$short_form[1])
 \dontrun{
 browseURL(u)
 }
