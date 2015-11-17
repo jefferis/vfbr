@@ -47,8 +47,6 @@ See \url{http://virtualflybrain.org}
 }
 \seealso{
 \code{\link{vfb_solr_query}}
-
-\code{\link{vfb_solr_query}}
 }
 \keyword{package}
 

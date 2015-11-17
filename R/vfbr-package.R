@@ -13,7 +13,6 @@
 #'   }
 #' @name vfbr-package
 #' @aliases vfbr
-#' @seealso \code{\link{vfb_solr_query}}
 #' @examples
 #' # Show state of vfbr package options
 #' options()[grep('^vfbr', names(options()))]
