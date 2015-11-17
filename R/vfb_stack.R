@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' # some gmr lines
-#' ids=c("VFBi_00004657","VFBi_00023207","VFBi_00023120","VFBi_00022264")
+#' ids=c("VFB_00004657","VFB_00023207","VFB_00023120","VFB_00022264")
 #' template="VFBt_00100000"
 #' u=vfb_stack_url(c(template, ids), add=FALSE)
 #' \dontrun{
