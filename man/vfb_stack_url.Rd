@@ -4,14 +4,10 @@
 \alias{vfb_stack_url}
 \title{Make a URL for a set of VFB ids to be displayed in the stack browser}
 \usage{
-vfb_stack_url(ids, add = TRUE, path = "/site/stacks",
-  server = getOption("vfbr.server"))
+vfb_stack_url(ids, path = "/site/stacks", server = getOption("vfbr.server"))
 }
 \arguments{
 \item{ids}{A character vector of IDs}
-
-\item{add}{Whether to add stacks to the existing scene (the default, when
-\code{add=TRUE}) or to start a new scene.}
 
 \item{path}{The path on the server containing the query page}
 

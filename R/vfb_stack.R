@@ -1,8 +1,6 @@
 #' Make a URL for a set of VFB ids to be displayed in the stack browser
 #'
 #' @param ids A character vector of IDs
-#' @param add Whether to add stacks to the existing scene (the default, when
-#'   \code{add=TRUE}) or to start a new scene.
 #' @inheritParams vfb_solr_query
 #'
 #' @return character vector to open stack browser
@@ -16,9 +14,8 @@
 #' \dontrun{
 #' browseURL(u)
 #' }
-vfb_stack_url<-function(ids, add=TRUE, path='/site/stacks', server= getOption("vfbr.server")) {
-  paste0(server, path, "/", "index.htm?",ifelse(add,"add=","id="),
-         paste(ids, collapse = ","))
+vfb_stack_url<-function(ids, path='/site/stacks', server= getOption("vfbr.server")) {
+  paste0(server, path, "/", "index.htm?add=", paste(ids, collapse = ","))
 }
 
 
