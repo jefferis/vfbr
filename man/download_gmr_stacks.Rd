@@ -45,6 +45,8 @@ stacks
 # on a mac this will open in the default app (e.g. Fiji/ImageJ)
 open_stack<-function(x) system(paste("open", paste(shQuote(x), collapse = " ")))
 open_stack(stacks)
+# open the downloads directory in the Finder
+system(paste("open -R", shQuote(getOption('vfbr.stack.downloads'))))
 }
 }
 
