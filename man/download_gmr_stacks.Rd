@@ -17,7 +17,7 @@ download_gmr_stacks(ids, download.dir = getOption("vfbr.stack.downloads"),
 \item{...}{Additional arguments passed to \code{\link{download.file}}}
 }
 \value{
-Named character vector of paths
+Named character vector of paths to downloaded files
 }
 \description{
 Download the registered GMR stacks for given ids

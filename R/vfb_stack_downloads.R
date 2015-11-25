@@ -29,7 +29,11 @@ gmr_stack_urls_for_ids<-function(ids){
   all_urls[extract_gmr_id(ids)]
 }
 
-memoised_download=R.cache::addMemoization(function(...) try(download.file(...)))
+memoised_download=function(url, destfile, ...) {
+  if(file.exists(destfile)) return(invisible(0L))
+  try(download.file(url, destfile, ...))
+}
+
 regular_download=function(...) try(download.file(...))
 
 #' Download the registered GMR stacks for given ids
@@ -52,16 +56,21 @@ regular_download=function(...) try(download.file(...))
 #' @param Force Whether to force the download.
 #' @param ... Additional arguments passed to \code{\link{download.file}}
 #' @return Named character vector of paths to downloaded files
+#' @examples
+#' \dontrun{
+#' download_gmr_stacks(c('9A09', '95H11'))
+#' }
 download_gmr_stacks<-function(ids, download.dir=getOption('vfbr.stack.downloads'),
                               Force=FALSE, ...){
   if(is.null(download.dir)) stop("You must specify a download directory")
   if(!file.exists(download.dir)) dir.create(download.dir, recursive = TRUE)
   if(!file.info(download.dir)$isdir)
     stop("You must specify a valid download directory")
-  urls=gmr_stack_urls_for_ids(ids)
+  urls=na.omit(gmr_stack_urls_for_ids(ids))
+  if(!length(urls)) return(invisible(NULL))
   dests=file.path(download.dir, basename(urls))
   names(dests)=names(urls)
-  mapply(ifelse(Force, regular_download, memoised_download),
+  mapply(if(Force) regular_download else memoised_download,
          urls, dests, MoreArgs = list(...))
   dests
 }
