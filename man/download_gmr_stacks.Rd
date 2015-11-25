@@ -49,4 +49,7 @@ open_stack(stacks)
 system(paste("open -R", shQuote(getOption('vfbr.stack.downloads'))))
 }
 }
+\seealso{
+\code{\link{gmr_stack_urls_for_ids}}
+}
 

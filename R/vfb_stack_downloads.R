@@ -56,6 +56,7 @@ regular_download=function(...) try(download.file(...))
 #' @param Force Whether to force the download.
 #' @param ... Additional arguments passed to \code{\link{download.file}}
 #' @return Named character vector of paths to downloaded files
+#' @seealso \code{\link{gmr_stack_urls_for_ids}}
 #' @examples
 #' \dontrun{
 #' stacks=download_gmr_stacks(c('9A09', '95H11'))
