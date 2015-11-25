@@ -21,6 +21,8 @@ Programmatic access to the VFB API
   \item{\code{vfbr.server.gepetto}}{ URL of VFB's gepetto server for 3D
   visualisation (see \code{\link{vfb_3dbrowser_url}}.)}
 
+  \item{\code{vfbr.stack.downloads}}{Location of downloaded stacks. See
+  \code{\link{download_gmr_stacks}}}
   }
 }
 
