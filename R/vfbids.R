@@ -13,6 +13,7 @@
 #'   \code{fixed=FALSE} and a wild-card search returns no results a character
 #'   vector of length 0 will be returned.
 #' @export
+#' @seealso \code{\link{gmr_vfbid}}
 #' @examples
 #' # some flycircuit ids
 #' fcids=c("VGlut-F-000304", "VGlut-F-200278", "fru-F-200121", "TH-F-300016")
@@ -62,6 +63,7 @@ extract_gmr_id <- function(ids) stringr::str_extract("[0-9]{1,2}[A-H][0-9]{2}", 
 #' @export
 #' @examples
 #' gmr_vfbid("11H09")
+#' @seealso \code{\link{vfb_fromvfbids}}
 gmr_vfbid<-function(ids){
   shortids=extract_gmr_id(ids)
   r=vfb_solr_query(filterquery=c("VFB_*","label:GMR_*"), fields = "short_form+label", rows = Inf)

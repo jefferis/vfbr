@@ -43,4 +43,7 @@ fcids=c("VGlut-F-000304", "VGlut-F-200278", "fru-F-200121", "TH-F-300016")
 vfbids=vfb_tovfbids(fcids)
 vfb_fromvfbids(vfbids)
 }
+\seealso{
+\code{\link{gmr_vfbid}}
+}
 

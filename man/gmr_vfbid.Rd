@@ -17,4 +17,7 @@ query, you should run the query in a single call to \code{gmr_vfbid}.
 \examples{
 gmr_vfbid("11H09")
 }
+\seealso{
+\code{\link{vfb_fromvfbids}}
+}
 
