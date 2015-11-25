@@ -12,7 +12,8 @@
 gmr_stack_urls<-function(gmr_url='http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/reformatted-quant/') {
   h=xml2::read_html(gmr_url)
   urls=rvest::html_attr(rvest::html_nodes(h, css = "a"), 'href')
-  nrrd_urls=grep("^JFRC2_.*nrrd$",urls, value = TRUE)
+  nrrds=grep("^JFRC2_.*nrrd$",urls, value = TRUE)
+  nrrd_urls=file.path(gmr_url, nrrds)
   names(nrrd_urls)=extract_gmr_id(nrrd_urls)
   nrrd_urls
 }
