@@ -10,4 +10,4 @@ Description: The Virtual Fly Brain provides a website virtualflybrain.org
   enables queries against an experimental (as of time of writing) API.
 License: GPL-3
 LazyData: TRUE
-Imports: jsonlite, httr
+Imports: jsonlite, httr, stringr

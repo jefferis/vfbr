@@ -49,3 +49,23 @@ vfb_tovfbids<-function(ids, fixed=TRUE, ...){
     rdf$short_form
   }
 }
+
+extract_gmr_id <- function(ids) stringr::str_extract("[0-9]{1,2}[A-H][0-9]{2}", ids)
+
+#' Convert GMR identifiers to VFB ids
+#'
+#' Note that this function currently is vectorised and operates by pulling a
+#' list of all GMR ids on VFB. Therefore if you have 50 (or 1000) GMR lines to
+#' query, you should run the query in a single call to \code{gmr_vfbid}.
+#'
+#' @param ids A character vector of GMR Gal4 ids
+#' @export
+#' @examples
+#' gmr_vfbid("11H09")
+gmr_vfbid<-function(ids){
+  shortids=extract_gmr_id(ids)
+  r=vfb_solr_query(filterquery=c("VFB_*","label:GMR_*"), fields = "short_form+label", rows = Inf)
+  r$gmr_ids=extract_gmr_id(r$label)
+  r$short_form[match(shortids, r$gmr_ids)]
+}
+
