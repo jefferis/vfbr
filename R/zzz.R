@@ -7,5 +7,8 @@
   toset <- !(names(op.vfbr) %in% names(op))
   if(any(toset)) options(op.vfbr[toset])
 
+  # set a temporary directory for memoisation
+  R.cache::setCacheRootPath(cachedir<-tempfile())
+
   invisible()
 }

@@ -2,20 +2,31 @@
 % Please edit documentation in R/vfb_stack_downloads.R
 \name{gmr_stack_urls}
 \alias{gmr_stack_urls}
-\title{Return the urls for all registered GMR-Gal4 stacks}
+\alias{gmr_stack_urls_for_ids}
+\title{Return the urls for GMR-Gal4 stacks}
 \usage{
 
   gmr_stack_urls(gmr_url = "http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/reformatted-quant/")
+
+gmr_stack_urls_for_ids(ids)
 }
 \arguments{
 \item{gmr_url}{The URL of the directory containing all registered GMR images
 for download.}
+
+\item{ids}{Character vector of GMR ids specified in any way}
 }
 \value{
 A character vector of URLs each named by their GMR ID
+
+Character vector of named URLs
 }
 \description{
-Return the urls for all registered GMR-Gal4 stacks
+\code{gmr_stack_urls} returns all URLs. This is expensive but
+  can be memoised (cached).
+
+\code{gmr_stack_urls_for_ids} returns URLs for specified GMR
+  Gal4 lines
 }
 \details{
 You probably won't want to use this directly
