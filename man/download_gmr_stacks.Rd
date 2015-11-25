@@ -37,4 +37,14 @@ Note that the downloading tries to be a little bit clever, by
   If memoisation gives you unexpected behaviour, you can set
   \code{Force=TRUE}.
 }
+\examples{
+\dontrun{
+stacks=download_gmr_stacks(c('9A09', '95H11'))
+stacks
+
+# on a mac this will open in the default app (e.g. Fiji/ImageJ)
+open_stack<-function(x) system(paste("open", paste(shQuote(x), collapse = " ")))
+open_stack(stacks)
+}
+}
 

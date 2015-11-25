@@ -58,7 +58,14 @@ regular_download=function(...) try(download.file(...))
 #' @return Named character vector of paths to downloaded files
 #' @examples
 #' \dontrun{
-#' download_gmr_stacks(c('9A09', '95H11'))
+#' stacks=download_gmr_stacks(c('9A09', '95H11'))
+#' stacks
+#'
+#' # on a mac this will open in the default app (e.g. Fiji/ImageJ)
+#' open_stack<-function(x) system(paste("open", paste(shQuote(x), collapse = " ")))
+#' open_stack(stacks)
+#' # open the downloads directory in the Finder
+#' system(paste("open -R", shQuote(getOption('vfbr.stack.downloads'))))
 #' }
 download_gmr_stacks<-function(ids, download.dir=getOption('vfbr.stack.downloads'),
                               Force=FALSE, ...){
@@ -74,7 +81,3 @@ download_gmr_stacks<-function(ids, download.dir=getOption('vfbr.stack.downloads'
          urls, dests, MoreArgs = list(...))
   dests
 }
-
-#
-#
-# gmr_nrrds
