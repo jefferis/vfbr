@@ -4,12 +4,14 @@
 \alias{vfb_nblast}
 \title{Query vfb opencpu server to obtain pre-computed nblast scores}
 \usage{
-vfb_nblast(query, n = 50, ...)
+vfb_nblast(query, n = 50, target = c("FlyCircuit", "GMR-Gal4"), ...)
 }
 \arguments{
 \item{query}{A single flycircuit identifier}
 
 \item{n}{The number of hits to return}
+
+\item{target}{The target data set to query}
 
 \item{...}{Additional arguments to be included in the POST}
 }

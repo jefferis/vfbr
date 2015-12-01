@@ -2,6 +2,7 @@
 #'
 #' @param query A single flycircuit identifier
 #' @param n The number of hits to return
+#' @param target The target data set to query
 #' @param ... Additional arguments to be included in the POST
 #'
 #' @return a data.frame in descending score order with columns \itemize{
@@ -14,13 +15,15 @@
 #' @export
 #' @examples
 #' vfb_nblast('fru-M-200266')
-vfb_nblast<-function(query, n=50, ...){
+vfb_nblast<-function(query, n=50, target=c("FlyCircuit", "GMR-Gal4"), ...){
+  target=match.arg(target)
   server="http://vfbdev.inf.ed.ac.uk"
-  topn_path="/ocpu/library/flynblastscores/R/flycircuit_topn"
-  posturl=paste0(server,topn_path, '/json')
+  topn_path=paste0("/ocpu/library/flynblastscores/R/flycircuit_",
+                   ifelse(target=='FlyCircuit', "topn", "gmr_topn"),
+                   '/json')
+  posturl=paste0(server,topn_path)
   listbody=list(query=query, n=n, ...)
-  jsonbody=lapply(listbody, toJSON)
-  r=POST(posturl, body=jsonbody)
+  r=POST(posturl, body=listbody, encode = 'json')
   stop_for_status(r)
   jsonlite::fromJSON(content(r,as='text'))
 }
