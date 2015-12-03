@@ -29,7 +29,7 @@ gmr_stack_urls_for_ids<-function(ids){
   all_urls[extract_gmr_id(ids)]
 }
 
-memoised_download=function(url, destfile, ...) {
+cached_download=function(url, destfile, ...) {
   if(file.exists(destfile)) return(invisible(0L))
   try(download.file(url, destfile, ...))
 }
@@ -43,13 +43,12 @@ regular_download=function(...) try(download.file(...))
 #'   \item wrapping the \code{download.file} call in a try expression in case it
 #'   fails
 #'
-#'   \item memoising the \code{download.file} call so if it is called with the
-#'   same url and destination value it will not re-download the file.
+#'   \item caching the \code{download.file} call so if the destination file
+#'   already exists it will not re-download the file.
 #'
 #'   }
 #'
-#'   If memoisation gives you unexpected behaviour, you can set
-#'   \code{Force=TRUE}.
+#'   If caching gives you unexpected behaviour, you can set \code{Force=TRUE}.
 #'
 #' @inheritParams gmr_stack_urls
 #' @param download.dir The download directory
@@ -79,7 +78,7 @@ download_gmr_stacks<-function(ids, download.dir=getOption('vfbr.stack.downloads'
   if(!length(urls)) return(invisible(NULL))
   dests=file.path(download.dir, basename(urls))
   names(dests)=names(urls)
-  mapply(if(Force) regular_download else memoised_download,
+  mapply(if(Force) regular_download else cached_download,
          urls, dests, MoreArgs = list(...))
   dests
 }
