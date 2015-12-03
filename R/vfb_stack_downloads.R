@@ -9,6 +9,13 @@
 #' @examples
 #' u=gmr_stack_urls()
 #' length(u)
+#' \dontrun{
+#' gmr_stack_urls_memo=memoise::memoise(gmr_stack_urls)
+#' system.time(u2 <- gmr_stack_urls_memo())
+#' # and again
+#' system.time(u3 <- gmr_stack_urls_memo())
+#' stopifnot(all.equal(u2,u3))
+#' }
 gmr_stack_urls<-function(gmr_url='http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/reformatted-quant/') {
   h=xml2::read_html(gmr_url)
   urls=rvest::html_attr(rvest::html_nodes(h, css = "a"), 'href')

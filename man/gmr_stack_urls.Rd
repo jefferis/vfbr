@@ -34,5 +34,12 @@ You probably won't want to use this directly
 \examples{
 u=gmr_stack_urls()
 length(u)
+\dontrun{
+gmr_stack_urls_memo=memoise::memoise(gmr_stack_urls)
+system.time(u2 <- gmr_stack_urls_memo())
+# and again
+system.time(u3 <- gmr_stack_urls_memo())
+stopifnot(all.equal(u2,u3))
+}
 }
 
