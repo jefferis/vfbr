@@ -5,8 +5,7 @@
 \alias{gmr_stack_urls_for_ids}
 \title{Return the urls for GMR-Gal4 stacks}
 \usage{
-
-  gmr_stack_urls(gmr_url = "http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/reformatted-quant/")
+gmr_stack_urls(gmr_url = getOption("vfbr.stack.gmr_url"))
 
 gmr_stack_urls_for_ids(ids)
 }
@@ -34,5 +33,12 @@ You probably won't want to use this directly
 \examples{
 u=gmr_stack_urls()
 length(u)
+\dontrun{
+gmr_stack_urls_memo=memoise::memoise(gmr_stack_urls)
+system.time(u2 <- gmr_stack_urls_memo())
+# and again
+system.time(u3 <- gmr_stack_urls_memo())
+stopifnot(all.equal(u2,u3))
+}
 }
 

@@ -29,13 +29,12 @@ Note that the downloading tries to be a little bit clever, by
   \item wrapping the \code{download.file} call in a try expression in case it
   fails
 
-  \item memoising the \code{download.file} call so if it is called with the
-  same url and destination value it will not re-download the file.
+  \item caching the \code{download.file} call so if the destination file
+  already exists it will not re-download the file.
 
   }
 
-  If memoisation gives you unexpected behaviour, you can set
-  \code{Force=TRUE}.
+  If caching gives you unexpected behaviour, you can set \code{Force=TRUE}.
 }
 \examples{
 \dontrun{

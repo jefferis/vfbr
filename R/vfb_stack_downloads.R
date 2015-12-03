@@ -9,7 +9,14 @@
 #' @examples
 #' u=gmr_stack_urls()
 #' length(u)
-gmr_stack_urls<-function(gmr_url='http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/reformatted-quant/') {
+#' \dontrun{
+#' gmr_stack_urls_memo=memoise::memoise(gmr_stack_urls)
+#' system.time(u2 <- gmr_stack_urls_memo())
+#' # and again
+#' system.time(u3 <- gmr_stack_urls_memo())
+#' stopifnot(all.equal(u2,u3))
+#' }
+gmr_stack_urls<-function(gmr_url=getOption('vfbr.stack.gmr_url')) {
   h=xml2::read_html(gmr_url)
   urls=rvest::html_attr(rvest::html_nodes(h, css = "a"), 'href')
   nrrds=grep("^JFRC2_.*nrrd$",urls, value = TRUE)
@@ -18,6 +25,9 @@ gmr_stack_urls<-function(gmr_url='http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/
   nrrd_urls
 }
 
+#' @importFrom memoise memoise
+gmr_stack_urls_memo=memoise::memoise(gmr_stack_urls)
+
 #' Return the urls for specified GMR-Gal4 stacks
 #' @description \code{gmr_stack_urls_for_ids} returns URLs for specified GMR
 #'   Gal4 lines
@@ -25,11 +35,11 @@ gmr_stack_urls<-function(gmr_url='http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/
 #' @param ids Character vector of GMR ids specified in any way
 #' @return Character vector of named URLs
 gmr_stack_urls_for_ids<-function(ids){
-  all_urls=R.cache::memoizedCall(gmr_stack_urls)
+  all_urls=gmr_stack_urls_memo(gmr_stack_urls)
   all_urls[extract_gmr_id(ids)]
 }
 
-memoised_download=function(url, destfile, ...) {
+cached_download=function(url, destfile, ...) {
   if(file.exists(destfile)) return(invisible(0L))
   try(download.file(url, destfile, ...))
 }
@@ -43,13 +53,12 @@ regular_download=function(...) try(download.file(...))
 #'   \item wrapping the \code{download.file} call in a try expression in case it
 #'   fails
 #'
-#'   \item memoising the \code{download.file} call so if it is called with the
-#'   same url and destination value it will not re-download the file.
+#'   \item caching the \code{download.file} call so if the destination file
+#'   already exists it will not re-download the file.
 #'
 #'   }
 #'
-#'   If memoisation gives you unexpected behaviour, you can set
-#'   \code{Force=TRUE}.
+#'   If caching gives you unexpected behaviour, you can set \code{Force=TRUE}.
 #'
 #' @inheritParams gmr_stack_urls
 #' @param download.dir The download directory
@@ -79,7 +88,7 @@ download_gmr_stacks<-function(ids, download.dir=getOption('vfbr.stack.downloads'
   if(!length(urls)) return(invisible(NULL))
   dests=file.path(download.dir, basename(urls))
   names(dests)=names(urls)
-  mapply(if(Force) regular_download else memoised_download,
+  mapply(if(Force) regular_download else cached_download,
          urls, dests, MoreArgs = list(...))
   dests
 }
