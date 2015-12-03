@@ -5,8 +5,7 @@
 \alias{gmr_stack_urls_for_ids}
 \title{Return the urls for GMR-Gal4 stacks}
 \usage{
-
-  gmr_stack_urls(gmr_url = "http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/reformatted-quant/")
+gmr_stack_urls(gmr_url = getOption("vfbr.stack.gmr_url"))
 
 gmr_stack_urls_for_ids(ids)
 }
