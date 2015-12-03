@@ -25,6 +25,9 @@ gmr_stack_urls<-function(gmr_url='http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/
   nrrd_urls
 }
 
+#' @importFrom memoise memoise
+gmr_stack_urls_memo=memoise::memoise(gmr_stack_urls)
+
 #' Return the urls for specified GMR-Gal4 stacks
 #' @description \code{gmr_stack_urls_for_ids} returns URLs for specified GMR
 #'   Gal4 lines
@@ -32,7 +35,7 @@ gmr_stack_urls<-function(gmr_url='http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/
 #' @param ids Character vector of GMR ids specified in any way
 #' @return Character vector of named URLs
 gmr_stack_urls_for_ids<-function(ids){
-  all_urls=R.cache::memoizedCall(gmr_stack_urls)
+  all_urls=gmr_stack_urls_memo(gmr_stack_urls)
   all_urls[extract_gmr_id(ids)]
 }
 
