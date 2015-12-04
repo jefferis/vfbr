@@ -97,6 +97,6 @@ download_gmr_stacks<-function(ids, download.dir=getOption('vfbr.stack.downloads'
   dests=file.path(download.dir, basename(urls))
   names(dests)=names(urls)
   mapply(if(Force) regular_download else cached_download,
-         urls, dests, MoreArgs = list(...))
+         urls, dests, MoreArgs = list(mode='wb', ...))
   dests
 }
