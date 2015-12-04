@@ -35,7 +35,7 @@ gmr_stack_urls_memo=memoise::memoise(gmr_stack_urls)
 #' @param ids Character vector of GMR ids specified in any way
 #' @return Character vector of named URLs
 gmr_stack_urls_for_ids<-function(ids){
-  all_urls=gmr_stack_urls_memo(gmr_stack_urls)
+  all_urls=gmr_stack_urls_memo()
   all_urls[extract_gmr_id(ids)]
 }
 
