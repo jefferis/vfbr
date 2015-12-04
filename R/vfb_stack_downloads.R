@@ -26,7 +26,10 @@ gmr_stack_urls<-function(gmr_url=getOption('vfbr.stack.gmr_url')) {
 }
 
 #' @importFrom memoise memoise
-gmr_stack_urls_memo=memoise::memoise(gmr_stack_urls)
+gmr_stack_urls_memo=memoise::memoise(function(...) {
+  message("Caching all gmr stack urls. This may take a minute ...")
+  gmr_stack_urls(...)
+})
 
 #' Return the urls for specified GMR-Gal4 stacks
 #' @description \code{gmr_stack_urls_for_ids} returns URLs for specified GMR
