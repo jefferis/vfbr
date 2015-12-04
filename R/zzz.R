@@ -4,7 +4,7 @@
     vfbr.server.gepetto="http://129.215.164.244:8084",
     vfbr.stack.gmr_url='http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/reformatted-quant/',
     vfbr.stack.downloads=file.path(
-      rappdirs::user_data_dir('rpkg-vfbr'), 'stacks')
+      rappdirs::user_data_dir('rpkg-vfbr', appauthor=NULL), 'stacks')
   )
   op<-options()
   toset <- !(names(op.vfbr) %in% names(op))
