@@ -41,11 +41,16 @@ Note that the downloading tries to be a little bit clever, by
 stacks=download_gmr_stacks(c('9A09', '95H11'))
 stacks
 
-# on a mac this will open in the default app (e.g. Fiji/ImageJ)
+# on Mac and Windows systems, this will open in the default application
+# e.g. Fiji/ImageJ if you have associated ".nrrd" files
 open_stack<-function(x) system(paste("open", paste(shQuote(x), collapse = " ")))
 open_stack(stacks)
 # open the downloads directory in the Finder
 system(paste("open -R", shQuote(getOption('vfbr.stack.downloads'))))
+
+# Set the package option to control where files are downloaded
+# see also ?vfbr
+option(vfbr.stack.downloads="/path/to/my/stacks/folder")
 }
 }
 \seealso{
