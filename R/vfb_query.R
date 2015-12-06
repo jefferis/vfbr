@@ -1,11 +1,11 @@
 #' Generic query against VFB OWL API
 #'
-#' @description This function epects an R list or vector describing a query and
+#' @description This function expects an R list or vector describing a query and
 #'   constructs an appropriate query url embedding a JSON query, GETs the server
 #'   response and (by default) parses the JSON result.
 #'
-#' @details Note that the VFB OWL query endpoint default wraps all results
-#'   inside in a JSON result object called \code{results}. When
+#' @details Note that the VFB OWL query endpoint by default wraps all results
+#'   inside a JSON result object called \code{results}. When
 #'   \code{parse.json=TRUE}, the returned results will be unwrapped to remove
 #'   this outer layer.
 #'
