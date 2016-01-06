@@ -62,9 +62,14 @@ vfb_synonym_query("PAM-*", exact = FALSE)
 \donttest{
 # Search for MBON-01 to MBON-22 (sprintf is used to 0 pad the numbers)
 vfb_synonym_query(sprintf("MBON-\%02d",1:22))
+
 # You can also use a wild card search, which is much faster since it only
 # makes a single solr query but the hits are returned in an arbitrary order.
-vfb_synonym_query("MBON-??")
+mbondf=vfb_synonym_query("MBON-??")
+# then you can pick out your preferred synonym
+# note that we use the glob2rx function to convert solr's simple shell-style
+# wild card syntax to a regular expression
+mbondf$aso=sapply(mbondf$synonym, function(x) grep(glob2rx("MBON-??"), x, value=TRUE))
 }
 }
 \seealso{
