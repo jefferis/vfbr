@@ -1,5 +1,5 @@
 # vfbr
-
+[![Travis-CI Build Status](https://travis-ci.org/jefferis/vfbr.svg?branch=master)](https://travis-ci.org/jefferis/vfbr)
 ## Installation
 Currently there isn't a released version on [CRAN](http://cran.r-project.org/), 
 but you  can use the **devtools** [1] package to install the development version:
