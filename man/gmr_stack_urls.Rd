@@ -31,8 +31,10 @@ Character vector of named URLs
 You probably won't want to use this directly
 }
 \examples{
+\donttest{
 u=gmr_stack_urls()
 length(u)
+}
 \dontrun{
 gmr_stack_urls_memo=memoise::memoise(gmr_stack_urls)
 system.time(u2 <- gmr_stack_urls_memo())

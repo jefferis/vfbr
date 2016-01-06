@@ -7,8 +7,10 @@
 #'   for download.
 #' @export
 #' @examples
+#' \donttest{
 #' u=gmr_stack_urls()
 #' length(u)
+#' }
 #' \dontrun{
 #' gmr_stack_urls_memo=memoise::memoise(gmr_stack_urls)
 #' system.time(u2 <- gmr_stack_urls_memo())
