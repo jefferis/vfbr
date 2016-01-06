@@ -20,7 +20,7 @@
 #' vfbids=vfb_tovfbids(fcids)
 #' vfb_fromvfbids(vfbids)
 vfb_fromvfbids<-function(vfbids, ...){
-  q=paste0("short_form", vfbids, collapse = " ")
+  q=paste(vfbids, collapse = " ")
   rdf=vfb_solr_query(query=q, fields = "short_form+label", rows=Inf, ...)
   if(nrow(rdf)==0) {
     rep(NA_character_, length(vfbids))
