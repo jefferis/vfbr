@@ -1,0 +1,7 @@
+vfbr 0.2
+========
+* New function vfb_synonym_query
+* fix vfb_fromvfbids for multiple ids (#5)
+* fix problem downloading stacks on Windows (#4)
+* fix vfb_nblast failure (#2)
+* dev: add tests
