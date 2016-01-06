@@ -64,7 +64,7 @@ vfb_synonym_query("PAM-*", exact = FALSE)
 vfb_synonym_query(sprintf("MBON-\%02d",1:22))
 # You can also use a wild card search, which is much faster since it only
 # makes a single solr query but the hits are returned in an arbitrary order.
-vfb_synonym_query("MBON-*")
+vfb_synonym_query("MBON-??")
 }
 }
 \seealso{
