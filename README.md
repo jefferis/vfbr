@@ -13,7 +13,14 @@ devtools::install_github("jefferis/vfbr")
 
 ```r
 library(vfbr)
-example(vfb_generic_query)
+
+# generic SOLR queries
+example(vfb_solr_query)
+# queries to find terms matching a synonym
+example(vfb_synonym_query)
+
+# package help
+?vfbr
 ```
 
 [1] Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install via devtools.
