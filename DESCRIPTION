@@ -11,3 +11,4 @@ Description: The Virtual Fly Brain provides a website virtualflybrain.org
 License: GPL-3
 LazyData: TRUE
 Imports: jsonlite, httr, stringr, rvest, xml2, memoise, rappdirs
+Suggests: testthat
