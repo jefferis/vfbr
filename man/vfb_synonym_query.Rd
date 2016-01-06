@@ -47,8 +47,7 @@ vfb_synonym_query("SOG")
 # anything with a synonym that includes SOG
 vfb_synonym_query("SOG", exact=FALSE)
 
-\donttest{
-# query for PAM exactly
+\donttest{#' # query for PAM exactly
 vfb_synonym_query("PAM")
 # any term with a synonym containing PAM
 vfb_synonym_query("PAM", exact = FALSE)
