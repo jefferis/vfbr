@@ -5,10 +5,19 @@ Version: 0.2
 Authors@R: person("Gregory", "Jefferis", email="jefferis@gmail.com",
   role = c("aut", "cre"))
 Description: The Virtual Fly Brain provides a website virtualflybrain.org
-  containing neuroanatomical data for the fruit fly, Drosophila melanogaster,
-  curated from published journal articles and bulk image data. This package
-  enables queries against an experimental (as of time of writing) API.
+    containing neuroanatomical data for the fruit fly, Drosophila melanogaster,
+    curated from published journal articles and bulk image data. This package
+    enables queries against an experimental (as of time of writing) API.
 License: GPL-3
 LazyData: TRUE
-Imports: jsonlite, httr, stringr, rvest, xml2, memoise, rappdirs
-Suggests: testthat
+Imports:
+    jsonlite,
+    httr,
+    stringr,
+    rvest,
+    xml2,
+    memoise,
+    rappdirs
+Suggests:
+    testthat
+RoxygenNote: 5.0.1.9000
