@@ -2,7 +2,7 @@
 #'
 #' @param query A character vector containing one or more queries - see details.
 #'   Wildcards (\code{?*}) can be used, and have a similar meaning to their use
-#'   in the shell.
+#'   in the shell. Queries are case insensitive.
 #' @param exact Whether to do an exact match (i.e. the query must match the
 #'   whole string, the default) or to allow partial matches against synonyms.
 #'   See \bold{Query details} and examples.
