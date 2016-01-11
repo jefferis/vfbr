@@ -2,28 +2,40 @@
 % Please edit documentation in R/vfb_extended_query.R
 \name{vfb_synonym_query}
 \alias{vfb_synonym_query}
-\title{Find canononical value for synonyms using VFB SOLR query}
+\title{Find canononical ontology term using VFB SOLR to query synonyms}
 \usage{
-vfb_synonym_query(x, exact = TRUE, fields = "short_form label synonym", ...)
+vfb_synonym_query(query, exact = TRUE, quote = NA,
+  fields = "short_form label synonym", verbose = interactive(), ...)
 }
 \arguments{
-\item{x}{The search term. Multiple search terms are also allowed - see
-details. Wildcards (\code{?*}) can be used, but}
+\item{query}{A character vector containing one or more queries - see details.
+Wildcards (\code{?*}) can be used, and have a similar meaning to their use
+in the shell.}
 
-\item{exact}{Whether to do an exact match (default) or to allow partial
-matches against synonyms.}
+\item{exact}{Whether to do an exact match (i.e. the query must match the
+whole string, the default) or to allow partial matches against synonyms.
+See \bold{Query details} and examples.}
+
+\item{quote}{Whether to quote the query so that individual terms must all be
+matched in the order given or to \bold{OR} each term in the query. The
+default \code{quote=NA} will quote when \code{exact=TRUE} and the query
+does not contain wildcards. See \bold{Query details} and \bold{Examples}.}
 
 \item{fields}{The fields to return (defaults to 'short_form label synonym').
 Setting \code{fields=""} implies all fields (but note that not all results
 may have the same fields - see discussion in details)}
 
-\item{...}{Additional arguments passed to \code{\link{vfb_solr_query}}}
+\item{verbose}{Whether to print messages to the screen.}
+
+\item{...}{Additional arguments passed to \code{\link{vfb_solr_query}}. You
+can use this e.g. to set the number of returned \code{rows}.}
 }
 \value{
-A data.frame containing one or more result rows or when
+A data.frame containing one or more result rows, ordered according to
+  the solr result score, with attributres
 }
 \description{
-Find canononical value for synonyms using VFB SOLR query
+Find canononical ontology term using VFB SOLR to query synonyms
 }
 \details{
 Note that data.frame that is returned may contain a list in the
@@ -37,17 +49,53 @@ Note that data.frame that is returned may contain a list in the
   matrix with rows that you can index by field name and columns that you can
   index by queries. However the form of this is not guaranteed if you ask for
   fields that are present only for some of the results.
+}
+\section{Query details}{
+ The \code{exact} and \code{quote} arguments have a
+  profound effect on how SOLR carries out searches. Setting both arguments to
+  \code{FALSE} gives the least specific search and you may want to do this if
+  you do not find any results with an initial query using the default values.
+
+  In general SOLR will break any text in fields like synonym into separate
+  tokens based on whitespace, hypens etc, so the value :
+
+  \code{inter-antennal lobe tract}
+
+  will map onto 4 tokens.
+
+  \code{inter antennal lobe tract}
+
+  This means that a search with query \code{"inter antennal lobe tract",
+  exact=F} will be successful (note missing hyphen).
+
+  When \code{exact=TRUE}, the values will not be tokenised and the query must
+  match the whole field.
+
+  The \code{quote} argument modifies the query. By default the query is
+  tokenised as just described for fields in the database, tokens can be
+  matched in any order and only one token must match (i.e. the are
+  \bold{OR}ed together).  When \code{quote=TRUE}, the query must match in the
+  order given (this is achieved by wrapping it in double quotes before
+  passing to SOLR). For example
+
+  \code{vfb_synonym_query("antennal lobe tract", exact=F, quote=T)}
+
+  returns 2 results at the time of writing whereas
+
+  \code{vfb_synonym_query("antennal lobe tract", exact=F, quote=F)}
+
+  returns 194 results.
 
   See
   \url{https://github.com/EBISPOT/OLS/blob/master/ols-solr/src/main/solr-conf/ontology/conf/schema.xml}
-   for definition of the of the synonym_s exact match field.
+   for definition of the of the \code{synonym_s} exact match field.
 }
 \examples{
 vfb_synonym_query("SOG")
 # anything with a synonym that includes SOG
 vfb_synonym_query("SOG", exact=FALSE)
 
-\donttest{#' # query for PAM exactly
+\donttest{# query for PAM exactly
 vfb_synonym_query("PAM")
 # any term with a synonym containing PAM
 vfb_synonym_query("PAM", exact = FALSE)
@@ -58,6 +106,10 @@ vfb_synonym_query("PAM-*")
 # against tokenised strings (i.e. strings that have broken on spaces and
 # other non word characters such as dashes and underscores).
 vfb_synonym_query("PAM-*", exact = FALSE)
+\donttest{# However if you quote the query you will get results
+vfb_synonym_query("PAM-*", exact = FALSE, quote=TRUE)
+}
+
 \donttest{
 # Search for MBON-01 to MBON-22 (sprintf is used to 0 pad the numbers)
 vfb_synonym_query(sprintf("MBON-\%02d",1:22))
