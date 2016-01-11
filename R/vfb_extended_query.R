@@ -10,6 +10,9 @@
 #'   matched in the order given or to \bold{OR} each term in the query. The
 #'   default \code{quote=NA} will quote when \code{exact=TRUE} and the query
 #'   does not contain wildcards. See \bold{Query details} and \bold{Examples}.
+#' @param searchfields Character vector specifying fields to search. The default
+#'   searches both \bold{synonym}s and the canonical term \bold{label} (since
+#'   the canonical term is not included in the synonym list).
 #' @param fields The fields to return (defaults to 'short_form label synonym').
 #'   Setting \code{fields=""} implies all fields (but note that not all results
 #'   may have the same fields - see discussion in details)
@@ -103,18 +106,21 @@
 #' # wild card syntax to a regular expression
 #' mbondf$aso=sapply(mbondf$synonym, function(x) grep(glob2rx("MBON-??"), x, value=TRUE))
 #' }
-vfb_synonym_query<-function(query, exact=TRUE, quote=NA,
+vfb_synonym_query<-function(query, exact=TRUE, quote=NA, searchfields=c("synonym","label"),
                             fields='short_form label synonym',
                             verbose=interactive(), ...){
-  if(length(query)>1) return(sapply(query, vfb_synonym_query, exact=exact, fields=fields,
-                                quote=quote, verbose=verbose, ...))
+  if(length(query)>1) return(sapply(query, vfb_synonym_query, exact=exact,
+                                    searchfields=searchfields, fields=fields,
+                                    quote=quote, verbose=verbose, ...))
+  searchfields=match.arg(searchfields, several.ok = TRUE)
   if(is.na(quote)){
     # quote=F unless exact=T and query does not contain wildcards
     quote=exact && !grepl("[*?]", query)
   }
   if(quote) query=sprintf('"%s"', query)
-  qfield=ifelse(exact, "synonym_s", "synonym")
-  res=vfb_solr_query(filterquery=query, fields=fields, defaultfield = qfield, ...)
+  if(exact) searchfields=paste0(searchfields, "_s")
+  query=paste0(searchfields,":",query, collapse=" ")
+  res=vfb_solr_query(filterquery=query, fields=fields, ...)
 
   if(verbose){
     nfound=attr(res,'numFound')

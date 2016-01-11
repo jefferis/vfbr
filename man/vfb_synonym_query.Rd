@@ -5,7 +5,8 @@
 \title{Find canononical ontology term using VFB SOLR to query synonyms}
 \usage{
 vfb_synonym_query(query, exact = TRUE, quote = NA,
-  fields = "short_form label synonym", verbose = interactive(), ...)
+  searchfields = c("synonym", "label"), fields = "short_form label synonym",
+  verbose = interactive(), ...)
 }
 \arguments{
 \item{query}{A character vector containing one or more queries - see details.
@@ -20,6 +21,10 @@ See \bold{Query details} and examples.}
 matched in the order given or to \bold{OR} each term in the query. The
 default \code{quote=NA} will quote when \code{exact=TRUE} and the query
 does not contain wildcards. See \bold{Query details} and \bold{Examples}.}
+
+\item{searchfields}{Character vector specifying fields to search. The default
+searches both \bold{synonym}s and the canonical term \bold{label} (since
+the canonical term is not included in the synonym list).}
 
 \item{fields}{The fields to return (defaults to 'short_form label synonym').
 Setting \code{fields=""} implies all fields (but note that not all results

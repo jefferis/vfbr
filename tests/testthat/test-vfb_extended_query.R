@@ -20,3 +20,7 @@ test_that("quoted synonym queries work", {
   expect_lt(nqt<-nrow(vfb_synonym_query("antennal lobe", exact=F, quote = T, rows=Inf)), nqf)
   expect_true(nqt>0)
 })
+
+test_that("can find synonyms only in main label", {
+  expect_gt(nrow(vfb_synonym_query("antennal lobe", exact=T)),0)
+})
