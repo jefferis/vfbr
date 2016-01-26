@@ -80,6 +80,7 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
 #'   implies all matching rows.
 #' @param fields Which fields to return (+delimited). A value of \code{""}
 #'   implies all fields.
+#' @param ... additional solr query arguments
 #' @return When \code{parse.json=TRUE}, a data.frame containing the parsed
 #'   response (originally the \code{response$docs} field in the parsed JSON)
 #'   along with additional attributes including
@@ -122,18 +123,27 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
                          server= getOption("vfbr.server"), parse.json=TRUE, ...) {
   if(!is.finite(rows)) {
     # check how many rows there are
-    rowr=vfb_solr_query(query=query, filterquery = filterquery, fields = fields, sort=sort,
-                   defaultfield = defaultfield, rows=0L, path=path,
-                   server = server, parse.json = T)
+    rowr=vfb_solr_query(query=query, filterquery = filterquery, fields = fields,
+                        sort=sort, defaultfield = defaultfield, rows=0L, path=path,
+                        server = server, parse.json = T)
     rows=attr(rowr,'numFound')
     # now we will return them all
   }
   params=c(fl=fields, sort=sort, rows=rows, df=defaultfield, q=query)
   # filterquery can be vectorised
-  if(length(filterquery)) {
-    names(filterquery)=rep("fq", length(filterquery))
-    params=c(params, filterquery)
+  de_vectorise<-function(x, name) {
+    if(length(x))
+      names(x)=rep(name, length(x))
+    x
   }
+  params=c(params, de_vectorise(filterquery, "fq"))
+
+  apl=pairlist(...)
+  if(length(apl)){
+    # interpret as extra SOLR params
+    for(n in names(apl))  params=c(params, de_vectorise(apl[[n]], n))
+  }
+
   fullquery=paste(names(params), sep="=", params, collapse = "&")
   url=paste0(server, "/", path, "&", fullquery)
   url=utils::URLencode(url)
@@ -141,7 +151,7 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
   res=GET(url)
 
   if(parse.json) {
-    rawres=vfb_parse_json(res, ...)
+    rawres=vfb_parse_json(res)
     # get main response data.frame
     response=rawres[['response']]
     res=response[['docs']]

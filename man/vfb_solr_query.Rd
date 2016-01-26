@@ -33,8 +33,7 @@ implies all matching rows.}
 
 \item{parse.json}{Whether or no to parse the response (default: TRUE)}
 
-\item{...}{additional arguments passed to
-\code{jsonlite::\link[jsonlite]{fromJSON}}}
+\item{...}{additional solr query arguments}
 }
 \value{
 When \code{parse.json=TRUE}, a data.frame containing the parsed
