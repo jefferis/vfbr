@@ -129,6 +129,6 @@ mbondf$aso=sapply(mbondf$synonym, function(x) grep(glob2rx("MBON-??"), x, value=
 }
 }
 \seealso{
-\code{\link{vfb_solr_query}}
+\code{\link{vfb_solr_query}}, \code{\link{vfb_autocomplete_query}}
 }
 

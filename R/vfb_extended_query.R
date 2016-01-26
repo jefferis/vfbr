@@ -72,7 +72,7 @@
 #'   matrix with rows that you can index by field name and columns that you can
 #'   index by queries. However the form of this is not guaranteed if you ask for
 #'   fields that are present only for some of the results.
-#' @seealso \code{\link{vfb_solr_query}}
+#' @seealso \code{\link{vfb_solr_query}}, \code{\link{vfb_autocomplete_query}}
 #' @export
 #' @examples
 #' vfb_synonym_query("SOG")
@@ -131,4 +131,30 @@ vfb_synonym_query<-function(query, exact=TRUE, quote=NA, searchfields=c("synonym
       message("No results found! You could try setting exact=FALSE.")
   }
   res
+}
+
+#' Replicate the VFB site's autocomplete query
+#'
+#' @details This is a rather non-selective query that emphasises exact matches and terms
+#' in the BRAINNAME defining key ontology components by returning them in the
+#' first rows of the result list.
+#' @inheritParams vfb_synonym_query
+#' @export
+#' @seealso \code{\link{vfb_synonym_query}}
+vfb_autocomplete_query<-function(query, ...){
+  munged_query=paste0("*", gsub(" ","?", query), "*")
+  vfb_solr_query(hl="true",
+  fields="short_form,label,synonym,id,type,has_narrow_synonym_annotation,has_broad_synonym_annotation",
+  filter_query=c("ontology_name:(fbbt)","is_obsolete:false","shortform_autosuggest:VFB_* OR shortform_autosuggest:FBbt_*"),
+  hl.simple.pre="<b>",
+  bq=sprintf('is_defining_ontology:true^100.0 label_s:"%s"^2 synonym_s:"%s" in_subset_annotation:BRAINNAME^3 short_form:FBbt_00003982^2',
+             query, query),
+  query=munged_query,
+  defType="edismax",
+  hl.simple.post="</b>:",
+  qf="label synonym label_autosuggest_ws label_autosuggest_e label_autosuggest synonym_autosuggest_ws synonym_autosuggest_e synonym_autosuggest shortform_autosuggest has_narrow_synonym_annotation has_broad_synonym_annotation",
+  hl.fl="label_autosuggest",
+  hl.fl="label",
+  hl.fl="synonym_autosuggest",
+  hl.fl="synonym", ...)
 }
