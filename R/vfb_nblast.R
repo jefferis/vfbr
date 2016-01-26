@@ -15,6 +15,12 @@
 #' @export
 #' @examples
 #' vfb_nblast('fru-M-200266')
+#'
+#' \dontrun{
+#' top10=vfb_nblast('fru-M-200266', target="GMR-Gal4", n = 10)
+#' library(nat.amira)
+#' open_stack_viewer(getOption("vfbr.stack.downloads"), download_gmr_stacks(top10$id))
+#' }
 vfb_nblast<-function(query, n=50, target=c("FlyCircuit", "GMR-Gal4"), ...){
   target=match.arg(target)
   server="http://vfbdev.inf.ed.ac.uk"
