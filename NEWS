@@ -1,3 +1,12 @@
+vfbr 0.2.1
+==========
+
+* Additional arguments for vfb_synonym_query
+* New function vfb_autocomplete_query to replicate the VFB website
+* vfb_solr_query can accept all solr query terms as additional arguments
+  (including repeated terms)
+* Documentation fixes/improvements
+
 vfbr 0.2
 ========
 * New function vfb_synonym_query
