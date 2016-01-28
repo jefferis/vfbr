@@ -2,6 +2,7 @@
 
 export(download_gmr_stacks)
 export(gmr_stack_urls)
+export(gmr_stack_urls_for_ids)
 export(gmr_vfbid)
 export(vfb_3dbrowser_url)
 export(vfb_autocomplete_query)
