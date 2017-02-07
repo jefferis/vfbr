@@ -51,6 +51,7 @@ vfb_stack_url<-function(ids, terminfo=NULL, clear=FALSE, path='/site/stacks', se
 #' browseURL(u2)
 #' }
 vfb_3dbrowser_url<-function(ids, template="VFBt_001", server=getOption('vfbr.server.gepetto')) {
-  baseurl="%s/org.geppetto.frontend/geppetto?load_project_from_url=http://vfbdev.inf.ed.ac.uk/do/geppettoJson.json?i=%s&t=%s"
-  sprintf(baseurl, server, paste(ids, collapse = ","), template)
+  server_noport=sub(":[0-9]+$","", server)
+  baseurl="%s/org.geppetto.frontend/geppetto?load_project_from_url=%s/do/geppettoJson.json?i=%s&t=%s"
+  sprintf(baseurl, server, server_noport, paste(ids, collapse = ","), template)
 }
