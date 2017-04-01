@@ -18,6 +18,7 @@
 #'
 #' # find vfb id for this class of neuron often called fruitless mAL neuron
 #' resdf=vfb_solr_query("synonym:mAL",filterquery = c("label:female","label:neuron"))
+#' head(resdf)
 #' u=vfb_stack_url(c(template, ids), terminfo=resdf$short_form[1], clear=TRUE)
 #' \dontrun{
 #' browseURL(u)

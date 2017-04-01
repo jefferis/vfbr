@@ -107,14 +107,16 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
 #' # note use of rows = 0 so we do not fetch results (but still get totals)
 #' r=vfb_solr_query(filterquery="VFB_*",query="label:GMR_*", rows=0)
 #' attr(r,'numFound')
-#' \dontrun{
-#' # VFB id for all GMR lines
-#' vfb_solr_query(filterquery="VFB_*",query="label:GMR_*", rows=4000)
+#' \donttest{
+#' #' # VFB id for all GMR lines
+#' all_gmr=vfb_solr_query(filterquery="VFB_*",query="label:GMR_*", rows=4000)
+#' head(all_gmr)
 #'
 #' # VFB id for all FlyCircuit neurons
 #' # note use of rows=Inf to fetch all rows
-#' y=vfb_solr_query(filterquery="VFB_*",
+#' all_fc=vfb_solr_query(filterquery="VFB_*",
 #'   query="source_data_link_annotation:*flycircuit*", rows=Inf)
+#' head(all_fc)
 #' }
 #' @seealso \code{\link[httr]{response}}
 vfb_solr_query<-function(query="*:*", filterquery=NULL,
