@@ -16,6 +16,7 @@
 #' @param ... additional arguments passed to
 #'   \code{jsonlite::\link[jsonlite]{fromJSON}}
 #' @export
+#' @family query
 #' @seealso \code{\link[jsonlite]{fromJSON}}
 #' @examples
 #' \dontrun{
@@ -97,7 +98,7 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
 #'
 #'   When \code{parse.json=FALSE} an \code{httr::response} object
 #' @export
-#'
+#' @family query
 #' @examples
 #' # Find VFB ids matching a given GMR line
 #' vfb_solr_query(filterquery="VFB_*",query="label:GMR_10A07*")

@@ -43,4 +43,7 @@ head(neurondf)
 }
 \seealso{
 \code{\link[jsonlite]{fromJSON}}
+
+Other query: \code{\link{vfb_neo4j_query}},
+  \code{\link{vfb_solr_query}}
 }
