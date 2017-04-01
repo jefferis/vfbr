@@ -165,3 +165,41 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
   }
   res
 }
+
+
+
+#' Query VFB's Neo4J graph database
+#'
+#' @details Under the hood, this uses the \code{\link[RNeo4j]{cypher}} function
+#'   to call a Neo4J service running on the specified VFB server. The \code{path} and \code{server} arguments should be
+#' @param x A character query in Neo4J's cypher language
+#' @param ... Additional query arguments of the form \code{key=value}
+#' @param path The relative path on the server for the Neo4J endpoint
+#' @param server The server's root URL
+#'
+#' @return A data.frame of query results
+#' @export
+#' @importFrom RNeo4j startGraph cypher
+#' @seealso \code{\link[RNeo4j]{RNeo4j}}, \code{\link[RNeo4j]{cypher}}
+#' @family query
+#' @examples
+#' \donttest{
+#' # ask for all neuronal classes
+#' nclasses=vfb_neo4j_query("MATCH (n:Neuron:Class) RETURN n.label")
+#' nrow(nclasses)
+#' head(nclasses)
+#'
+#' # Find all images with an associated neuronal class
+#' q=paste0("MATCH (n:Class:VFB { label : 'neuron' })",
+#'   "<-[:SUBCLASSOF*]-(p)<-[:INSTANCEOF]-(i:Individual)",
+#'   "RETURN distinct i.label, p.label;")
+#' nclasses_image=vfb_neo4j_query(q)
+#'
+#' }
+#' @references \url{https://neo4j.com/developer/cypher-query-language/}
+vfb_neo4j_query <- function(x, ..., path="neo4jdb/data", server= getOption("vfbr.server")){
+  url=file.path(server, path)
+  g <- try(startGraph(url))
+  cypher(g, x)
+
+}
