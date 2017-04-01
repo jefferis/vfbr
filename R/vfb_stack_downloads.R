@@ -45,6 +45,7 @@ gmr_stack_urls_for_ids<-function(ids){
   all_urls[extract_gmr_id(ids)]
 }
 
+#' @importFrom utils download.file
 cached_download=function(url, destfile, ...) {
   if(file.exists(destfile)) return(invisible(0L))
   try(download.file(url, destfile, ...))
@@ -73,6 +74,7 @@ regular_download=function(...) try(download.file(...))
 #' @return Named character vector of paths to downloaded files
 #' @seealso \code{\link{gmr_stack_urls_for_ids}}
 #' @export
+#' @importFrom stats na.omit
 #' @examples
 #' \dontrun{
 #' stacks=download_gmr_stacks(c('9A09', '95H11'))
