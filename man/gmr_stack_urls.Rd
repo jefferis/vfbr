@@ -43,4 +43,3 @@ system.time(u3 <- gmr_stack_urls_memo())
 stopifnot(all.equal(u2,u3))
 }
 }
-

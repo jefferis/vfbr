@@ -95,6 +95,7 @@ Note that data.frame that is returned may contain a list in the
   \url{https://github.com/EBISPOT/OLS/blob/master/ols-solr/src/main/solr-conf/ontology/conf/schema.xml}
    for definition of the of the \code{synonym_s} exact match field.
 }
+
 \examples{
 vfb_synonym_query("SOG")
 # anything with a synonym that includes SOG
@@ -131,4 +132,3 @@ mbondf$aso=sapply(mbondf$synonym, function(x) grep(glob2rx("MBON-??"), x, value=
 \seealso{
 \code{\link{vfb_solr_query}}, \code{\link{vfb_autocomplete_query}}
 }
-

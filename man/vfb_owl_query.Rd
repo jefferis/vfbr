@@ -44,4 +44,3 @@ head(neurondf)
 \seealso{
 \code{\link[jsonlite]{fromJSON}}
 }
-

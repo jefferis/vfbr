@@ -46,4 +46,3 @@ vfb_fromvfbids(vfbids)
 \seealso{
 \code{\link{gmr_vfbid}}
 }
-

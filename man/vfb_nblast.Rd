@@ -36,4 +36,3 @@ library(nat.amira)
 open_stack_viewer(getOption("vfbr.stack.downloads"), download_gmr_stacks(top10$id))
 }
 }
-

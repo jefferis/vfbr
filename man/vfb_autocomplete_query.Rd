@@ -25,4 +25,3 @@ first rows of the result list.
 \seealso{
 \code{\link{vfb_synonym_query}}
 }
-

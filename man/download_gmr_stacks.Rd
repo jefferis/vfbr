@@ -57,4 +57,3 @@ option(vfbr.stack.downloads="/path/to/my/stacks/folder")
 \seealso{
 \code{\link{gmr_stack_urls_for_ids}}
 }
-

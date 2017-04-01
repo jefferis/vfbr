@@ -20,4 +20,3 @@ gmr_vfbid("11H09")
 \seealso{
 \code{\link{vfb_fromvfbids}}
 }
-

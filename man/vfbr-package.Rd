@@ -2,8 +2,8 @@
 % Please edit documentation in R/vfbr-package.R
 \docType{package}
 \name{vfbr-package}
-\alias{vfbr}
 \alias{vfbr-package}
+\alias{vfbr}
 \title{Programmatic Access to the virtualflybrain.org website}
 \description{
 Programmatic Access to the virtualflybrain.org website
@@ -43,6 +43,7 @@ Programmatic Access to the virtualflybrain.org website
 
  }
 }
+
 \examples{
 # Show state of vfbr package options
 options()[grep('^vfbr', names(options()))]
@@ -58,4 +59,3 @@ See \url{http://virtualflybrain.org}
 \code{\link{vfb_solr_query}}
 }
 \keyword{package}
-

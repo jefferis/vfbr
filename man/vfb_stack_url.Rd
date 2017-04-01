@@ -39,4 +39,3 @@ u=vfb_stack_url(c(template, ids), terminfo=resdf$short_form[1], clear=TRUE)
 browseURL(u)
 }
 }
-

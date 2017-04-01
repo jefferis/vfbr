@@ -94,4 +94,3 @@ y=vfb_solr_query(filterquery="VFB_*",
 \seealso{
 \code{\link[httr]{response}}
 }
-
