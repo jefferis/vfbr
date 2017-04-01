@@ -17,6 +17,11 @@ Programmatic Access to the virtualflybrain.org website
  point. This gives you programmatic access to the great majority of searches
  that you can perform interactively on the VFB website.
 
+ \item{\code{\link{vfb_neo4j_query}}} Allows you to query VFB's Neo4J end
+ point. This gives you programmatic access to many sophisticated searches
+ based on the VFB ontology, including searches that may not be easily
+ accessible via the website.
+
  \item{\code{\link{vfb_synonym_query}}} A higher level function that allows
  you to search for canonical terms with synonyms matching a given query.
 
