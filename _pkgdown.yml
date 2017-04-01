@@ -1,0 +1,26 @@
+reference:
+- title: Package Help
+  desc: Provides an overview of key functions and classes
+  contents:
+  - vfbr-package
+- title: Queries
+  desc: Programmatic queries of VFB data
+  contents:
+  - vfb_autocomplete_query
+  - vfb_neo4j_query
+  - vfb_owl_query
+  - vfb_solr_query
+  - vfb_synonym_query
+- title: Image Data
+  contents:
+  - download_gmr_stacks
+  - gmr_stack_urls
+  - vfb_3dbrowser_url
+  - vfb_stack_url
+- title: NBLAST neuron search
+  contents:
+  - vfb_nblast
+- title: Identifiers
+  contents:
+  - gmr_vfbid
+  - vfb_fromvfbids
