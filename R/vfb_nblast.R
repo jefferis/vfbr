@@ -13,6 +13,7 @@
 #'
 #'   }
 #' @export
+#' @inheritParams vfb_solr_query
 #' @examples
 #' vfb_nblast('fru-M-200266')
 #'
@@ -24,9 +25,9 @@
 #' library(nat.amira)
 #' open_stack_viewer(getOption("vfbr.stack.downloads"), download_gmr_stacks(top10$id))
 #' }
-vfb_nblast<-function(query, n=50, target=c("FlyCircuit", "GMR-Gal4"), ...){
+vfb_nblast<-function(query, n=50, target=c("FlyCircuit", "GMR-Gal4"),
+                     server=getOption("vfbr.server"), ...){
   target=match.arg(target)
-  server="http://vfbdev.inf.ed.ac.uk"
   topn_path=paste0("/ocpu/library/flynblastscores/R/flycircuit_",
                    ifelse(target=='FlyCircuit', "topn", "gmr_topn"),
                    '/json')
