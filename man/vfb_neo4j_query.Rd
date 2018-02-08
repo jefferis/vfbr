@@ -4,8 +4,8 @@
 \alias{vfb_neo4j_query}
 \title{Query VFB's Neo4J graph database}
 \usage{
-vfb_neo4j_query(x, ..., path = "neo4jdb/data",
-  server = getOption("vfbr.server"))
+vfb_neo4j_query(x, ..., path = "db/data",
+  server = getOption("vfbr.server.neo4j"))
 }
 \arguments{
 \item{x}{A character query in Neo4J's cypher language}

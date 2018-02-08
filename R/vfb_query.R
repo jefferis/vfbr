@@ -200,7 +200,7 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
 #'
 #' }
 #' @references \url{https://neo4j.com/developer/cypher-query-language/}
-vfb_neo4j_query <- function(x, ..., path="neo4jdb/data", server= getOption("vfbr.server")){
+vfb_neo4j_query <- function(x, ..., path="db/data", server= getOption("vfbr.server.neo4j")){
   url=file.path(server, path)
   g <- try(startGraph(url))
   cypher(g, x)
