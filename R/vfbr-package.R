@@ -26,8 +26,14 @@
 #'
 #'  \item{\code{vfbr.server}}{ URL of main VFB server}
 #'
+#'  \item{\code{vfbr.server.neo4j}}{ URL for Neo4J graph database queries}
+#'
+#'  \item{\code{vfbr.server.owl}}{ URL for OWL ontology queries}
+#'
 #'  \item{\code{vfbr.server.gepetto}}{ URL of VFB's gepetto server for 3D
 #'  visualisation (see \code{\link{vfb_3dbrowser_url}}.)}
+#'
+#'  \item{\code{vfbr.server.r}}{ URL for opencpu/R queries - not for users at the moment}
 #'
 #'  \item{\code{vfbr.stack.gmr_url}}{URL containing listing of registered GMR
 #'  Gal4 confocal stacks. See \code{\link{gmr_stack_urls}}}
