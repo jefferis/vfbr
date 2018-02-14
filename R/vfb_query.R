@@ -183,7 +183,8 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
 #' @return A data.frame of query results
 #' @export
 #' @importFrom RNeo4j startGraph cypher
-#' @seealso \code{\link[RNeo4j]{RNeo4j}}, \code{\link[RNeo4j]{cypher}}
+#' @seealso \code{\link[RNeo4j]{RNeo4j}}, \code{\link[RNeo4j]{cypher}} and
+#'   \url{https://neo4j.com/docs/rest-docs/3.3/}
 #' @family query
 #' @examples
 #' \donttest{

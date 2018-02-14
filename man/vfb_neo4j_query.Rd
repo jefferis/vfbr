@@ -45,7 +45,8 @@ nclasses_image=vfb_neo4j_query(q)
 \url{https://neo4j.com/developer/cypher-query-language/}
 }
 \seealso{
-\code{\link[RNeo4j]{RNeo4j}}, \code{\link[RNeo4j]{cypher}}
+\code{\link[RNeo4j]{RNeo4j}}, \code{\link[RNeo4j]{cypher}} and
+  \url{https://neo4j.com/docs/rest-docs/3.3/}
 
 Other query: \code{\link{vfb_owl_query}},
   \code{\link{vfb_solr_query}}
