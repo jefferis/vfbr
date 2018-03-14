@@ -5,7 +5,7 @@
 \title{Query vfb opencpu server to obtain pre-computed nblast scores}
 \usage{
 vfb_nblast(query, n = 50, target = c("FlyCircuit", "GMR-Gal4"),
-  server = getOption("vfbr.server"), ...)
+  server = getOption("vfbr.server.r"), ...)
 }
 \arguments{
 \item{query}{A single flycircuit identifier}

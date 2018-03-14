@@ -26,7 +26,7 @@
 #' open_stack_viewer(getOption("vfbr.stack.downloads"), download_gmr_stacks(top10$id))
 #' }
 vfb_nblast<-function(query, n=50, target=c("FlyCircuit", "GMR-Gal4"),
-                     server=getOption("vfbr.server"), ...){
+                     server=getOption("vfbr.server.r"), ...){
   target=match.arg(target)
   topn_path=paste0("/ocpu/library/flynblastscores/R/flycircuit_",
                    ifelse(target=='FlyCircuit', "topn", "gmr_topn"),
