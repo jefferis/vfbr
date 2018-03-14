@@ -122,8 +122,8 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
 vfb_solr_query<-function(query="*:*", filterquery=NULL,
                          fields="label+short_form", sort="score+desc",
                          defaultfield="short_form", rows=30L,
-                         path="search/select?wt=json",
-                         server= getOption("vfbr.server"), parse.json=TRUE, ...) {
+                         path="solr/ontology/select?wt=json",
+                         server= getOption("vfbr.server.solr"), parse.json=TRUE, ...) {
   if(!is.finite(rows)) {
     # check how many rows there are
     rowr=vfb_solr_query(query=query, filterquery = filterquery, fields = fields,

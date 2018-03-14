@@ -1,6 +1,7 @@
 .onLoad <- function(libname, pkgname) {
   op.vfbr=list(
     vfbr.server="http://virtualflybrain.org",
+    vfbr.server.solr="http://solr.virtualflybrain.org",
     vfbr.server.owl="http://owl.virtualflybrain.org",
     vfbr.server.neo4j="http://pdb.virtualflybrain.org",
     vfbr.server.r="http://r.virtualflybrain.org",

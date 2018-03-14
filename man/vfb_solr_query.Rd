@@ -6,8 +6,9 @@
 \usage{
 vfb_solr_query(query = "*:*", filterquery = NULL,
   fields = "label+short_form", sort = "score+desc",
-  defaultfield = "short_form", rows = 30L, path = "search/select?wt=json",
-  server = getOption("vfbr.server"), parse.json = TRUE, ...)
+  defaultfield = "short_form", rows = 30L,
+  path = "solr/ontology/select?wt=json",
+  server = getOption("vfbr.server.solr"), parse.json = TRUE, ...)
 }
 \arguments{
 \item{query}{A key-value list specifying the query}
