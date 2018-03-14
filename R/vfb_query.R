@@ -28,11 +28,10 @@
 #' # show the first few rows of the returned data.frame
 #' head(neurondf)
 #' }
-vfb_owl_query<-function(query, path="do/jsonQuery.html?json=",
-                            server= getOption("vfbr.server"), parse.json=TRUE, ...) {
-  queryj=minify(toJSON(query, auto_unbox=TRUE))
-  queryj=utils::URLencode(queryj)
-  url=paste0(server, "/", path, queryj)
+vfb_owl_query<-function(query, path="api/runQuery.groovy?",
+                            server= getOption("vfbr.server.owl"), parse.json=TRUE, ...) {
+  queryt=utils::URLencode(query)
+  url=paste0(server, "/", path, queryt)
   if(is.null(server)) stop ("You must specify a server!")
   res=GET(url)
 

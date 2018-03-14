@@ -4,8 +4,8 @@
 \alias{vfb_owl_query}
 \title{Generic query against VFB OWL API}
 \usage{
-vfb_owl_query(query, path = "do/jsonQuery.html?json=",
-  server = getOption("vfbr.server"), parse.json = TRUE, ...)
+vfb_owl_query(query, path = "api/runQuery.groovy?",
+  server = getOption("vfbr.server.owl"), parse.json = TRUE, ...)
 }
 \arguments{
 \item{query}{A key-value list specifying the query}
