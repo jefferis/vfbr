@@ -38,7 +38,15 @@ q=paste0("MATCH (n:Class:VFB { label : 'neuron' })",
   "<-[:SUBCLASSOF*]-(p)<-[:INSTANCEOF]-(i:Individual)",
   "RETURN distinct i.label, p.label;")
 nclasses_image=vfb_neo4j_query(q)
+nrow(nclasses_image)
+head(nclasses_image)
 
+# how many neuronal classes have images?
+length(unique(nclasses_image$p.label))
+
+# look at number of images for each neuronal class
+table_by_nclass <- table(nclasses_image$p.label)
+subset(as.data.frame(table_by_nclass), Freq>200)
 }
 }
 \references{
