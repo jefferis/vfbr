@@ -39,6 +39,8 @@ Programmatic Access to the virtualflybrain.org website
 
  \item{\code{vfbr.server.neo4j}}{ URL for Neo4J graph database queries}
 
+ \item{\code{vfbr.server.solr}}{ URL for SOLR queries}
+
  \item{\code{vfbr.server.owl}}{ URL for OWL ontology queries}
 
  \item{\code{vfbr.server.gepetto}}{ URL of VFB's gepetto server for 3D
