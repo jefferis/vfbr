@@ -1,10 +1,10 @@
 Package: vfbr
 Type: Package
 Title: R Package to Access the Virtual Fly Brain project API
-Version: 0.2.1
-Authors@R: person("Gregory", "Jefferis", email="jefferis@gmail.com",
-  role = c("aut", "cre"))
-Description: The Virtual Fly Brain provides a website virtualflybrain.org
+Version: 0.3
+Authors@R: person("Gregory","Jefferis", email="jefferis@gmail.com", 
+    role = c("aut", "cre"), comment = c(ORCID = "0000-0002-0587-9355"))
+Description: The Virtual Fly Brain project provides a website virtualflybrain.org
     containing neuroanatomical data for the fruit fly, Drosophila melanogaster,
     curated from published journal articles and bulk image data. This package
     enables queries against an experimental (as of time of writing) API.
@@ -23,3 +23,5 @@ Suggests:
     testthat
 RoxygenNote: 6.0.1
 Remotes: nicolewhite/RNeo4j
+URL: https://github.com/jefferis/vfbr
+BugReports: https://github.com/jefferis/vfbr/issues

@@ -1,3 +1,10 @@
+vfbr 0.3
+========
+* add vfb_neo4j_query
+* fix vfb_nblast, vfb_solr_query URLs
+* export gmr_stack_urls_for_ids function
+* pkgdown site
+
 vfbr 0.2.1
 ==========
 
