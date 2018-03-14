@@ -18,19 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
+<meta property="og:title" content="Function reference" />
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -49,12 +55,23 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jefferis/vfbr">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -66,92 +83,140 @@
       <div class="row">
   <div class="col-md-9">
     <div class="page-header">
-      <h1>Function reference</h1>
-      <h4>version&nbsp;0.2.1</h4>
+      <h1>
+        Reference
+        <small>version&nbsp;0.3</small>
+      </h1>
     </div>
 
     <div class="contents">
-      <h2 id="section-package-help" class="hasAnchor"><a href="#section-package-help" class="anchor"></a>Package Help</h2>
-      <p class="section-desc"><p>Provides an overview of key functions and classes</p></p>
+      <table class="ref-index">
 
-      
-      <p><a href="vfbr-package.html">Programmatic Access to the virtualflybrain.org website</a></p>
-      <ul>
-        <li><code><a href="vfbr-package.html">vfbr-package</a></code></li><li><code><a href="vfbr-package.html">vfbr</a></code></li>
-      </ul>
-          <h2 id="section-queries" class="hasAnchor"><a href="#section-queries" class="anchor"></a>Queries</h2>
-      <p class="section-desc"><p>Programmatic queries of VFB data</p></p>
+      <colgroup>
+        <col class="alias" />
+        <col class="title" />
+      </colgroup>
 
-      
-      <p><a href="vfb_autocomplete_query.html">Replicate the VFB site's autocomplete query</a></p>
-      <ul>
-        <li><code><a href="vfb_autocomplete_query.html">vfb_autocomplete_query</a></code></li>
-      </ul>
-      
-      <p><a href="vfb_neo4j_query.html">Query VFB's Neo4J graph database</a></p>
-      <ul>
-        <li><code><a href="vfb_neo4j_query.html">vfb_neo4j_query</a></code></li>
-      </ul>
-      
-      <p><a href="vfb_owl_query.html">Generic query against VFB OWL API</a></p>
-      <ul>
-        <li><code><a href="vfb_owl_query.html">vfb_owl_query</a></code></li>
-      </ul>
-      
-      <p><a href="vfb_solr_query.html">Query VFB via solr indexing system</a></p>
-      <ul>
-        <li><code><a href="vfb_solr_query.html">vfb_solr_query</a></code></li>
-      </ul>
-      
-      <p><a href="vfb_synonym_query.html">Find canononical ontology term using VFB SOLR to query synonyms</a></p>
-      <ul>
-        <li><code><a href="vfb_synonym_query.html">vfb_synonym_query</a></code></li>
-      </ul>
-          <h2 id="section-image-data" class="hasAnchor"><a href="#section-image-data" class="anchor"></a>Image Data</h2>
-      <p class="section-desc"></p>
-
-      
-      <p><a href="download_gmr_stacks.html">Download the registered GMR stacks for given ids</a></p>
-      <ul>
-        <li><code><a href="download_gmr_stacks.html">download_gmr_stacks</a></code></li>
-      </ul>
-      
-      <p><a href="gmr_stack_urls.html">Return the urls for GMR-Gal4 stacks</a></p>
-      <ul>
-        <li><code><a href="gmr_stack_urls.html">gmr_stack_urls</a></code></li><li><code><a href="gmr_stack_urls.html">gmr_stack_urls_for_ids</a></code></li>
-      </ul>
-      
-      <p><a href="vfb_3dbrowser_url.html">Make a URL for a set of VFB ids to be displayed in the 3D browser</a></p>
-      <ul>
-        <li><code><a href="vfb_3dbrowser_url.html">vfb_3dbrowser_url</a></code></li>
-      </ul>
-      
-      <p><a href="vfb_stack_url.html">Make a URL for a set of VFB ids to be displayed in the stack browser</a></p>
-      <ul>
-        <li><code><a href="vfb_stack_url.html">vfb_stack_url</a></code></li>
-      </ul>
-          <h2 id="section-nblast-neuron-search" class="hasAnchor"><a href="#section-nblast-neuron-search" class="anchor"></a>NBLAST neuron search</h2>
-      <p class="section-desc"></p>
-
-      
-      <p><a href="vfb_nblast.html">Query vfb opencpu server to obtain pre-computed nblast scores</a></p>
-      <ul>
-        <li><code><a href="vfb_nblast.html">vfb_nblast</a></code></li>
-      </ul>
-          <h2 id="section-identifiers" class="hasAnchor"><a href="#section-identifiers" class="anchor"></a>Identifiers</h2>
-      <p class="section-desc"></p>
-
-      
-      <p><a href="gmr_vfbid.html">Convert GMR identifiers to VFB ids</a></p>
-      <ul>
-        <li><code><a href="gmr_vfbid.html">gmr_vfbid</a></code></li>
-      </ul>
-      
-      <p><a href="vfb_fromvfbids.html">Convert between VFB and external identifiers</a></p>
-      <ul>
-        <li><code><a href="vfb_fromvfbids.html">vfb_fromvfbids</a></code></li><li><code><a href="vfb_fromvfbids.html">vfb_tovfbids</a></code></li>
-      </ul>
-    
+      <tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-package-help" class="hasAnchor"><a href="#section-package-help" class="anchor"></a>Package Help</h2>
+            <p class="section-desc"><p>Provides an overview of key functions and classes</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="vfbr-package.html">vfbr-package</a></code> </p>
+          </td>
+          <td><p>Programmatic Access to the virtualflybrain.org website</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-queries" class="hasAnchor"><a href="#section-queries" class="anchor"></a>Queries</h2>
+            <p class="section-desc"><p>Programmatic queries of VFB data</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="vfb_autocomplete_query.html">vfb_autocomplete_query</a></code> </p>
+          </td>
+          <td><p>Replicate the VFB site's autocomplete query</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="vfb_neo4j_query.html">vfb_neo4j_query</a></code> </p>
+          </td>
+          <td><p>Query VFB's Neo4J graph database</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="vfb_owl_query.html">vfb_owl_query</a></code> </p>
+          </td>
+          <td><p>Generic query against VFB OWL API</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="vfb_solr_query.html">vfb_solr_query</a></code> </p>
+          </td>
+          <td><p>Query VFB via solr indexing system</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="vfb_synonym_query.html">vfb_synonym_query</a></code> </p>
+          </td>
+          <td><p>Find canononical ontology term using VFB SOLR to query synonyms</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-image-data" class="hasAnchor"><a href="#section-image-data" class="anchor"></a>Image Data</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="download_gmr_stacks.html">download_gmr_stacks</a></code> </p>
+          </td>
+          <td><p>Download the registered GMR stacks for given ids</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="gmr_stack_urls.html">gmr_stack_urls</a></code> <code><a href="gmr_stack_urls.html">gmr_stack_urls_for_ids</a></code> </p>
+          </td>
+          <td><p>Return the urls for GMR-Gal4 stacks</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="vfb_3dbrowser_url.html">vfb_3dbrowser_url</a></code> </p>
+          </td>
+          <td><p>Make a URL for a set of VFB ids to be displayed in the 3D browser</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="vfb_stack_url.html">vfb_stack_url</a></code> </p>
+          </td>
+          <td><p>Make a URL for a set of VFB ids to be displayed in the stack browser</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-nblast-neuron-search" class="hasAnchor"><a href="#section-nblast-neuron-search" class="anchor"></a>NBLAST neuron search</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="vfb_nblast.html">vfb_nblast</a></code> </p>
+          </td>
+          <td><p>Query vfb opencpu server to obtain pre-computed nblast scores</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-identifiers" class="hasAnchor"><a href="#section-identifiers" class="anchor"></a>Identifiers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="gmr_vfbid.html">gmr_vfbid</a></code> </p>
+          </td>
+          <td><p>Convert GMR identifiers to VFB ids</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="vfb_fromvfbids.html">vfb_fromvfbids</a></code> <code><a href="vfb_fromvfbids.html">vfb_tovfbids</a></code> </p>
+          </td>
+          <td><p>Convert between VFB and external identifiers</p></td>
+        </tr>
+      </tbody>
+      </table>
     </div>
   </div>
 
@@ -173,7 +238,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -181,3 +246,4 @@
 
   </body>
 </html>
+

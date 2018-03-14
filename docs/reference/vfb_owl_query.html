@@ -18,19 +18,30 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+  
+  
+<meta property="og:title" content="Generic query against VFB OWL API — vfb_owl_query" />
 
+<meta property="og:description" content="This function expects an R list or vector describing a query and
+  constructs an appropriate query url embedding a JSON query, GETs the server
+  response and (by default) parses the JSON result." />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -49,12 +60,23 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jefferis/vfbr">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -75,23 +97,34 @@
   response and (by default) parses the JSON result.</p>
     
 
-    <pre><span class='fu'>vfb_owl_query</span>(<span class='no'>query</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"do/jsonQuery.html?json="</span>,
+    <pre class="usage"><span class='fu'>vfb_owl_query</span>(<span class='no'>query</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"do/jsonQuery.html?json="</span>,
   <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.server"</span>), <span class='kw'>parse.json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>query</dt>
-      <dd>A key-value list specifying the query</dd>
-      <dt>path</dt>
-      <dd>The path on the server containing the query page</dd>
-      <dt>server</dt>
-      <dd>The base url of the server</dd>
-      <dt>parse.json</dt>
-      <dd>Whether or no to parse the response (default: TRUE)</dd>
-      <dt>...</dt>
-      <dd>additional arguments passed to
-<code>jsonlite::<a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></code></dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>query</th>
+      <td><p>A key-value list specifying the query</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>The path on the server containing the query page</p></td>
+    </tr>
+    <tr>
+      <th>server</th>
+      <td><p>The base url of the server</p></td>
+    </tr>
+    <tr>
+      <th>parse.json</th>
+      <td><p>Whether or no to parse the response (default: TRUE)</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments passed to
+<code>jsonlite::<a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></code></p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -103,20 +136,20 @@
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></code></p>
-    <p>Other query: <code><a href='vfb_neo4j_query.html'>vfb_neo4j_query</a></code>,
+<p>Other query: <code><a href='vfb_neo4j_query.html'>vfb_neo4j_query</a></code>,
   <code><a href='vfb_solr_query.html'>vfb_solr_query</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># # query for descendant classes of Fan-Shaped Body</span>
-<span class='co'># vfb_owl_query(list(query_type="descendant_class", query="FBbt:00003679"))</span>
-<span class='co'># </span>
-<span class='co'># # query for individual neurons overlapping with Fan-Shaped Body</span>
-<span class='co'># neurondf=vfb_owl_query(list(query_type="individuals", query="FBbt:00003679"))</span>
-<span class='co'># # show the first few rows of the returned data.frame</span>
-<span class='co'># head(neurondf)</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># query for descendant classes of Fan-Shaped Body</span>
+<span class='fu'>vfb_owl_query</span>(<span class='fu'>list</span>(<span class='kw'>query_type</span><span class='kw'>=</span><span class='st'>"descendant_class"</span>, <span class='kw'>query</span><span class='kw'>=</span><span class='st'>"FBbt:00003679"</span>))
+
+<span class='co'># query for individual neurons overlapping with Fan-Shaped Body</span>
+<span class='no'>neurondf</span><span class='kw'>=</span><span class='fu'>vfb_owl_query</span>(<span class='fu'>list</span>(<span class='kw'>query_type</span><span class='kw'>=</span><span class='st'>"individuals"</span>, <span class='kw'>query</span><span class='kw'>=</span><span class='st'>"FBbt:00003679"</span>))
+<span class='co'># show the first few rows of the returned data.frame</span>
+<span class='fu'>head</span>(<span class='no'>neurondf</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -139,7 +172,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -147,3 +180,4 @@
 
   </body>
 </html>
+

@@ -18,19 +18,32 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+  
+  
+<meta property="og:title" content="Return the urls for GMR-Gal4 stacks — gmr_stack_urls" />
 
+<meta property="og:description" content="gmr_stack_urls returns all URLs. This is expensive but
+  can be memoised (cached)." />
+
+<meta property="og:description" content="gmr_stack_urls_for_ids returns URLs for specified GMR
+  Gal4 lines" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -49,12 +62,23 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jefferis/vfbr">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -71,45 +95,49 @@
 
     
     <p><code>gmr_stack_urls</code> returns all URLs. This is expensive but
-  can be memoised (cached).</p>
+  can be memoised (cached).
 
-    <p><code>gmr_stack_urls_for_ids</code> returns URLs for specified GMR
+    <code>gmr_stack_urls_for_ids</code> returns URLs for specified GMR
   Gal4 lines</p>
     
 
-    <pre><span class='fu'>gmr_stack_urls</span>(<span class='kw'>gmr_url</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.stack.gmr_url"</span>))
+    <pre class="usage"><span class='fu'>gmr_stack_urls</span>(<span class='kw'>gmr_url</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.stack.gmr_url"</span>))
 
 <span class='fu'>gmr_stack_urls_for_ids</span>(<span class='no'>ids</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>gmr_url</dt>
-      <dd>The URL of the directory containing all registered GMR images
-for download.</dd>
-      <dt>ids</dt>
-      <dd>Character vector of GMR ids specified in any way</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>gmr_url</th>
+      <td><p>The URL of the directory containing all registered GMR images
+for download.</p></td>
+    </tr>
+    <tr>
+      <th>ids</th>
+      <td><p>Character vector of GMR ids specified in any way</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A character vector of URLs each named by their GMR ID</p>
-    <p>Character vector of named URLs</p>
+<p>Character vector of named URLs</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>You probably won&#39;t want to use this directly</p>
+    <p>You probably won't want to use this directly</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>u</span><span class='kw'>=</span><span class='fu'>gmr_stack_urls</span>()
-<span class='fu'>length</span>(<span class='no'>u</span>)</div><div class='output co'>#&gt; [1] 3501</div><div class='input'>
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># gmr_stack_urls_memo=memoise::memoise(gmr_stack_urls)</span>
-<span class='co'># system.time(u2 &lt;- gmr_stack_urls_memo())</span>
-<span class='co'># # and again</span>
-<span class='co'># system.time(u3 &lt;- gmr_stack_urls_memo())</span>
-<span class='co'># stopifnot(all.equal(u2,u3))</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+<span class='fu'>length</span>(<span class='no'>u</span>)</div><div class='output co'>#&gt; [1] 3501</div><span class='co'># NOT RUN {</span>
+<span class='no'>gmr_stack_urls_memo</span><span class='kw'>=</span><span class='kw pkg'>memoise</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/memoise/topics/memoise'>memoise</a></span>(<span class='no'>gmr_stack_urls</span>)
+<span class='fu'>system.time</span>(<span class='no'>u2</span> <span class='kw'>&lt;-</span> <span class='fu'>gmr_stack_urls_memo</span>())
+<span class='co'># and again</span>
+<span class='fu'>system.time</span>(<span class='no'>u3</span> <span class='kw'>&lt;-</span> <span class='fu'>gmr_stack_urls_memo</span>())
+<span class='fu'>stopifnot</span>(<span class='fu'>all.equal</span>(<span class='no'>u2</span>,<span class='no'>u3</span>))
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -132,7 +160,7 @@ for download.</dd>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -140,3 +168,4 @@ for download.</dd>
 
   </body>
 </html>
+

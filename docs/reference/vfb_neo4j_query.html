@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Query VFB&#39;s Neo4J graph database — vfb_neo4j_query • vfbr</title>
+<title>Query VFB's Neo4J graph database — vfb_neo4j_query • vfbr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,19 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+  
+  
+<meta property="og:title" content="Query VFB's Neo4J graph database — vfb_neo4j_query" />
 
+<meta property="og:description" content="Query VFB's Neo4J graph database" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -49,12 +58,23 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jefferis/vfbr">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -66,27 +86,36 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Query VFB&#39;s Neo4J graph database</h1>
+    <h1>Query VFB's Neo4J graph database</h1>
     </div>
 
     
-    <p>Query VFB&#39;s Neo4J graph database</p>
+    <p>Query VFB's Neo4J graph database</p>
     
 
-    <pre><span class='fu'>vfb_neo4j_query</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"neo4jdb/data"</span>,
-  <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.server"</span>))</pre>
+    <pre class="usage"><span class='fu'>vfb_neo4j_query</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"db/data"</span>,
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.server.neo4j"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>x</dt>
-      <dd>A character query in Neo4J&#39;s cypher language</dd>
-      <dt>...</dt>
-      <dd>Additional query arguments of the form <code>key=value</code></dd>
-      <dt>path</dt>
-      <dd>The relative path on the server for the Neo4J endpoint</dd>
-      <dt>server</dt>
-      <dd>The server&#39;s root URL</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>A character query in Neo4J's cypher language</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional query arguments of the form <code>key=value</code></p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>The relative path on the server for the Neo4J endpoint</p></td>
+    </tr>
+    <tr>
+      <th>server</th>
+      <td><p>The server's root URL</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -99,30 +128,50 @@
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href = 'https://neo4j.com/developer/cypher-query-language/'>https://neo4j.com/developer/cypher-query-language/</a></p>
+    <p><a href='https://neo4j.com/developer/cypher-query-language/'>https://neo4j.com/developer/cypher-query-language/</a></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='http://www.rdocumentation.org/packages/RNeo4j/topics/RNeo4j'>RNeo4j</a></code>, <code><a href='http://www.rdocumentation.org/packages/RNeo4j/topics/cypher'>cypher</a></code></p>
-    <p>Other query: <code><a href='vfb_owl_query.html'>vfb_owl_query</a></code>,
+    <p><code><a href='http://www.rdocumentation.org/packages/RNeo4j/topics/RNeo4j'>RNeo4j</a></code>, <code><a href='http://www.rdocumentation.org/packages/RNeo4j/topics/cypher'>cypher</a></code> and
+  <a href='https://neo4j.com/docs/rest-docs/3.3/'>https://neo4j.com/docs/rest-docs/3.3/</a></p>
+<p>Other query: <code><a href='vfb_owl_query.html'>vfb_owl_query</a></code>,
   <code><a href='vfb_solr_query.html'>vfb_solr_query</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># ask for all neuronal classes</span>
 <span class='no'>nclasses</span><span class='kw'>=</span><span class='fu'>vfb_neo4j_query</span>(<span class='st'>"MATCH (n:Neuron:Class) RETURN n.label"</span>)
-<span class='fu'>nrow</span>(<span class='no'>nclasses</span>)</div><div class='output co'>#&gt; [1] 2687</div><div class='input'><span class='fu'>head</span>(<span class='no'>nclasses</span>)</div><div class='output co'>#&gt;                               n.label
-#&gt; 1               abdominal vch2 neuron
-#&gt; 2            abdominal sensory neuron
-#&gt; 3 abdominal posterior fascicle neuron
-#&gt; 4                         vch2 neuron
-#&gt; 5             abdominal 7 vch2 neuron
-#&gt; 6                           A7 neuron</div><div class='input'>
+<span class='fu'>nrow</span>(<span class='no'>nclasses</span>)</div><div class='output co'>#&gt; [1] 2772</div><div class='input'><span class='fu'>head</span>(<span class='no'>nclasses</span>)</div><div class='output co'>#&gt;                                                               n.label
+#&gt; 1                                       adult serotonergic LP2 neuron
+#&gt; 2                                     supraesophageal ganglion neuron
+#&gt; 3                                                           Tv neuron
+#&gt; 4 apterous-expressing neuron of the lateral cluster of the thorax Ap4
+#&gt; 5                                                    endocrine neuron
+#&gt; 6                                                  cholinergic neuron</div><div class='input'>
 <span class='co'># Find all images with an associated neuronal class</span>
 <span class='no'>q</span><span class='kw'>=</span><span class='fu'>paste0</span>(<span class='st'>"MATCH (n:Class:VFB { label : 'neuron' })"</span>,
   <span class='st'>"&lt;-[:SUBCLASSOF*]-(p)&lt;-[:INSTANCEOF]-(i:Individual)"</span>,
   <span class='st'>"RETURN distinct i.label, p.label;"</span>)
-<span class='no'>nclasses_image</span><span class='kw'>=</span><span class='fu'>vfb_neo4j_query</span>(<span class='no'>q</span>)</div></pre>
+<span class='no'>nclasses_image</span><span class='kw'>=</span><span class='fu'>vfb_neo4j_query</span>(<span class='no'>q</span>)
+<span class='fu'>nrow</span>(<span class='no'>nclasses_image</span>)</div><div class='output co'>#&gt; [1] 7091</div><div class='input'><span class='fu'>head</span>(<span class='no'>nclasses_image</span>)</div><div class='output co'>#&gt;          i.label                     p.label
+#&gt; 1 VGlut-F-500350 lobula columnar neuron Lcn4
+#&gt; 2 VGlut-F-200028 lobula columnar neuron Lcn4
+#&gt; 3   Cha-F-700192 lobula columnar neuron Lcn4
+#&gt; 4 VGlut-F-200385 lobula columnar neuron Lcn4
+#&gt; 5 VGlut-F-700230 lobula columnar neuron Lcn4
+#&gt; 6 VGlut-F-600493 lobula columnar neuron Lcn4</div><div class='input'>
+<span class='co'># how many neuronal classes have images?</span>
+<span class='fu'>length</span>(<span class='fu'>unique</span>(<span class='no'>nclasses_image</span>$<span class='no'>p.label</span>))</div><div class='output co'>#&gt; [1] 264</div><div class='input'>
+<span class='co'># look at number of images for each neuronal class</span>
+<span class='no'>table_by_nclass</span> <span class='kw'>&lt;-</span> <span class='fu'>table</span>(<span class='no'>nclasses_image</span>$<span class='no'>p.label</span>)
+<span class='fu'>subset</span>(<span class='fu'>as.data.frame</span>(<span class='no'>table_by_nclass</span>), <span class='no'>Freq</span><span class='kw'>&gt;</span><span class='fl'>200</span>)</div><div class='output co'>#&gt;                                                          Var1 Freq
+#&gt; 36                                   adult DM6 lineage neuron  295
+#&gt; 74                                  adult fruitless Mb neuron  682
+#&gt; 102 adult multiglomerular antennal lobe projection neuron lPN  201
+#&gt; 120                               alpha/beta core Kenyon cell  689
+#&gt; 122                            alpha/beta surface Kenyon cell  366
+#&gt; 192                                         gamma Kenyon cell  423
+#&gt; 199                               lobula columnar neuron LC12  212</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -149,7 +198,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -157,3 +206,4 @@
 
   </body>
 </html>
+

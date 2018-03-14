@@ -18,19 +18,32 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+  
+  
+<meta property="og:title" content="Query VFB via solr indexing system — vfb_solr_query" />
 
+<meta property="og:description" content="Solr provides an extremely fast way to query all key content on
+  VFB and is the backend used for most queries run on the website. It is
+  pre-populated from the OWL ontology documents describing all the
+  information on the site and their relationships. More details on Solr and
+  its query syntax can be found at http://lucene.apache.org/solr/." />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -49,12 +62,23 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jefferis/vfbr">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -74,76 +98,96 @@
   VFB and is the backend used for most queries run on the website. It is
   pre-populated from the OWL ontology documents describing all the
   information on the site and their relationships. More details on Solr and
-  its query syntax can be found at <a href = 'http://lucene.apache.org/solr/'>http://lucene.apache.org/solr/</a>.</p>
+  its query syntax can be found at <a href='http://lucene.apache.org/solr/'>http://lucene.apache.org/solr/</a>.</p>
     
 
-    <pre><span class='fu'>vfb_solr_query</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>"*:*"</span>, <span class='kw'>filterquery</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>vfb_solr_query</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>"*:*"</span>, <span class='kw'>filterquery</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"label+short_form"</span>, <span class='kw'>sort</span> <span class='kw'>=</span> <span class='st'>"score+desc"</span>,
-  <span class='kw'>defaultfield</span> <span class='kw'>=</span> <span class='st'>"short_form"</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>30L</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"search/select?wt=json"</span>,
-  <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.server"</span>), <span class='kw'>parse.json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>defaultfield</span> <span class='kw'>=</span> <span class='st'>"short_form"</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='fl'>30L</span>,
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"solr/ontology/select?wt=json"</span>,
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.server.solr"</span>), <span class='kw'>parse.json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>query</dt>
-      <dd>A key-value list specifying the query</dd>
-      <dt>filterquery</dt>
-      <dd>A character vector (of length one or more) describing
-filter queries for solr (see Details for regular vs filter queries)</dd>
-      <dt>fields</dt>
-      <dd>Which fields to return (+delimited). A value of <code>&quot;&quot;</code>
-implies all fields.</dd>
-      <dt>sort</dt>
-      <dd>Character vector naming one or more fields (+ delimited) to use
-for sorting the results.</dd>
-      <dt>defaultfield</dt>
-      <dd>Character vector naming default field used for filter
-queries (defaults to <code>short_form</code>)</dd>
-      <dt>rows</dt>
-      <dd>Maximum number of rows to return. The special value of Inf
-implies all matching rows.</dd>
-      <dt>path</dt>
-      <dd>The path on the server containing the query page</dd>
-      <dt>server</dt>
-      <dd>The base url of the server</dd>
-      <dt>parse.json</dt>
-      <dd>Whether or no to parse the response (default: TRUE)</dd>
-      <dt>...</dt>
-      <dd>additional solr query arguments</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>query</th>
+      <td><p>A key-value list specifying the query</p></td>
+    </tr>
+    <tr>
+      <th>filterquery</th>
+      <td><p>A character vector (of length one or more) describing
+filter queries for solr (see Details for regular vs filter queries)</p></td>
+    </tr>
+    <tr>
+      <th>fields</th>
+      <td><p>Which fields to return (+delimited). A value of <code>""</code>
+implies all fields.</p></td>
+    </tr>
+    <tr>
+      <th>sort</th>
+      <td><p>Character vector naming one or more fields (+ delimited) to use
+for sorting the results.</p></td>
+    </tr>
+    <tr>
+      <th>defaultfield</th>
+      <td><p>Character vector naming default field used for filter
+queries (defaults to <code>short_form</code>)</p></td>
+    </tr>
+    <tr>
+      <th>rows</th>
+      <td><p>Maximum number of rows to return. The special value of Inf
+implies all matching rows.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>The path on the server containing the query page</p></td>
+    </tr>
+    <tr>
+      <th>server</th>
+      <td><p>The base url of the server</p></td>
+    </tr>
+    <tr>
+      <th>parse.json</th>
+      <td><p>Whether or no to parse the response (default: TRUE)</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional solr query arguments</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>When <code>parse.json=TRUE</code>, a data.frame containing the parsed
   response (originally the <code>response$docs</code> field in the parsed JSON)
   along with additional attributes including</p>
-    <p><ul>
-<li> numFound</p>
-    <p></li>
-<li> start</p>
-    <p></li>
-<li> responseHeader</p>
-    <p></li>
-</ul></p>
-    <p>When <code>parse.json=FALSE</code> an <code>httr::response</code> object</p>
+<p></p><ul>
+<li><p>numFound</p></li>
+<li><p>start</p></li>
+<li><p>responseHeader</p></li>
+</ul>
+
+<p>When <code>parse.json=FALSE</code> an <code><a href='http://www.rdocumentation.org/packages/httr/topics/response'>httr::response</a></code> object</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>query</code> arguments maps onto the general solr <code>q=</code>
   query while <code>filterqueries</code> maps onto one or more <code>fl=</code> terms.
   The
-  <a href = 'solr
-   wiki'>https://cwiki.apache.org/confluence/display/solr/Common+Query+Parameters</a> says this about the difference:</p>
-    <p>The fq parameter defines a query that can be used to restrict the superset
+  <a href='https://cwiki.apache.org/confluence/display/solr/Common+Query+Parameters'>solr
+   wiki</a> says this about the difference:</p>
+<p>The fq parameter defines a query that can be used to restrict the superset
   of documents that can be returned, without influencing score. It can be
   very useful for speeding up complex queries, since the queries specified
   with fq are cached independently of the main query. When a later query uses
-  the same filter, there&#39;s a cache hit, and filter results are returned
+  the same filter, there's a cache hit, and filter results are returned
   quickly from the cache.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><code><a href='http://www.rdocumentation.org/packages/httr/topics/response'>response</a></code></p>
-    <p>Other query: <code><a href='vfb_neo4j_query.html'>vfb_neo4j_query</a></code>,
+<p>Other query: <code><a href='vfb_neo4j_query.html'>vfb_neo4j_query</a></code>,
   <code><a href='vfb_owl_query.html'>vfb_owl_query</a></code></p>
     
 
@@ -157,24 +201,23 @@ implies all matching rows.</dd>
 <span class='fu'>attr</span>(<span class='no'>r</span>,<span class='st'>'numFound'</span>)</div><div class='output co'>#&gt; [1] 3468</div><div class='input'><span class='co'>#' # VFB id for all GMR lines</span>
 <span class='no'>all_gmr</span><span class='kw'>=</span><span class='fu'>vfb_solr_query</span>(<span class='kw'>filterquery</span><span class='kw'>=</span><span class='st'>"VFB_*"</span>,<span class='kw'>query</span><span class='kw'>=</span><span class='st'>"label:GMR_*"</span>, <span class='kw'>rows</span><span class='kw'>=</span><span class='fl'>4000</span>)
 <span class='fu'>head</span>(<span class='no'>all_gmr</span>)</div><div class='output co'>#&gt;     short_form                    label
-#&gt; 1 VFB_00021970 GMR_20A05_AE_01_04-fA01b
-#&gt; 2 VFB_00021971 GMR_17G03_AE_01_04-fA01b
-#&gt; 3 VFB_00021972 GMR_79B01_AE_01_02-fA01b
-#&gt; 4 VFB_00021973 GMR_20B12_AE_01_05-fA01b
-#&gt; 5 VFB_00021974 GMR_44C03_AE_01_09-fA01b
-#&gt; 6 VFB_00021975 GMR_29E11_AE_01_04-fA01b</div><div class='input'>
+#&gt; 1 VFB_00021692 GMR_30C01_AE_01_05-fA01b
+#&gt; 2 VFB_00021693 GMR_37E04_AE_01_00-fA01b
+#&gt; 3 VFB_00021690 GMR_38G12_AE_01_05-fA01b
+#&gt; 4 VFB_00021691 GMR_73A08_AE_01_04-fA01b
+#&gt; 5 VFB_00021696 GMR_70E06_AE_01_03-fA01b
+#&gt; 6 VFB_00021697 GMR_25H02_AE_01_03-fA01b</div><div class='input'>
 <span class='co'># VFB id for all FlyCircuit neurons</span>
 <span class='co'># note use of rows=Inf to fetch all rows</span>
 <span class='no'>all_fc</span><span class='kw'>=</span><span class='fu'>vfb_solr_query</span>(<span class='kw'>filterquery</span><span class='kw'>=</span><span class='st'>"VFB_*"</span>,
   <span class='kw'>query</span><span class='kw'>=</span><span class='st'>"source_data_link_annotation:*flycircuit*"</span>, <span class='kw'>rows</span><span class='kw'>=</span><span class='fl'>Inf</span>)
 <span class='fu'>head</span>(<span class='no'>all_fc</span>)</div><div class='output co'>#&gt;     short_form          label
-#&gt; 1 VFB_00006415 VGlut-F-100366
-#&gt; 2 VFB_00006416 VGlut-F-100367
-#&gt; 3 VFB_00006413 VGlut-F-300600
-#&gt; 4 VFB_00006414 VGlut-F-100365
-#&gt; 5 VFB_00006411 VGlut-F-600160
-#&gt; 6 VFB_00006412 VGlut-F-600161</div><div class='input'>
-</div></pre>
+#&gt; 1 VFB_00006050 VGlut-F-900046
+#&gt; 2 VFB_00006062 VGlut-F-000505
+#&gt; 3 VFB_00006063 VGlut-F-000506
+#&gt; 4 VFB_00006064 VGlut-F-000507
+#&gt; 5 VFB_00006065 VGlut-F-000508
+#&gt; 6 VFB_00006066 VGlut-F-000509</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -199,7 +242,7 @@ implies all matching rows.</dd>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -207,3 +250,4 @@ implies all matching rows.</dd>
 
   </body>
 </html>
+

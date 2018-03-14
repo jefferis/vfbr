@@ -18,19 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+  
+  
+<meta property="og:title" content="Programmatic Access to the virtualflybrain.org website — vfbr-package" />
 
+<meta property="og:description" content="Programmatic Access to the virtualflybrain.org website" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -49,12 +58,23 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jefferis/vfbr">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -76,44 +96,41 @@
         
     <h2 class="hasAnchor" id="queries"><a class="anchor" href="#queries"></a>Queries</h2>
 
-    <p></p>
-    <p><ul>
-<li><code><a href='vfb_solr_query.html'>vfb_solr_query</a></code> Allows you to query VFB&#39;s SOLR end
+    
+    <p></p><ul>
+<li><p><code><a href='vfb_solr_query.html'>vfb_solr_query</a></code> Allows you to query VFB's SOLR end
  point. This gives you programmatic access to the great majority of searches
- that you can perform interactively on the VFB website.</p>
-    <p></li>
-<li><code><a href='vfb_neo4j_query.html'>vfb_neo4j_query</a></code> Allows you to query VFB&#39;s Neo4J end
+ that you can perform interactively on the VFB website.</p></li>
+<li><p><code><a href='vfb_neo4j_query.html'>vfb_neo4j_query</a></code> Allows you to query VFB's Neo4J end
  point. This gives you programmatic access to many sophisticated searches
  based on the VFB ontology, including searches that may not be easily
- accessible via the website.</p>
-    <p></li>
-<li><code><a href='vfb_synonym_query.html'>vfb_synonym_query</a></code> A higher level function that allows
- you to search for canonical terms with synonyms matching a given query.</p>
-    <p></li>
-</ul></p>
+ accessible via the website.</p></li>
+<li><p><code><a href='vfb_synonym_query.html'>vfb_synonym_query</a></code> A higher level function that allows
+ you to search for canonical terms with synonyms matching a given query.</p></li>
+</ul>
     
     <h2 class="hasAnchor" id="package-options"><a class="anchor" href="#package-options"></a>Package Options</h2>
 
     <p>The following options can be set to specify default
  behaviour. They will be set to sensible defaults on package startup, unless
  you have previously set a value (e.g. in your <code><a href='http://www.rdocumentation.org/packages/base/topics/Startup'>Rprofile</a></code>).</p>
-    <p><ul>
-<li><code>vfbr.server</code> URL of main VFB server</p>
-    <p></li>
-<li><code>vfbr.server.gepetto</code> URL of VFB&#39;s gepetto server for 3D
- visualisation (see <code><a href='vfb_3dbrowser_url.html'>vfb_3dbrowser_url</a></code>.)</p>
-    <p></li>
-<li><code>vfbr.stack.gmr_url</code>URL containing listing of registered GMR
- Gal4 confocal stacks. See <code><a href='gmr_stack_urls.html'>gmr_stack_urls</a></code></p>
-    <p></li>
-<li><code>vfbr.stack.downloads</code>Location of downloaded stacks. See
- <code><a href='download_gmr_stacks.html'>download_gmr_stacks</a></code></p>
-    <p></li>
-</ul></p>
+<p></p><ul>
+<li><p><code>vfbr.server</code> URL of main VFB server</p></li>
+<li><p><code>vfbr.server.neo4j</code> URL for Neo4J graph database queries</p></li>
+<li><p><code>vfbr.server.solr</code> URL for SOLR queries</p></li>
+<li><p><code>vfbr.server.owl</code> URL for OWL ontology queries</p></li>
+<li><p><code>vfbr.server.gepetto</code> URL of VFB's gepetto server for 3D
+ visualisation (see <code><a href='vfb_3dbrowser_url.html'>vfb_3dbrowser_url</a></code>.)</p></li>
+<li><p><code>vfbr.server.r</code> URL for opencpu/R queries - not for users at the moment</p></li>
+<li><p><code>vfbr.stack.gmr_url</code>URL containing listing of registered GMR
+ Gal4 confocal stacks. See <code><a href='gmr_stack_urls.html'>gmr_stack_urls</a></code></p></li>
+<li><p><code>vfbr.stack.downloads</code>Location of downloaded stacks. See
+ <code><a href='download_gmr_stacks.html'>download_gmr_stacks</a></code></p></li>
+</ul>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>See <a href = 'http://virtualflybrain.org'>http://virtualflybrain.org</a></p>
+    <p>See <a href='http://virtualflybrain.org'>http://virtualflybrain.org</a></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -123,20 +140,32 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Show state of vfbr package options</span>
 <span class='fu'>options</span>()[<span class='fu'>grep</span>(<span class='st'>'^vfbr'</span>, <span class='fu'>names</span>(<span class='fu'>options</span>()))]</div><div class='output co'>#&gt; $vfbr.server
-#&gt; [1] &quot;http://vfbdev.inf.ed.ac.uk&quot;
+#&gt; [1] "http://virtualflybrain.org"
 #&gt; 
 #&gt; $vfbr.server.gepetto
-#&gt; [1] &quot;http://129.215.164.244:8084&quot;
+#&gt; [1] "http://vfbsandbox3.inf.ed.ac.uk:8180"
+#&gt; 
+#&gt; $vfbr.server.neo4j
+#&gt; [1] "http://pdb.virtualflybrain.org"
+#&gt; 
+#&gt; $vfbr.server.owl
+#&gt; [1] "http://owl.virtualflybrain.org"
+#&gt; 
+#&gt; $vfbr.server.r
+#&gt; [1] "http://r.virtualflybrain.org"
+#&gt; 
+#&gt; $vfbr.server.solr
+#&gt; [1] "http://solr.virtualflybrain.org"
 #&gt; 
 #&gt; $vfbr.stack.downloads
-#&gt; [1] &quot;/Users/jefferis/Library/Application Support/rpkg-vfbr/stacks&quot;
+#&gt; [1] "/Users/jefferis/Library/Application Support/rpkg-vfbr/stacks"
 #&gt; 
 #&gt; $vfbr.stack.gmr_url
-#&gt; [1] &quot;http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/reformatted-quant/&quot;
+#&gt; [1] "http://flybrain.mrc-lmb.cam.ac.uk/vfb/jfrc/fl/reformatted-quant/"
 #&gt; </div><div class='input'>
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># example(vfb_solr_query)</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>example</span>(<span class='no'>vfb_solr_query</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -162,7 +191,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -170,3 +199,4 @@
 
   </body>
 </html>
+

@@ -18,19 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+  
+  
+<meta property="og:title" content="Query vfb opencpu server to obtain pre-computed nblast scores — vfb_nblast" />
 
+<meta property="og:description" content="Query vfb opencpu server to obtain pre-computed nblast scores" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -49,12 +58,23 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jefferis/vfbr">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -73,28 +93,41 @@
     <p>Query vfb opencpu server to obtain pre-computed nblast scores</p>
     
 
-    <pre><span class='fu'>vfb_nblast</span>(<span class='no'>query</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"FlyCircuit"</span>, <span class='st'>"GMR-Gal4"</span>), <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>vfb_nblast</span>(<span class='no'>query</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"FlyCircuit"</span>, <span class='st'>"GMR-Gal4"</span>),
+  <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.server.r"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>query</dt>
-      <dd>A single flycircuit identifier</dd>
-      <dt>n</dt>
-      <dd>The number of hits to return</dd>
-      <dt>target</dt>
-      <dd>The target data set to query</dd>
-      <dt>...</dt>
-      <dd>Additional arguments to be included in the POST</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>query</th>
+      <td><p>A single flycircuit identifier</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>The number of hits to return</p></td>
+    </tr>
+    <tr>
+      <th>target</th>
+      <td><p>The target data set to query</p></td>
+    </tr>
+    <tr>
+      <th>server</th>
+      <td><p>The base url of the server</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments to be included in the POST</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data.frame in descending score order with columns <ul>
-<li> id Flycircuit Neuron name</p>
-    <p></li>
-<li> score NBLAST score</p>
-    <p></li>
-</ul></p>
+    <p>a data.frame in descending score order with columns</p><ul>
+<li><p>id Flycircuit Neuron name</p></li>
+<li><p>score NBLAST score</p></li>
+</ul>
+
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -149,17 +182,16 @@
 #&gt; 48 fru-M-200152 0.6242
 #&gt; 49 fru-F-100084 0.6241
 #&gt; 50 fru-F-200152 0.6237</div><div class='input'>
-<span class='no'>top10</span><span class='kw'>=</span><span class='fu'>vfb_nblast</span>(<span class='st'>'fru-M-200266'</span>, <span class='kw'>target</span><span class='kw'>=</span><span class='st'>"GMR-Gal4"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='output co'>#&gt; <span class='message'>No encoding supplied: defaulting to UTF-8.</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>top10</span>)</div><div class='output co'>#&gt;      id  score
+</div><div class='input'><span class='no'>top10</span><span class='kw'>=</span><span class='fu'>vfb_nblast</span>(<span class='st'>'fru-M-200266'</span>, <span class='kw'>target</span><span class='kw'>=</span><span class='st'>"GMR-Gal4"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='output co'>#&gt; <span class='message'>No encoding supplied: defaulting to UTF-8.</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>top10</span>)</div><div class='output co'>#&gt;      id  score
 #&gt; 1 20E07 0.5375
 #&gt; 2 25A06 0.5124
 #&gt; 3 73E08 0.4930
 #&gt; 4 87F10 0.4894
 #&gt; 5 19C07 0.4648
-#&gt; 6 34H10 0.4431</div><div class='input'>
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># library(nat.amira)</span>
-<span class='co'># open_stack_viewer(getOption("vfbr.stack.downloads"), download_gmr_stacks(top10$id))</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+#&gt; 6 34H10 0.4431</div><span class='co'># NOT RUN {</span>
+<span class='fu'>library</span>(<span class='no'>nat.amira</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/nat.amira/topics/open_stack_viewer'>open_stack_viewer</a></span>(<span class='fu'>getOption</span>(<span class='st'>"vfbr.stack.downloads"</span>), <span class='fu'><a href='download_gmr_stacks.html'>download_gmr_stacks</a></span>(<span class='no'>top10</span>$<span class='no'>id</span>))
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -180,7 +212,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -188,3 +220,4 @@
 
   </body>
 </html>
+

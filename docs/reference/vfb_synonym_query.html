@@ -18,19 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+  
+  
+<meta property="og:title" content="Find canononical ontology term using VFB SOLR to query synonyms — vfb_synonym_query" />
 
+<meta property="og:description" content="Find canononical ontology term using VFB SOLR to query synonyms" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -49,12 +58,23 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jefferis/vfbr">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -73,39 +93,54 @@
     <p>Find canononical ontology term using VFB SOLR to query synonyms</p>
     
 
-    <pre><span class='fu'>vfb_synonym_query</span>(<span class='no'>query</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+    <pre class="usage"><span class='fu'>vfb_synonym_query</span>(<span class='no'>query</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>quote</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
   <span class='kw'>searchfields</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"synonym"</span>, <span class='st'>"label"</span>), <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"short_form label synonym"</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'>interactive</span>(), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>query</dt>
-      <dd>A character vector containing one or more queries - see details.
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>query</th>
+      <td><p>A character vector containing one or more queries - see details.
 Wildcards (<code>?*</code>) can be used, and have a similar meaning to their use
-in the shell. Queries are case insensitive.</dd>
-      <dt>exact</dt>
-      <dd>Whether to do an exact match (i.e. the query must match the
+in the shell. Queries are case insensitive.</p></td>
+    </tr>
+    <tr>
+      <th>exact</th>
+      <td><p>Whether to do an exact match (i.e. the query must match the
 whole string, the default) or to allow partial matches against synonyms.
-See <b>Query details</b> and examples.</dd>
-      <dt>quote</dt>
-      <dd>Whether to quote the query so that individual terms must all be
+See <b>Query details</b> and examples.</p></td>
+    </tr>
+    <tr>
+      <th>quote</th>
+      <td><p>Whether to quote the query so that individual terms must all be
 matched in the order given or to <b>OR</b> each term in the query. The
 default <code>quote=NA</code> will quote when <code>exact=TRUE</code> and the query
-does not contain wildcards. See <b>Query details</b> and <b>Examples</b>.</dd>
-      <dt>searchfields</dt>
-      <dd>Character vector specifying fields to search. The default
+does not contain wildcards. See <b>Query details</b> and <b>Examples</b>.</p></td>
+    </tr>
+    <tr>
+      <th>searchfields</th>
+      <td><p>Character vector specifying fields to search. The default
 searches both <b>synonym</b>s and the canonical term <b>label</b> (since
-the canonical term is not included in the synonym list).</dd>
-      <dt>fields</dt>
-      <dd>The fields to return (defaults to &#39;short_form label synonym&#39;).
-Setting <code>fields=&quot;&quot;</code> implies all fields (but note that not all results
-may have the same fields - see discussion in details)</dd>
-      <dt>verbose</dt>
-      <dd>Whether to print messages to the screen.</dd>
-      <dt>...</dt>
-      <dd>Additional arguments passed to <code><a href='vfb_solr_query.html'>vfb_solr_query</a></code>. You
-can use this e.g. to set the number of returned <code>rows</code>.</dd>
-    </dl>
+the canonical term is not included in the synonym list).</p></td>
+    </tr>
+    <tr>
+      <th>fields</th>
+      <td><p>The fields to return (defaults to 'short_form label synonym').
+Setting <code>fields=""</code> implies all fields (but note that not all results
+may have the same fields - see discussion in details)</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Whether to print messages to the screen.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed to <code><a href='vfb_solr_query.html'>vfb_solr_query</a></code>. You
+can use this e.g. to set the number of returned <code>rows</code>.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -117,7 +152,7 @@ can use this e.g. to set the number of returned <code>rows</code>.</dd>
     <p>Note that data.frame that is returned may contain a list in the
   synonym column because there will likely be multiple synonyms for a given
   query.</p>
-    <p>When <code>x</code> has length &gt; 1 i.e. multiple query terms, then multiple calls
+<p>When <code>x</code> has length &gt; 1 i.e. multiple query terms, then multiple calls
   to <code><a href='vfb_solr_query.html'>vfb_solr_query</a></code> are wrapped in a <code><a href='http://www.rdocumentation.org/packages/base/topics/lapply'>sapply</a></code>
   statement. You can pass arguments to <code>sapply</code> in <code>...</code> such as
   <code>simplify=FALSE</code> if you wish. By default the return value will be a
@@ -131,27 +166,27 @@ can use this e.g. to set the number of returned <code>rows</code>.</dd>
   profound effect on how SOLR carries out searches. Setting both arguments to
   <code>FALSE</code> gives the least specific search and you may want to do this if
   you do not find any results with an initial query using the default values.</p>
-    <p>In general SOLR will break any text in fields like synonym into separate
+<p>In general SOLR will break any text in fields like synonym into separate
   tokens based on whitespace, hypens etc, so the value :</p>
-    <p><code>inter-antennal lobe tract</code></p>
-    <p>will map onto 4 tokens.</p>
-    <p><code>inter antennal lobe tract</code></p>
-    <p>This means that a search with query <code>&quot;inter antennal lobe tract&quot;,
+<p><code>inter-antennal lobe tract</code></p>
+<p>will map onto 4 tokens.</p>
+<p><code>inter antennal lobe tract</code></p>
+<p>This means that a search with query <code>"inter antennal lobe tract",
   exact=F</code> will be successful (note missing hyphen).</p>
-    <p>When <code>exact=TRUE</code>, the values will not be tokenised and the query must
+<p>When <code>exact=TRUE</code>, the values will not be tokenised and the query must
   match the whole field.</p>
-    <p>The <code>quote</code> argument modifies the query. By default the query is
+<p>The <code>quote</code> argument modifies the query. By default the query is
   tokenised as just described for fields in the database, tokens can be
   matched in any order and only one token must match (i.e. the are
   <b>OR</b>ed together).  When <code>quote=TRUE</code>, the query must match in the
   order given (this is achieved by wrapping it in double quotes before
   passing to SOLR). For example</p>
-    <p><code>vfb_synonym_query(&quot;antennal lobe tract&quot;, exact=F, quote=T)</code></p>
-    <p>returns 2 results at the time of writing whereas</p>
-    <p><code>vfb_synonym_query(&quot;antennal lobe tract&quot;, exact=F, quote=F)</code></p>
-    <p>returns 194 results.</p>
-    <p>See
-  <a href = 'https://github.com/EBISPOT/OLS/blob/master/ols-solr/src/main/solr-conf/ontology/conf/schema.xml'>https://github.com/EBISPOT/OLS/blob/master/ols-solr/src/main/solr-conf/ontology/conf/schema.xml</a>
+<p><code>vfb_synonym_query("antennal lobe tract", exact=F, quote=T)</code></p>
+<p>returns 2 results at the time of writing whereas</p>
+<p><code>vfb_synonym_query("antennal lobe tract", exact=F, quote=F)</code></p>
+<p>returns 194 results.</p>
+<p>See
+  <a href='https://github.com/EBISPOT/OLS/blob/master/ols-solr/src/main/solr-conf/ontology/conf/schema.xml'>https://github.com/EBISPOT/OLS/blob/master/ols-solr/src/main/solr-conf/ontology/conf/schema.xml</a>
    for definition of the of the <code>synonym_s</code> exact match field.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -171,20 +206,20 @@ can use this e.g. to set the number of returned <code>rows</code>.</dd>
 #&gt; 2 FBbt_00111345   larval CCAP subesophageal IN-1 neuron
 #&gt; 3 FBbt_00111326        larval CCAP subesophageal neuron
 #&gt; 4 FBbt_00110639                adult subesophageal zone
-#&gt; 5 FBbt_00100138 embryonic/larval subesophageal ganglion
-#&gt; 6 FBbt_00004013                  subesophageal ganglion
-#&gt; 7 FBbt_00007354             antenno-subesophageal tract
-#&gt; 8 FBbt_00100785      SOG ventral unpaired median neuron
+#&gt; 5 FBbt_00100785      SOG ventral unpaired median neuron
+#&gt; 6 FBbt_00100138 embryonic/larval subesophageal ganglion
+#&gt; 7 FBbt_00004013                  subesophageal ganglion
+#&gt; 8 FBbt_00007354             antenno-subesophageal tract
 #&gt;                                                                                                                  synonym
 #&gt; 1                                                             OA-VUMa, subesophageal ganglion VUM neuron, SOG VUM neuron
 #&gt; 2                                                                                                               IN SOG-1
 #&gt; 3                                                                                                                 IN SOG
 #&gt; 4                                                         suboesophageal ganglion, subesophageal ganglion, SEG, SEZ, SOG
-#&gt; 5                                                                                                   embryonic/larval SOG
-#&gt; 6                                                                                      suboesophageal ganglion, SEG, SOG
-#&gt; 7 AST, antennal lobe-subesophageal tract, antennal lobe-SOG tract, antenno-suboesophageal tract, antennal lobe-SEG tract
-#&gt; 8                                                                      subesophageal ganglion VUM neuron, SOG VUM neuron</div><div class='input'>
-<span class='co'># query for PAM exactly</span>
+#&gt; 5                                                                      subesophageal ganglion VUM neuron, SOG VUM neuron
+#&gt; 6                                                                                                   embryonic/larval SOG
+#&gt; 7                                                                                      suboesophageal ganglion, SEG, SOG
+#&gt; 8 AST, antennal lobe-subesophageal tract, antennal lobe-SOG tract, antenno-suboesophageal tract, antennal lobe-SEG tract</div><div class='input'>
+</div><div class='input'><span class='co'># query for PAM exactly</span>
 <span class='fu'>vfb_synonym_query</span>(<span class='st'>"PAM"</span>)</div><div class='output co'>#&gt;      short_form                   label
 #&gt; 1 FBbt_00100214 dopaminergic PAM neuron
 #&gt;                                                                                                                                              synonym
@@ -206,12 +241,12 @@ can use this e.g. to set the number of returned <code>rows</code>.</dd>
 #&gt; 14 FBbt_00100214                       dopaminergic PAM neuron
 #&gt; 15 FBbt_00100231 mushroom body medial lobe arborizing neuron 3
 #&gt;                                                                                                                                               synonym
-#&gt; 1                                                                                                                                 PAM-beta&#39;1m, PAM-14
-#&gt; 2                                                                                                                                PAM-13, PAM-beta&#39;1ap
+#&gt; 1                                                                                                                                 PAM-beta'1m, PAM-14
+#&gt; 2                                                                                                                                PAM-13, PAM-beta'1ap
 #&gt; 3                                                                                                                                  PAM-alpha1, PAM-11
-#&gt; 4                                                                                                                                 PAM-beta&#39;2m, PAM-06
-#&gt; 5                                                                                                                                 PAM-beta&#39;2p, PAM-05
-#&gt; 6                                                                                                                                 PAM-beta&#39;2a, PAM-02
+#&gt; 4                                                                                                                                 PAM-beta'2m, PAM-06
+#&gt; 5                                                                                                                                 PAM-beta'2p, PAM-05
+#&gt; 6                                                                                                                                 PAM-beta'2a, PAM-02
 #&gt; 7                                                                                                                                  PAM-01, PAM-gamma5
 #&gt; 8                                                                                                                     PAM-07, PAM-gamma4-gamma1gamma2
 #&gt; 9                                                                                                                                PAM-09, PAM-beta1ped
@@ -220,8 +255,7 @@ can use this e.g. to set the number of returned <code>rows</code>.</dd>
 #&gt; 12                                                                                                                                  PAM-10, PAM-beta1
 #&gt; 13                                                                                                                          MB-M2, PAM-12, PAM-gamma3
 #&gt; 14 PAM cluster neuron, AM cell cluster neuron, TH-positive anteriomedial cluster neuron, PAM, protocerebral anteriomedial dopaminergic cluster neuron
-#&gt; 15                                                                                                                    MB-M3, PAM-beta2beta&#39;2a, PAM-03</div><div class='input'>
-<span class='co'># terms with synonyms that start with "PAM-"</span>
+#&gt; 15                                                                                                                    MB-M3, PAM-beta2beta'2a, PAM-03</div><div class='input'><span class='co'># terms with synonyms that start with "PAM-"</span>
 <span class='fu'>vfb_synonym_query</span>(<span class='st'>"PAM-*"</span>)</div><div class='output co'>#&gt;       short_form                                         label
 #&gt; 1  FBbt_00111024                    dopaminergic PAM neuron 14
 #&gt; 2  FBbt_00111023                    dopaminergic PAM neuron 13
@@ -238,12 +272,12 @@ can use this e.g. to set the number of returned <code>rows</code>.</dd>
 #&gt; 13 FBbt_00100230 mushroom body medial lobe arborizing neuron 2
 #&gt; 14 FBbt_00100231 mushroom body medial lobe arborizing neuron 3
 #&gt;                            synonym
-#&gt; 1              PAM-beta&#39;1m, PAM-14
-#&gt; 2             PAM-13, PAM-beta&#39;1ap
+#&gt; 1              PAM-beta'1m, PAM-14
+#&gt; 2             PAM-13, PAM-beta'1ap
 #&gt; 3               PAM-alpha1, PAM-11
-#&gt; 4              PAM-beta&#39;2m, PAM-06
-#&gt; 5              PAM-beta&#39;2p, PAM-05
-#&gt; 6              PAM-beta&#39;2a, PAM-02
+#&gt; 4              PAM-beta'2m, PAM-06
+#&gt; 5              PAM-beta'2p, PAM-05
+#&gt; 6              PAM-beta'2a, PAM-02
 #&gt; 7               PAM-01, PAM-gamma5
 #&gt; 8  PAM-07, PAM-gamma4-gamma1gamma2
 #&gt; 9             PAM-09, PAM-beta1ped
@@ -251,7 +285,7 @@ can use this e.g. to set the number of returned <code>rows</code>.</dd>
 #&gt; 11               PAM-beta2, PAM-04
 #&gt; 12               PAM-10, PAM-beta1
 #&gt; 13       MB-M2, PAM-12, PAM-gamma3
-#&gt; 14 MB-M3, PAM-beta2beta&#39;2a, PAM-03</div><div class='input'><span class='co'># nb this doesn't return any results when exact=FALSE because solr matches</span>
+#&gt; 14 MB-M3, PAM-beta2beta'2a, PAM-03</div><div class='input'><span class='co'># nb this doesn't return any results when exact=FALSE because solr matches</span>
 <span class='co'># against tokenised strings (i.e. strings that have broken on spaces and</span>
 <span class='co'># other non word characters such as dashes and underscores).</span>
 <span class='fu'>vfb_synonym_query</span>(<span class='st'>"PAM-*"</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; data frame with 0 columns and 0 rows</div><div class='input'><span class='co'># However if you quote the query you will get results</span>
@@ -272,12 +306,12 @@ can use this e.g. to set the number of returned <code>rows</code>.</dd>
 #&gt; 14 FBbt_00100214                       dopaminergic PAM neuron
 #&gt; 15 FBbt_00100231 mushroom body medial lobe arborizing neuron 3
 #&gt;                                                                                                                                               synonym
-#&gt; 1                                                                                                                                 PAM-beta&#39;1m, PAM-14
-#&gt; 2                                                                                                                                PAM-13, PAM-beta&#39;1ap
+#&gt; 1                                                                                                                                 PAM-beta'1m, PAM-14
+#&gt; 2                                                                                                                                PAM-13, PAM-beta'1ap
 #&gt; 3                                                                                                                                  PAM-alpha1, PAM-11
-#&gt; 4                                                                                                                                 PAM-beta&#39;2m, PAM-06
-#&gt; 5                                                                                                                                 PAM-beta&#39;2p, PAM-05
-#&gt; 6                                                                                                                                 PAM-beta&#39;2a, PAM-02
+#&gt; 4                                                                                                                                 PAM-beta'2m, PAM-06
+#&gt; 5                                                                                                                                 PAM-beta'2p, PAM-05
+#&gt; 6                                                                                                                                 PAM-beta'2a, PAM-02
 #&gt; 7                                                                                                                                  PAM-01, PAM-gamma5
 #&gt; 8                                                                                                                     PAM-07, PAM-gamma4-gamma1gamma2
 #&gt; 9                                                                                                                                PAM-09, PAM-beta1ped
@@ -286,80 +320,79 @@ can use this e.g. to set the number of returned <code>rows</code>.</dd>
 #&gt; 12                                                                                                                                  PAM-10, PAM-beta1
 #&gt; 13                                                                                                                          MB-M2, PAM-12, PAM-gamma3
 #&gt; 14 PAM cluster neuron, AM cell cluster neuron, TH-positive anteriomedial cluster neuron, PAM, protocerebral anteriomedial dopaminergic cluster neuron
-#&gt; 15                                                                                                                    MB-M3, PAM-beta2beta&#39;2a, PAM-03</div><div class='input'>
-
-<span class='co'># Search for MBON-01 to MBON-22 (sprintf is used to 0 pad the numbers)</span>
+#&gt; 15                                                                                                                    MB-M3, PAM-beta2beta'2a, PAM-03</div><div class='input'>
+</div><div class='input'><span class='co'># Search for MBON-01 to MBON-22 (sprintf is used to 0 pad the numbers)</span>
 <span class='fu'>vfb_synonym_query</span>(<span class='fu'>sprintf</span>(<span class='st'>"MBON-%02d"</span>,<span class='fl'>1</span>:<span class='fl'>22</span>))</div><div class='output co'>#&gt;            MBON-01                                        
-#&gt; short_form &quot;FBbt_00100234&quot;                                
-#&gt; label      &quot;mushroom body medial lobe arborizing neuron 6&quot;
+#&gt; short_form "FBbt_00100234"                                
+#&gt; label      "mushroom body medial lobe arborizing neuron 6"
 #&gt; synonym    List,1                                         
 #&gt;            MBON-02                        
-#&gt; short_form &quot;FBbt_00111012&quot;                
-#&gt; label      &quot;mushroom body output neuron 2&quot;
+#&gt; short_form "FBbt_00111012"                
+#&gt; label      "mushroom body output neuron 2"
 #&gt; synonym    List,1                         
 #&gt;            MBON-03                                        
-#&gt; short_form &quot;FBbt_00100232&quot;                                
-#&gt; label      &quot;mushroom body medial lobe arborizing neuron 4&quot;
+#&gt; short_form "FBbt_00100232"                                
+#&gt; label      "mushroom body medial lobe arborizing neuron 4"
 #&gt; synonym    List,1                                         
 #&gt;            MBON-04                         MBON-05                        
-#&gt; short_form &quot;FBbt_00111014&quot;                 &quot;FBbt_00111004&quot;                
-#&gt; label      &quot;mushroom body output neuron 4&quot; &quot;mushroom body output neuron 5&quot;
+#&gt; short_form "FBbt_00111014"                 "FBbt_00111004"                
+#&gt; label      "mushroom body output neuron 4" "mushroom body output neuron 5"
 #&gt; synonym    List,1                          List,1                         
 #&gt;            MBON-06                                                 
-#&gt; short_form &quot;FBbt_00100242&quot;                                         
-#&gt; label      &quot;mushroom body medial-vertical lobe arborizing neuron 2&quot;
+#&gt; short_form "FBbt_00100242"                                         
+#&gt; label      "mushroom body medial-vertical lobe arborizing neuron 2"
 #&gt; synonym    List,1                                                  
 #&gt;            MBON-07                         MBON-08                        
-#&gt; short_form &quot;FBbt_00111005&quot;                 &quot;FBbt_00111006&quot;                
-#&gt; label      &quot;mushroom body output neuron 7&quot; &quot;mushroom body output neuron 8&quot;
+#&gt; short_form "FBbt_00111005"                 "FBbt_00111006"                
+#&gt; label      "mushroom body output neuron 7" "mushroom body output neuron 8"
 #&gt; synonym    List,1                          List,1                         
 #&gt;            MBON-09                         MBON-10                         
-#&gt; short_form &quot;FBbt_00111007&quot;                 &quot;FBbt_00111008&quot;                 
-#&gt; label      &quot;mushroom body output neuron 9&quot; &quot;mushroom body output neuron 10&quot;
+#&gt; short_form "FBbt_00111007"                 "FBbt_00111008"                 
+#&gt; label      "mushroom body output neuron 9" "mushroom body output neuron 10"
 #&gt; synonym    List,1                          List,1                          
 #&gt;            MBON-11                                                                     
-#&gt; short_form &quot;FBbt_00100246&quot;                                                             
-#&gt; label      &quot;mushroom body pedunculus-medial lobe and vertical lobe arborizing neuron 2&quot;
+#&gt; short_form "FBbt_00100246"                                                             
+#&gt; label      "mushroom body pedunculus-medial lobe and vertical lobe arborizing neuron 2"
 #&gt; synonym    List,1                                                                      
 #&gt;            MBON-12                         
-#&gt; short_form &quot;FBbt_00111009&quot;                 
-#&gt; label      &quot;mushroom body output neuron 12&quot;
+#&gt; short_form "FBbt_00111009"                 
+#&gt; label      "mushroom body output neuron 12"
 #&gt; synonym    List,1                          
 #&gt;            MBON-13                                          
-#&gt; short_form &quot;FBbt_00100239&quot;                                  
-#&gt; label      &quot;mushroom body vertical lobe arborizing neuron 4&quot;
+#&gt; short_form "FBbt_00100239"                                  
+#&gt; label      "mushroom body vertical lobe arborizing neuron 4"
 #&gt; synonym    List,1                                           
 #&gt;            MBON-14                                          
-#&gt; short_form &quot;FBbt_00100238&quot;                                  
-#&gt; label      &quot;mushroom body vertical lobe arborizing neuron 3&quot;
+#&gt; short_form "FBbt_00100238"                                  
+#&gt; label      "mushroom body vertical lobe arborizing neuron 3"
 #&gt; synonym    List,1                                           
 #&gt;            MBON-15                         
-#&gt; short_form &quot;FBbt_00111010&quot;                 
-#&gt; label      &quot;mushroom body output neuron 15&quot;
+#&gt; short_form "FBbt_00111010"                 
+#&gt; label      "mushroom body output neuron 15"
 #&gt; synonym    List,1                          
 #&gt;            MBON-16                                                                    
-#&gt; short_form &quot;FBbt_00111063&quot;                                                            
-#&gt; label      &quot;mushroom body vertical lobe arborizing neuron 2 alpha&#39; anterior-posterior&quot;
+#&gt; short_form "FBbt_00111063"                                                            
+#&gt; label      "mushroom body vertical lobe arborizing neuron 2 alpha' anterior-posterior"
 #&gt; synonym    List,1                                                                     
 #&gt;            MBON-17                                                        
-#&gt; short_form &quot;FBbt_00111064&quot;                                                
-#&gt; label      &quot;mushroom body vertical lobe arborizing neuron 2 alpha&#39; middle&quot;
+#&gt; short_form "FBbt_00111064"                                                
+#&gt; label      "mushroom body vertical lobe arborizing neuron 2 alpha' middle"
 #&gt; synonym    List,1                                                         
 #&gt;            MBON-18                                                
-#&gt; short_form &quot;FBbt_00110101&quot;                                        
-#&gt; label      &quot;mushroom body vertical lobe arborizing neuron 2 alpha&quot;
+#&gt; short_form "FBbt_00110101"                                        
+#&gt; label      "mushroom body vertical lobe arborizing neuron 2 alpha"
 #&gt; synonym    List,1                                                 
 #&gt;            MBON-19                          MBON-20                         
-#&gt; short_form &quot;FBbt_00111011&quot;                  &quot;FBbt_00111013&quot;                 
-#&gt; label      &quot;mushroom body output neuron 19&quot; &quot;mushroom body output neuron 20&quot;
+#&gt; short_form "FBbt_00111011"                  "FBbt_00111013"                 
+#&gt; label      "mushroom body output neuron 19" "mushroom body output neuron 20"
 #&gt; synonym    List,1                           List,1                          
 #&gt;            MBON-21                         
-#&gt; short_form &quot;FBbt_00111046&quot;                 
-#&gt; label      &quot;mushroom body output neuron 21&quot;
+#&gt; short_form "FBbt_00111046"                 
+#&gt; label      "mushroom body output neuron 21"
 #&gt; synonym    List,1                          
 #&gt;            MBON-22                                             
-#&gt; short_form &quot;FBbt_00100240&quot;                                     
-#&gt; label      &quot;mushroom body calyx-pedunculus arborizing neuron 1&quot;
+#&gt; short_form "FBbt_00100240"                                     
+#&gt; label      "mushroom body calyx-pedunculus arborizing neuron 1"
 #&gt; synonym    List,1                                              </div><div class='input'>
 <span class='co'># You can also use a wild card search, which is much faster since it only</span>
 <span class='co'># makes a single solr query but the hits are returned in an arbitrary order.</span>
@@ -394,7 +427,7 @@ can use this e.g. to set the number of returned <code>rows</code>.</dd>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -402,3 +435,4 @@ can use this e.g. to set the number of returned <code>rows</code>.</dd>
 
   </body>
 </html>
+
