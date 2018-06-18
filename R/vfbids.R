@@ -51,6 +51,10 @@ vfb_tovfbids<-function(ids, fixed=TRUE, ...){
   }
 }
 
+is.vfb_id <- function(x) {
+  substr(x,1,4)=="VFB_"
+}
+
 extract_gmr_id <- function(ids) stringr::str_extract(ids, "[0-9]{1,2}[A-H][0-9]{2}")
 
 #' Convert GMR identifiers to VFB ids

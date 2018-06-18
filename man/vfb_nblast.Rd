@@ -5,7 +5,7 @@
 \title{Query vfb opencpu server to obtain pre-computed nblast scores}
 \usage{
 vfb_nblast(query, n = 50, target = c("FlyCircuit", "GMR-Gal4"),
-  server = getOption("vfbr.server.r"), ...)
+  vfb_ids = NA, server = getOption("vfbr.server.r"), ...)
 }
 \arguments{
 \item{query}{A single flycircuit identifier}
@@ -13,6 +13,10 @@ vfb_nblast(query, n = 50, target = c("FlyCircuit", "GMR-Gal4"),
 \item{n}{The number of hits to return}
 
 \item{target}{The target data set to query}
+
+\item{vfb_ids}{Whether to expect and return VFB identifiers rather than the
+ids used in the original dataset. Default value \code{vfb_ids=NA} attempts
+to autodetect and return VFB ids.}
 
 \item{server}{The base url of the server}
 
@@ -32,6 +36,8 @@ Query vfb opencpu server to obtain pre-computed nblast scores
 }
 \examples{
 vfb_nblast('fru-M-200266')
+# using a VFB id
+vfb_nblast('VFB_00014755', n=10)
 
 \donttest{
 top10=vfb_nblast('fru-M-200266', target="GMR-Gal4", n = 10)
@@ -40,5 +46,20 @@ head(top10)
 \dontrun{
 library(nat.amira)
 open_stack_viewer(getOption("vfbr.stack.downloads"), download_gmr_stacks(top10$id))
+}
+
+\dontrun{
+# to use ocpu instance as an API
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
+  -d 'query="FruMARCM-M002262_seg001"'
+# specify number of results to return
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
+  -d 'query="FruMARCM-M002262_seg001&n=10"'
+# all results
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
+  -d 'query="FruMARCM-M002262_seg001&n=0"'
+# with VFB id
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
+  -d 'query="VFB_00014755&n=10"'
 }
 }
