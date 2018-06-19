@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Replicate the VFB site's autocomplete query — vfb_autocomplete_query • vfbr</title>
+<title>Changelog • vfbr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -28,10 +28,7 @@
 
 
 
-<meta property="og:title" content="Replicate the VFB site's autocomplete query — vfb_autocomplete_query" />
-
-<meta property="og:description" content="Replicate the VFB site's autocomplete query" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Changelog" />
 
 
 <!-- mathjax -->
@@ -46,7 +43,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -97,58 +94,62 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Replicate the VFB site's autocomplete query</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jefferis/vfbr/blob/master/R/vfb_extended_query.R'><code>R/vfb_extended_query.R</code></a></small>
-    <div class="hidden name"><code>vfb_autocomplete_query.Rd</code></div>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/jefferis/vfbr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    
-    <p>Replicate the VFB site's autocomplete query</p>
-    
-    </div>
-
-    <pre class="usage"><span class='fu'>vfb_autocomplete_query</span>(<span class='no'>query</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>query</th>
-      <td><p>A character vector containing one or more queries - see details.
-Wildcards (<code>?*</code>) can be used, and have a similar meaning to their use
-in the shell. Queries are case insensitive.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='vfb_solr_query.html'>vfb_solr_query</a></code>. You
-can use this e.g. to set the number of returned <code>rows</code>.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This is a rather non-selective query that emphasises exact matches and terms
-in the BRAINNAME defining key ontology components by returning them in the
-first rows of the result list.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='vfb_synonym_query.html'>vfb_synonym_query</a></code></p></div>
-    
-
+    <div id="vfbr-0-3-1" class="section level1">
+<h1 class="page-header">
+<a href="#vfbr-0-3-1" class="anchor"></a>vfbr 0.3.1</h1>
+<ul>
+<li>Allow vfb_nblast to accept and return VFB ids (<a href='https://github.com/jefferis/vfbr/issues/9'>#9</a>)</li>
+</ul>
+</div>
+    <div id="vfbr-0-3" class="section level1">
+<h1 class="page-header">
+<a href="#vfbr-0-3" class="anchor"></a>vfbr 0.3</h1>
+<ul>
+<li>add vfb_neo4j_query</li>
+<li>fix vfb_nblast, vfb_solr_query URLs</li>
+<li>export gmr_stack_urls_for_ids function</li>
+<li>pkgdown site</li>
+</ul>
+</div>
+    <div id="vfbr-0-2-1" class="section level1">
+<h1 class="page-header">
+<a href="#vfbr-0-2-1" class="anchor"></a>vfbr 0.2.1</h1>
+<ul>
+<li>Additional arguments for vfb_synonym_query</li>
+<li>New function vfb_autocomplete_query to replicate the VFB website</li>
+<li>vfb_solr_query can accept all solr query terms as additional arguments (including repeated terms)</li>
+<li>Documentation fixes/improvements</li>
+</ul>
+</div>
+    <div id="vfbr-0-2" class="section level1">
+<h1 class="page-header">
+<a href="#vfbr-0-2" class="anchor"></a>vfbr 0.2</h1>
+<ul>
+<li>New function vfb_synonym_query</li>
+<li>fix vfb_fromvfbids for multiple ids (<a href='https://github.com/jefferis/vfbr/issues/5'>#5</a>)</li>
+<li>fix problem downloading stacks on Windows (<a href='https://github.com/jefferis/vfbr/issues/4'>#4</a>)</li>
+<li>fix vfb_nblast failure (<a href='https://github.com/jefferis/vfbr/issues/2'>#2</a>)</li>
+<li>dev: add tests</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#vfbr-0-3-1">0.3.1</a></li>
+        <li><a href="#vfbr-0-3">0.3</a></li>
+        <li><a href="#vfbr-0-2-1">0.2.1</a></li>
+        <li><a href="#vfbr-0-2">0.2</a></li>
+      </ul>
+    </div>
   </div>
+
 </div>
 
       <footer>
