@@ -54,12 +54,15 @@ curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
   -d 'query="FruMARCM-M002262_seg001"'
 # specify number of results to return
 curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
-  -d 'query="FruMARCM-M002262_seg001&n=10"'
+  -d 'query="FruMARCM-M002262_seg001"&n=10'
 # all results
 curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
-  -d 'query="FruMARCM-M002262_seg001&n=0"'
+  -d 'query="FruMARCM-M002262_seg001"&n=0'
 # with VFB id
 curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
-  -d 'query="VFB_00014755&n=10"'
+  -d 'query="VFB_00014755"&n=10'
+# with VFB id, all results
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
+  -d 'query="VFB_00014755"&n=0'
 }
 }
