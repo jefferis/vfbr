@@ -1,12 +1,12 @@
-vfbr 0.3
-========
+# vfbr 0.3
+
 * add vfb_neo4j_query
 * fix vfb_nblast, vfb_solr_query URLs
 * export gmr_stack_urls_for_ids function
 * pkgdown site
 
-vfbr 0.2.1
-==========
+# vfbr 0.2.1
+
 
 * Additional arguments for vfb_synonym_query
 * New function vfb_autocomplete_query to replicate the VFB website
@@ -14,8 +14,8 @@ vfbr 0.2.1
   (including repeated terms)
 * Documentation fixes/improvements
 
-vfbr 0.2
-========
+# vfbr 0.2
+
 * New function vfb_synonym_query
 * fix vfb_fromvfbids for multiple ids (#5)
 * fix problem downloading stacks on Windows (#4)
