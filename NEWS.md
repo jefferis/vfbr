@@ -1,3 +1,7 @@
+# vfbr 0.3.1
+
+* Allow vfb_nblast to accept and return VFB ids (#9)
+
 # vfbr 0.3
 
 * add vfb_neo4j_query
