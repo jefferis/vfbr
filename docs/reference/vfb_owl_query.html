@@ -25,14 +25,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
 <meta property="og:title" content="Generic query against VFB OWL API — vfb_owl_query" />
 
 <meta property="og:description" content="This function expects an R list or vector describing a query and
   constructs an appropriate query url embedding a JSON query, GETs the server
   response and (by default) parses the JSON result." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -55,8 +58,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">vfbr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">vfbr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -78,6 +85,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -85,22 +93,26 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generic query against VFB OWL API</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jefferis/vfbr/blob/master/R/vfb_query.R'><code>R/vfb_query.R</code></a></small>
+    <div class="hidden name"><code>vfb_owl_query.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function expects an R list or vector describing a query and
   constructs an appropriate query url embedding a JSON query, GETs the server
   response and (by default) parses the JSON result.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>vfb_owl_query</span>(<span class='no'>query</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"do/jsonQuery.html?json="</span>,
   <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.server"</span>), <span class='kw'>parse.json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -135,9 +147,9 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></code></p>
 <p>Other query: <code><a href='vfb_neo4j_query.html'>vfb_neo4j_query</a></code>,
-  <code><a href='vfb_solr_query.html'>vfb_solr_query</a></code></p>
+  <code><a href='vfb_solr_query.html'>vfb_solr_query</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -177,6 +189,8 @@
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

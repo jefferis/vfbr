@@ -25,8 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
 <meta property="og:title" content="Query VFB via solr indexing system — vfb_solr_query" />
 
 <meta property="og:description" content="Solr provides an extremely fast way to query all key content on
@@ -35,6 +36,8 @@
   information on the site and their relationships. More details on Solr and
   its query syntax can be found at http://lucene.apache.org/solr/." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -57,8 +60,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">vfbr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">vfbr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -80,6 +87,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -87,12 +95,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Query VFB via solr indexing system</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jefferis/vfbr/blob/master/R/vfb_query.R'><code>R/vfb_query.R</code></a></small>
+    <div class="hidden name"><code>vfb_solr_query.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Solr provides an extremely fast way to query all key content on
   VFB and is the backend used for most queries run on the website. It is
@@ -100,6 +111,7 @@
   information on the site and their relationships. More details on Solr and
   its query syntax can be found at <a href='http://lucene.apache.org/solr/'>http://lucene.apache.org/solr/</a>.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>vfb_solr_query</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>"*:*"</span>, <span class='kw'>filterquery</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"label+short_form"</span>, <span class='kw'>sort</span> <span class='kw'>=</span> <span class='st'>"score+desc"</span>,
@@ -107,7 +119,7 @@
   <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"solr/ontology/select?wt=json"</span>,
   <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.server.solr"</span>), <span class='kw'>parse.json</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -186,9 +198,9 @@ implies all matching rows.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='http://www.rdocumentation.org/packages/httr/topics/response'>response</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/httr/topics/response'>response</a></code></p>
 <p>Other query: <code><a href='vfb_neo4j_query.html'>vfb_neo4j_query</a></code>,
-  <code><a href='vfb_owl_query.html'>vfb_owl_query</a></code></p>
+  <code><a href='vfb_owl_query.html'>vfb_owl_query</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -201,23 +213,23 @@ implies all matching rows.</p></td>
 <span class='fu'>attr</span>(<span class='no'>r</span>,<span class='st'>'numFound'</span>)</div><div class='output co'>#&gt; [1] 3468</div><div class='input'><span class='co'>#' # VFB id for all GMR lines</span>
 <span class='no'>all_gmr</span><span class='kw'>=</span><span class='fu'>vfb_solr_query</span>(<span class='kw'>filterquery</span><span class='kw'>=</span><span class='st'>"VFB_*"</span>,<span class='kw'>query</span><span class='kw'>=</span><span class='st'>"label:GMR_*"</span>, <span class='kw'>rows</span><span class='kw'>=</span><span class='fl'>4000</span>)
 <span class='fu'>head</span>(<span class='no'>all_gmr</span>)</div><div class='output co'>#&gt;     short_form                    label
-#&gt; 1 VFB_00021692 GMR_30C01_AE_01_05-fA01b
-#&gt; 2 VFB_00021693 GMR_37E04_AE_01_00-fA01b
-#&gt; 3 VFB_00021690 GMR_38G12_AE_01_05-fA01b
-#&gt; 4 VFB_00021691 GMR_73A08_AE_01_04-fA01b
-#&gt; 5 VFB_00021696 GMR_70E06_AE_01_03-fA01b
-#&gt; 6 VFB_00021697 GMR_25H02_AE_01_03-fA01b</div><div class='input'>
+#&gt; 1 VFB_00021799 GMR_38D04_AE_01_03-fA01b
+#&gt; 2 VFB_00021797 GMR_20H03_AE_01_05-fA01b
+#&gt; 3 VFB_00021798 GMR_85F12_AE_01_00-fA01b
+#&gt; 4 VFB_00021906 GMR_74A04_AE_01_04-fA01b
+#&gt; 5 VFB_00021907 GMR_12G04_AE_01_05-fA01b
+#&gt; 6 VFB_00021904 GMR_74A02_AE_01_00-fA01b</div><div class='input'>
 <span class='co'># VFB id for all FlyCircuit neurons</span>
 <span class='co'># note use of rows=Inf to fetch all rows</span>
 <span class='no'>all_fc</span><span class='kw'>=</span><span class='fu'>vfb_solr_query</span>(<span class='kw'>filterquery</span><span class='kw'>=</span><span class='st'>"VFB_*"</span>,
   <span class='kw'>query</span><span class='kw'>=</span><span class='st'>"source_data_link_annotation:*flycircuit*"</span>, <span class='kw'>rows</span><span class='kw'>=</span><span class='fl'>Inf</span>)
-<span class='fu'>head</span>(<span class='no'>all_fc</span>)</div><div class='output co'>#&gt;     short_form          label
-#&gt; 1 VFB_00006050 VGlut-F-900046
-#&gt; 2 VFB_00006062 VGlut-F-000505
-#&gt; 3 VFB_00006063 VGlut-F-000506
-#&gt; 4 VFB_00006064 VGlut-F-000507
-#&gt; 5 VFB_00006065 VGlut-F-000508
-#&gt; 6 VFB_00006066 VGlut-F-000509</div></pre>
+<span class='fu'>head</span>(<span class='no'>all_fc</span>)</div><div class='output co'>#&gt;     short_form        label
+#&gt; 1 VFB_00004629 fru-F-000096
+#&gt; 2 VFB_00004628 fru-F-000095
+#&gt; 3 VFB_00004627 fru-F-800053
+#&gt; 4 VFB_00004626 fru-F-800052
+#&gt; 5 VFB_00004636 fru-F-200134
+#&gt; 6 VFB_00004635 fru-F-200133</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -247,6 +259,8 @@ implies all matching rows.</p></td>
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

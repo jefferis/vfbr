@@ -25,12 +25,15 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
 <meta property="og:title" content="Query vfb opencpu server to obtain pre-computed nblast scores — vfb_nblast" />
 
 <meta property="og:description" content="Query vfb opencpu server to obtain pre-computed nblast scores" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -53,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">vfbr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">vfbr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,6 +83,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -83,20 +91,24 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Query vfb opencpu server to obtain pre-computed nblast scores</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jefferis/vfbr/blob/master/R/vfb_nblast.R'><code>R/vfb_nblast.R</code></a></small>
+    <div class="hidden name"><code>vfb_nblast.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Query vfb opencpu server to obtain pre-computed nblast scores</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>vfb_nblast</span>(<span class='no'>query</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"FlyCircuit"</span>, <span class='st'>"GMR-Gal4"</span>),
-  <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.server.r"</span>), <span class='no'>...</span>)</pre>
+  <span class='kw'>vfb_ids</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>server</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"vfbr.server.r"</span>), <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -110,6 +122,12 @@
     <tr>
       <th>target</th>
       <td><p>The target data set to query</p></td>
+    </tr>
+    <tr>
+      <th>vfb_ids</th>
+      <td><p>Whether to expect and return VFB identifiers rather than the
+ids used in the original dataset. Default value <code>vfb_ids=NA</code> attempts
+to autodetect and return VFB ids.</p></td>
     </tr>
     <tr>
       <th>server</th>
@@ -181,7 +199,18 @@
 #&gt; 47 fru-F-300081 0.6246
 #&gt; 48 fru-M-200152 0.6242
 #&gt; 49 fru-F-100084 0.6241
-#&gt; 50 fru-F-200152 0.6237</div><div class='input'>
+#&gt; 50 fru-F-200152 0.6237</div><div class='input'><span class='co'># using a VFB id</span>
+<span class='fu'>vfb_nblast</span>(<span class='st'>'VFB_00014755'</span>, <span class='kw'>n</span><span class='kw'>=</span><span class='fl'>10</span>)</div><div class='output co'>#&gt; <span class='message'>No encoding supplied: defaulting to UTF-8.</span></div><div class='output co'>#&gt;              id  score
+#&gt; 1  VFB_00014755 1.0000
+#&gt; 2  VFB_00003336 0.4228
+#&gt; 3  VFB_00013725 0.4000
+#&gt; 4  VFB_00013446 0.3971
+#&gt; 5  VFB_00013731 0.3948
+#&gt; 6  VFB_00013626 0.3884
+#&gt; 7  VFB_00013770 0.3856
+#&gt; 8  VFB_00013707 0.3838
+#&gt; 9  VFB_00013716 0.3834
+#&gt; 10 VFB_00003209 0.3831</div><div class='input'>
 </div><div class='input'><span class='no'>top10</span><span class='kw'>=</span><span class='fu'>vfb_nblast</span>(<span class='st'>'fru-M-200266'</span>, <span class='kw'>target</span><span class='kw'>=</span><span class='st'>"GMR-Gal4"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='output co'>#&gt; <span class='message'>No encoding supplied: defaulting to UTF-8.</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>top10</span>)</div><div class='output co'>#&gt;      id  score
 #&gt; 1 20E07 0.5375
 #&gt; 2 25A06 0.5124
@@ -191,7 +220,22 @@
 #&gt; 6 34H10 0.4431</div><span class='co'># NOT RUN {</span>
 <span class='fu'>library</span>(<span class='no'>nat.amira</span>)
 <span class='fu'><a href='http://www.rdocumentation.org/packages/nat.amira/topics/open_stack_viewer'>open_stack_viewer</a></span>(<span class='fu'>getOption</span>(<span class='st'>"vfbr.stack.downloads"</span>), <span class='fu'><a href='download_gmr_stacks.html'>download_gmr_stacks</a></span>(<span class='no'>top10</span>$<span class='no'>id</span>))
-<span class='co'># }</span></pre>
+<span class='co'># }</span><div class='input'>
+</div># NOT RUN {
+# to use ocpu instance as an API
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \
+  -d 'query="FruMARCM-M002262_seg001"'
+# specify number of results to return
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \
+  -d 'query="FruMARCM-M002262_seg001&n=10"'
+# all results
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \
+  -d 'query="FruMARCM-M002262_seg001&n=0"'
+# with VFB id
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \
+  -d 'query="VFB_00014755&n=10"'
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -217,6 +261,8 @@
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>
