@@ -68,7 +68,10 @@ vfb_nblast<-function(query, n=50, target=c("FlyCircuit", "GMR-Gal4"),
   stop_for_status(r)
   res=jsonlite::fromJSON(content(r,as='text'))
   if(isTRUE(vfb_ids) && nrow(res)>0) {
-    res[['id']]=vfb_tovfbids(res[['id']])
+    if(target=='FlyCircuit')
+      res[['id']]=vfb_tovfbids(res[['id']])
+    else
+      res[['id']]=vfb_tovfbids(sprintf("GMR_%s*", res[['id']]), fixed=F)
   }
   res
 }
