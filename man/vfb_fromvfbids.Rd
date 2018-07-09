@@ -42,6 +42,9 @@ Note that these functions are not appropriate for fetching more than
 fcids=c("VGlut-F-000304", "VGlut-F-200278", "fru-F-200121", "TH-F-300016")
 vfbids=vfb_tovfbids(fcids)
 vfb_fromvfbids(vfbids)
+# Some GMR GAL4 lines
+gmrs=c('93D09', '87F10')
+vfb_tovfbids(sprintf("GMR_\%s*", gmrs), fixed=FALSE)
 }
 \seealso{
 \code{\link{gmr_vfbid}}

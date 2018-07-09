@@ -36,6 +36,10 @@ vfb_fromvfbids<-function(vfbids, ...){
 #'   wildcards can be used.
 #' @rdname vfb_fromvfbids
 #' @export
+#' @examples
+#' # Some GMR GAL4 lines
+#' gmrs=c('93D09', '87F10')
+#' vfb_tovfbids(sprintf("GMR_%s*", gmrs), fixed=FALSE)
 vfb_tovfbids<-function(ids, fixed=TRUE, ...){
   query_field=ifelse(fixed, "label_s:", "label:")
   q=paste0(query_field, ids, collapse = " ")
