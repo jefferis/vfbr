@@ -1,3 +1,7 @@
+# vfbr 0.3.2
+
+* Fix GMR-GAL4 to VFB id translation in vfb_nblast (#10)
+
 # vfbr 0.3.1
 
 * Allow vfb_nblast to accept and return VFB ids (#9)
