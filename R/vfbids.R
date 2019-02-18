@@ -74,7 +74,7 @@ extract_gmr_id <- function(ids) stringr::str_extract(ids, "[0-9]{1,2}[A-H][0-9]{
 #' @seealso \code{\link{vfb_fromvfbids}}
 gmr_vfbid<-function(ids){
   shortids=extract_gmr_id(ids)
-  r=vfb_solr_query(filterquery=c("VFB_*","label:GMR_*"), fields = "short_form+label", rows = Inf)
+  r=vfb_solr_query(filterquery=c("VFB_*","synonym_autosuggest:GMR_*"), fields = "short_form+label", rows = Inf)
   r$gmr_ids=extract_gmr_id(r$label)
   r$short_form[match(shortids, r$gmr_ids)]
 }
