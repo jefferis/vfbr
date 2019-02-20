@@ -27,6 +27,31 @@ gmr_stack_urls<-function(gmr_url=getOption('vfbr.stack.gmr_url')) {
   nrrd_urls
 }
 
+
+#' Find generic URL to image stack for download from VFB based on VFB ID
+#'
+#' @details This function expects the VFB id which has been designated for e.g.
+#'   a GAL4 line image. You can find these on the VFB webpages as
+#'   \code{VFB_XXXXXXXX}.
+#'
+#' @param x A VFB id (either numeric or character)
+#'
+#' @return A character vector containing download URLs
+#' @export
+#'
+#' @examples
+#' \donttest{
+#' vfb_stack_url_from_vfbid("VFB_00029638")
+#' vfb_stack_url_from_vfbid(29638)
+#' }
+vfb_stack_url_from_vfbid <- function(x) {
+  if(is.numeric(x)) x=sprintf("VFB_%08d",x)
+  # http://www.virtualflybrain.org/data/VFB/i/0004/8539/volume.nrrd
+  numid_parts=stringr::str_match(x, 'VFB_(\\d{4})(\\d{4})')[,2:3, drop=FALSE]
+
+  sprintf('http://www.virtualflybrain.org/data/VFB/i/%s/%s/volume.nrrd', numid_parts[,1], numid_parts[,2])
+}
+
 #' @importFrom memoise memoise
 gmr_stack_urls_memo=memoise::memoise(function(...) {
   message("Caching all gmr stack urls. This may take a minute ...")
