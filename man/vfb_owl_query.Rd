@@ -47,3 +47,4 @@ head(neurondf)
 Other query: \code{\link{vfb_neo4j_query}},
   \code{\link{vfb_solr_query}}
 }
+\concept{query}

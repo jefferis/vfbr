@@ -100,3 +100,4 @@ head(all_fc)
 Other query: \code{\link{vfb_neo4j_query}},
   \code{\link{vfb_owl_query}}
 }
+\concept{query}

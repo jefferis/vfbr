@@ -59,3 +59,4 @@ subset(as.data.frame(table_by_nclass), Freq>200)
 Other query: \code{\link{vfb_owl_query}},
   \code{\link{vfb_solr_query}}
 }
+\concept{query}

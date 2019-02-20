@@ -4,8 +4,8 @@
 \alias{download_gmr_stacks}
 \title{Download the registered GMR stacks for given ids}
 \usage{
-download_gmr_stacks(ids, download.dir = getOption("vfbr.stack.downloads"),
-  Force = FALSE, ...)
+download_gmr_stacks(ids,
+  download.dir = getOption("vfbr.stack.downloads"), Force = FALSE, ...)
 }
 \arguments{
 \item{ids}{Character vector of GMR ids specified in any way}
