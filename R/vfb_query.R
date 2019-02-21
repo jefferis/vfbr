@@ -103,6 +103,9 @@ vfb_parse_json <- function(req, simplifyVector = TRUE, ...) {
 #' # Find VFB ids matching a given GMR line
 #' vfb_solr_query(filterquery="VFB_*",query="label:GMR_10A07*")
 #'
+#' # Find VFB ids matching a given VT Gal4 line
+#' vfb_solr_query(filterquery="VFB_*",query="label:VT017929*")
+#'
 #' # how many GMR lines can we find
 #' # note use of rows = 0 so we do not fetch results (but still get totals)
 #' r=vfb_solr_query(filterquery="VFB_*",query="label:GMR_*", rows=0)
