@@ -76,7 +76,9 @@ The \code{query} arguments maps onto the general solr \code{q=}
 }
 \examples{
 # Find VFB ids matching a given GMR line
-vfb_solr_query(filterquery="VFB_*",query="label:GMR_10A07*")
+# note the field synonym_autosuggest will in future be the only one
+# matching GMR* ids
+vfb_solr_query(filterquery="VFB_*",query="synonym_autosuggest:GMR_10A07*")
 
 # Find VFB ids matching a given VT Gal4 line
 vfb_solr_query(filterquery="VFB_*",query="label:VT017929*")
