@@ -17,6 +17,7 @@ reference:
   - gmr_stack_urls
   - vfb_3dbrowser_url
   - vfb_stack_url
+  - vfb_download_url_from_vfbid
 - title: NBLAST neuron search
   contents:
   - vfb_nblast

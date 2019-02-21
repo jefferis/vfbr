@@ -43,18 +43,18 @@ gmr_stack_urls<-function(gmr_url=getOption('vfbr.stack.gmr_url')) {
 #' @seealso \code{\link{gmr_stack_urls_for_ids}}
 #' @examples
 #' \donttest{
-#' vfb_stack_url_from_vfbid("VFB_00029638")
-#' vfb_stack_url_from_vfbid(29638)
+#' vfb_download_url_from_vfbid("VFB_00029638")
+#' vfb_download_url_from_vfbid(29638)
 #'
 #' # find ids for a VT line
 #' vtids=vfb_solr_query(filterquery="VFB_*",query="label:VT017929*")$short_form
 #' # and then get the download URLs
-#' vfb_stack_url_from_vfbid(vtids)
+#' vfb_download_url_from_vfbid(vtids)
 #'
 #' # find ids for a GMR line and then get the download URL
-#' vfb_stack_url_from_vfbid(gmr_vfbid("13E10"))
+#' vfb_download_url_from_vfbid(gmr_vfbid("13E10"))
 #' }
-vfb_stack_url_from_vfbid <- function(x) {
+vfb_download_url_from_vfbid <- function(x) {
   if(is.numeric(x)) x=sprintf("VFB_%08d",x)
   # http://www.virtualflybrain.org/data/VFB/i/0004/8539/volume.nrrd
   numid_parts=stringr::str_match(x, 'VFB_(\\d{4})(\\d{4})')[,2:3, drop=FALSE]
