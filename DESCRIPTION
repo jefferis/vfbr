@@ -1,7 +1,7 @@
 Package: vfbr
 Type: Package
 Title: R Package to Access the Virtual Fly Brain project API
-Version: 0.3.2
+Version: 0.3.3
 Authors@R: person("Gregory","Jefferis", email="jefferis@gmail.com", 
     role = c("aut", "cre"), comment = c(ORCID = "0000-0002-0587-9355"))
 Description: The Virtual Fly Brain project provides a website virtualflybrain.org

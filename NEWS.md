@@ -1,3 +1,10 @@
+# vfbr 0.3.3
+
+* Update GMR-GAL4 id searches forthcoming changes to primary label of ids (#13)
+* Add `vfb_stack_url_from_vfbid()` function to get URLs to download image stacks
+  for any VFB ids
+* doc improvements
+
 # vfbr 0.3.2
 
 * Fix GMR-GAL4 to VFB id translation in vfb_nblast (#10)
