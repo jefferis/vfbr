@@ -32,17 +32,27 @@ gmr_stack_urls<-function(gmr_url=getOption('vfbr.stack.gmr_url')) {
 #'
 #' @details This function expects the VFB id which has been designated for e.g.
 #'   a GAL4 line image. You can find these on the VFB webpages as
-#'   \code{VFB_XXXXXXXX}.
+#'   \code{VFB_XXXXXXXX}. In contrast to \code{\link{gmr_stack_urls_for_ids}}, this
+#'   should work for the image data associated with any VFB id.
 #'
 #' @param x A VFB id (either numeric or character)
 #'
 #' @return A character vector containing download URLs
 #' @export
 #'
+#' @seealso \code{\link{gmr_stack_urls_for_ids}}
 #' @examples
 #' \donttest{
 #' vfb_stack_url_from_vfbid("VFB_00029638")
 #' vfb_stack_url_from_vfbid(29638)
+#'
+#' # find ids for a VT line
+#' vtids=vfb_solr_query(filterquery="VFB_*",query="label:VT017929*")$short_form
+#' # and then get the download URLs
+#' vfb_stack_url_from_vfbid(vtids)
+#'
+#' # find ids for a GMR line and then get the download URL
+#' vfb_stack_url_from_vfbid(gmr_vfbid("13E10"))
 #' }
 vfb_stack_url_from_vfbid <- function(x) {
   if(is.numeric(x)) x=sprintf("VFB_%08d",x)
