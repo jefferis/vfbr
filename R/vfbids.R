@@ -13,7 +13,8 @@
 #'   \code{fixed=FALSE} and a wild-card search returns no results a character
 #'   vector of length 0 will be returned.
 #' @export
-#' @seealso \code{\link{gmr_vfbid}}
+#' @seealso \code{\link{gmr_vfbid}}, \code{\link{vfb_solr_query}}, which powers
+#'   the underlying queries.
 #' @examples
 #' # some flycircuit ids
 #' fcids=c("VGlut-F-000304", "VGlut-F-200278", "fru-F-200121", "TH-F-300016")

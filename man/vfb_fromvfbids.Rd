@@ -47,5 +47,6 @@ gmrs=c('93D09', '87F10')
 vfb_tovfbids(sprintf("GMR_\%s*", gmrs), fixed=FALSE)
 }
 \seealso{
-\code{\link{gmr_vfbid}}
+\code{\link{gmr_vfbid}}, \code{\link{vfb_solr_query}}, which powers
+  the underlying queries.
 }
