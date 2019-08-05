@@ -178,8 +178,8 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
 
 #' Query VFB's Neo4J graph database
 #'
-#' @details Under the hood, this uses the \code{\link[RNeo4j]{cypher}} function
-#'   to call a Neo4J service running on the specified VFB server. The \code{path} and \code{server} arguments should be
+#' @details Under the hood, this uses the \code{RNeo4j::cypher} function to call
+#'   a Neo4J service running on the specified VFB server.
 #' @param x A character query in Neo4J's cypher language
 #' @param ... Additional query arguments of the form \code{key=value}
 #' @param path The relative path on the server for the Neo4J endpoint
@@ -187,8 +187,7 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
 #'
 #' @return A data.frame of query results
 #' @export
-#' @importFrom RNeo4j startGraph cypher
-#' @seealso \code{\link[RNeo4j]{RNeo4j}}, \code{\link[RNeo4j]{cypher}} and
+#' @seealso \code{RNeo4j::RNeo4j}, \code{RNeo4j::cypher} and
 #'   \url{https://neo4j.com/docs/rest-docs/3.3/}
 #' @family query
 #' @examples
@@ -216,6 +215,9 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
 #' @references \url{https://neo4j.com/developer/cypher-query-language/}
 vfb_neo4j_query <- function(x, ..., path="db/data", server= getOption("vfbr.server.neo4j")){
   url=file.path(server, path)
-  g <- try(startGraph(url))
-  cypher(g, x)
+  if(!requireNamespace("RNeo4j", quietly = TRUE))
+    stop('You must install the suggested package RNeo4j to use vfb_neo4j_query!\n',
+         '  remotes::install_github("nicolewhite/RNeo4j")')
+  g <- try(RNeo4j::startGraph(url))
+  RNeo4j::cypher(g, x)
 }

@@ -23,8 +23,8 @@ A data.frame of query results
 Query VFB's Neo4J graph database
 }
 \details{
-Under the hood, this uses the \code{\link[RNeo4j]{cypher}} function
-  to call a Neo4J service running on the specified VFB server. The \code{path} and \code{server} arguments should be
+Under the hood, this uses the \code{RNeo4j::cypher} function to call
+  a Neo4J service running on the specified VFB server.
 }
 \examples{
 \donttest{
@@ -53,7 +53,7 @@ subset(as.data.frame(table_by_nclass), Freq>200)
 \url{https://neo4j.com/developer/cypher-query-language/}
 }
 \seealso{
-\code{\link[RNeo4j]{RNeo4j}}, \code{\link[RNeo4j]{cypher}} and
+\code{RNeo4j::RNeo4j}, \code{RNeo4j::cypher} and
   \url{https://neo4j.com/docs/rest-docs/3.3/}
 
 Other query: \code{\link{vfb_owl_query}},

@@ -17,11 +17,12 @@ Imports:
     rvest,
     xml2,
     memoise,
-    rappdirs,
-    RNeo4j
+    rappdirs
 Suggests:
-    testthat
+    testthat,
+    RNeo4j
 RoxygenNote: 6.1.1
 Remotes: nicolewhite/RNeo4j
 URL: https://github.com/jefferis/vfbr
 BugReports: https://github.com/jefferis/vfbr/issues
+Encoding: UTF-8
