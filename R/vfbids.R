@@ -71,7 +71,10 @@ extract_gmr_id <- function(ids) stringr::str_extract(ids, "[0-9]{1,2}[A-H][0-9]{
 #' @param ids A character vector of GMR Gal4 ids
 #' @export
 #' @examples
+#' # Note that gmr_vfbid is quite relaxed about the form of the GMR ids
 #' gmr_vfbid("11H09")
+#' gmr_vfbid("R11H09")
+#' gmr_vfbid("GMR11H09")
 #' @seealso \code{\link{vfb_fromvfbids}}
 gmr_vfbid<-function(ids){
   shortids=extract_gmr_id(ids)

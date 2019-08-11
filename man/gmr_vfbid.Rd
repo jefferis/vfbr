@@ -15,7 +15,10 @@ list of all GMR ids on VFB. Therefore if you have 50 (or 1000) GMR lines to
 query, you should run the query in a single call to \code{gmr_vfbid}.
 }
 \examples{
+# Note that gmr_vfbid is quite relaxed about the form of the GMR ids
 gmr_vfbid("11H09")
+gmr_vfbid("R11H09")
+gmr_vfbid("GMR11H09")
 }
 \seealso{
 \code{\link{vfb_fromvfbids}}
