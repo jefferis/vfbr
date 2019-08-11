@@ -218,6 +218,8 @@ vfb_neo4j_query <- function(x, ..., path="db/data", server= getOption("vfbr.serv
   if(!requireNamespace("RNeo4j", quietly = TRUE))
     stop('You must install the suggested package RNeo4j to use vfb_neo4j_query!\n',
          '  remotes::install_github("nicolewhite/RNeo4j")')
-  g <- try(RNeo4j::startGraph(url))
+  g <- try(RNeo4j::startGraph(url), silent = TRUE)
+  if(inherits(g, 'try-error'))
+    stop("Unable to connect to VFB neo4j server: ", server)
   RNeo4j::cypher(g, x)
 }
