@@ -31,8 +31,8 @@ Under the hood, this uses the \code{RNeo4j::cypher} function to call
   a Neo4J service running on the specified VFB server.
 
   An alternative driver is the \code{neo4r} package via
-  \code{\link{call_neo4j}}. However this appears to be slower and produces a
-  less intuitive results format.
+  \code{\link[neo4r]{call_neo4j}}. However this appears to be slower and
+  produces a less intuitive results format.
 }
 \examples{
 \donttest{

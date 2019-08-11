@@ -182,8 +182,8 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
 #'   a Neo4J service running on the specified VFB server.
 #'
 #'   An alternative driver is the \code{neo4r} package via
-#'   \code{\link{call_neo4j}}. However this appears to be slower and produces a
-#'   less intuitive results format.
+#'   \code{\link[neo4r]{call_neo4j}}. However this appears to be slower and
+#'   produces a less intuitive results format.
 #' @param x A character query in Neo4J's cypher language
 #' @param ... Additional query arguments of the form \code{key=value}
 #' @param path The relative path on the server for the Neo4J endpoint
