@@ -6,6 +6,9 @@
 #'   then filter locally.
 #' @param vfbids One or more vfb identifiers. Solr wildcards can also be used
 #'   when \code{fixed=FALSE}- see examples and \code{\link{vfb_solr_query}}
+#' @param mustWork logical: if \code{TRUE} then an error is given if there are
+#'   missing results; if {NA} then a warning; if \code{FALSE} then there will be
+#'   no message but mising values will still be denoted by \code{NA} values.
 #' @param ... Additional arguments passed to \code{\link{vfb_solr_query}}.
 #' @return A character vector of vfb ids (for \code{vfb_fromvfbids}) or external
 #'   identifiers (for \code{vfb_tovfbids}) in the same order as the input query.
@@ -20,15 +23,26 @@
 #' fcids=c("VGlut-F-000304", "VGlut-F-200278", "fru-F-200121", "TH-F-300016")
 #' vfbids=vfb_tovfbids(fcids)
 #' vfb_fromvfbids(vfbids)
-vfb_fromvfbids<-function(vfbids, ...){
+#'
+#' # make up a fake id for testing - will give a warning
+#' \donttest{
+#' vfb_fromvfbids(c(vfbids, "VFB_10013392"))
+#' }
+vfb_fromvfbids<-function(vfbids, ..., mustWork=NA){
   q=paste(vfbids, collapse = " ")
   rdf=vfb_solr_query(query=q, fields = "short_form+label", rows=Inf, ...)
   if(nrow(rdf)==0) {
-    rep(NA_character_, length(vfbids))
+    res=rep(NA_character_, length(vfbids))
   } else {
     # make sure results are in correct order with NAs for missing results
-    rdf$label[match(vfbids, rdf$short_form)]
+    res=rdf$label[match(vfbids, rdf$short_form)]
   }
+  if(!isFALSE(mustWork)){
+    if(any(is.na(res)))
+      if(isTRUE(mustWork)) stop("Some ids could not be translated!")
+      else warning("Some ids could not be translated!")
+  }
+  res
 }
 
 #' @param ids One or more external identifiers. Solr wildcards can also be used

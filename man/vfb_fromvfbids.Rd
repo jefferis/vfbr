@@ -5,7 +5,7 @@
 \alias{vfb_tovfbids}
 \title{Convert between VFB and external identifiers}
 \usage{
-vfb_fromvfbids(vfbids, ...)
+vfb_fromvfbids(vfbids, ..., mustWork = NA)
 
 vfb_tovfbids(ids, fixed = TRUE, ...)
 }
@@ -14,6 +14,10 @@ vfb_tovfbids(ids, fixed = TRUE, ...)
 when \code{fixed=FALSE}- see examples and \code{\link{vfb_solr_query}}}
 
 \item{...}{Additional arguments passed to \code{\link{vfb_solr_query}}.}
+
+\item{mustWork}{logical: if \code{TRUE} then an error is given if there are
+missing results; if {NA} then a warning; if \code{FALSE} then there will be
+no message but mising values will still be denoted by \code{NA} values.}
 
 \item{ids}{One or more external identifiers. Solr wildcards can also be used
 when \code{fixed=FALSE}- see examples and \code{\link{vfb_solr_query}}}
@@ -42,6 +46,11 @@ Note that these functions are not appropriate for fetching more than
 fcids=c("VGlut-F-000304", "VGlut-F-200278", "fru-F-200121", "TH-F-300016")
 vfbids=vfb_tovfbids(fcids)
 vfb_fromvfbids(vfbids)
+
+# make up a fake id for testing - will give a warning
+\donttest{
+vfb_fromvfbids(c(vfbids, "VFB_10013392"))
+}
 # Some GMR GAL4 lines
 gmrs=c('93D09', '87F10')
 vfb_tovfbids(sprintf("GMR_\%s*", gmrs), fixed=FALSE)
