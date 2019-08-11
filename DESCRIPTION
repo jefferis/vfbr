@@ -20,7 +20,8 @@ Imports:
     rappdirs
 Suggests:
     testthat,
-    RNeo4j
+    RNeo4j,
+    neo4r
 RoxygenNote: 6.1.1
 Remotes: nicolewhite/RNeo4j
 URL: https://github.com/jefferis/vfbr

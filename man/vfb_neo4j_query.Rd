@@ -5,6 +5,7 @@
 \title{Query VFB's Neo4J graph database}
 \usage{
 vfb_neo4j_query(x, ..., path = "db/data",
+  driver = getOption("vfbr.neo4jdriver", NA),
   server = getOption("vfbr.server.neo4j"))
 }
 \arguments{
@@ -13,6 +14,9 @@ vfb_neo4j_query(x, ..., path = "db/data",
 \item{...}{Additional query arguments of the form \code{key=value}}
 
 \item{path}{The relative path on the server for the Neo4J endpoint}
+
+\item{driver}{Which Neo4j driver package to use. Defaults to RNeo4J if
+available as this is faster and the original driver used.}
 
 \item{server}{The server's root URL}
 }
@@ -25,6 +29,10 @@ Query VFB's Neo4J graph database
 \details{
 Under the hood, this uses the \code{RNeo4j::cypher} function to call
   a Neo4J service running on the specified VFB server.
+
+  An alternative driver is the \code{neo4r} package via
+  \code{\link{call_neo4j}}. However this appears to be slower and produces a
+  less intuitive results format.
 }
 \examples{
 \donttest{

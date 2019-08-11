@@ -180,9 +180,15 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
 #'
 #' @details Under the hood, this uses the \code{RNeo4j::cypher} function to call
 #'   a Neo4J service running on the specified VFB server.
+#'
+#'   An alternative driver is the \code{neo4r} package via
+#'   \code{\link{call_neo4j}}. However this appears to be slower and produces a
+#'   less intuitive results format.
 #' @param x A character query in Neo4J's cypher language
 #' @param ... Additional query arguments of the form \code{key=value}
 #' @param path The relative path on the server for the Neo4J endpoint
+#' @param driver Which Neo4j driver package to use. Defaults to RNeo4J if
+#'   available as this is faster and the original driver used.
 #' @param server The server's root URL
 #'
 #' @return A data.frame of query results
@@ -213,11 +219,28 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
 #' subset(as.data.frame(table_by_nclass), Freq>200)
 #' }
 #' @references \url{https://neo4j.com/developer/cypher-query-language/}
-vfb_neo4j_query <- function(x, ..., path="db/data", server= getOption("vfbr.server.neo4j")){
+vfb_neo4j_query <- function(x, ..., path="db/data",
+                            driver=getOption('vfbr.neo4jdriver', NA),
+                            server= getOption("vfbr.server.neo4j")){
   url=file.path(server, path)
-  if(!requireNamespace("RNeo4j", quietly = TRUE))
-    stop('You must install the suggested package RNeo4j to use vfb_neo4j_query!\n',
-         '  remotes::install_github("nicolewhite/RNeo4j")')
-  g <- try(RNeo4j::startGraph(url))
-  RNeo4j::cypher(g, x)
+  # if(!requireNamespace("neo4r", quietly = TRUE))
+  #   stop('You must install the suggested package neo4r to use vfb_neo4j_query!\n',
+  #        '  install.packages("neo4r")')
+  if(is.na(driver)) {
+    if(requireNamespace("RNeo4j", quietly = TRUE)) driver='RNeo4j'
+    else if(requireNamespace('neo4r', quietly = TRUE)) driver='neo4r'
+    else stop('You must install a Neo4j driver to use vfb_neo4j_query.',
+              ' We suggest package neo4r!\n',
+              '  install.packages("neo4r")')
+    options(vfbr.neo4jdriver=driver)
+  }
+  driver=match.arg(driver, choices=c("neo4r", "RNeo4j"))
+  if(driver=='neo4r'){
+    con=neo4r::neo4j_api$new(server, user = "", password = "")
+    res=neo4r::call_neo4j(x, con, ...)
+    res
+  } else {
+    g <- try(RNeo4j::startGraph(url))
+    RNeo4j::cypher(g, x)
+  }
 }
