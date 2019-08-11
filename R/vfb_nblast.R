@@ -60,7 +60,7 @@ vfb_nblast<-function(query, n=50, target=c("FlyCircuit", "GMR-Gal4"),
     vfb_ids <- all(is.vfb_id(query))
   }
   if(isTRUE(vfb_ids)) {
-    query <- vfb_fromvfbids(query)
+    query <- vfb_fromvfbids(query, mustWork = TRUE)
   }
 
   listbody=list(query=query, n=n, ...)
