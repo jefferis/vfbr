@@ -4,8 +4,11 @@
 \alias{vfb_3dbrowser_url}
 \title{Make a URL for a set of VFB ids to be displayed in the 3D browser}
 \usage{
-vfb_3dbrowser_url(ids, template = "VFBt_001",
-  server = getOption("vfbr.server.gepetto"))
+vfb_3dbrowser_url(
+  ids,
+  template = "VFBt_001",
+  server = getOption("vfbr.server.gepetto")
+)
 }
 \arguments{
 \item{ids}{A character vector of IDs}

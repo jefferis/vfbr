@@ -4,8 +4,13 @@
 \alias{vfb_owl_query}
 \title{Generic query against VFB OWL API}
 \usage{
-vfb_owl_query(query, path = "do/jsonQuery.html?json=",
-  server = getOption("vfbr.server"), parse.json = TRUE, ...)
+vfb_owl_query(
+  query,
+  path = "do/jsonQuery.html?json=",
+  server = getOption("vfbr.server"),
+  parse.json = TRUE,
+  ...
+)
 }
 \arguments{
 \item{query}{A key-value list specifying the query}
@@ -44,7 +49,8 @@ head(neurondf)
 \seealso{
 \code{\link[jsonlite]{fromJSON}}
 
-Other query: \code{\link{vfb_neo4j_query}},
-  \code{\link{vfb_solr_query}}
+Other query: 
+\code{\link{vfb_neo4j_query}()},
+\code{\link{vfb_solr_query}()}
 }
 \concept{query}

@@ -4,8 +4,12 @@
 \alias{vfb_neo4j_query}
 \title{Query VFB's Neo4J graph database}
 \usage{
-vfb_neo4j_query(x, ..., path = "db/data",
-  server = getOption("vfbr.server.neo4j"))
+vfb_neo4j_query(
+  x,
+  ...,
+  path = "db/data",
+  server = getOption("vfbr.server.neo4j")
+)
 }
 \arguments{
 \item{x}{A character query in Neo4J's cypher language}
@@ -56,7 +60,8 @@ subset(as.data.frame(table_by_nclass), Freq>200)
 \code{RNeo4j::RNeo4j}, \code{RNeo4j::cypher} and
   \url{https://neo4j.com/docs/rest-docs/3.3/}
 
-Other query: \code{\link{vfb_owl_query}},
-  \code{\link{vfb_solr_query}}
+Other query: 
+\code{\link{vfb_owl_query}()},
+\code{\link{vfb_solr_query}()}
 }
 \concept{query}

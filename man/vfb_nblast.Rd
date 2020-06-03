@@ -4,8 +4,14 @@
 \alias{vfb_nblast}
 \title{Query vfb opencpu server to obtain pre-computed nblast scores}
 \usage{
-vfb_nblast(query, n = 50, target = c("FlyCircuit", "GMR-Gal4"),
-  vfb_ids = NA, server = getOption("vfbr.server.r"), ...)
+vfb_nblast(
+  query,
+  n = 50,
+  target = c("FlyCircuit", "GMR-Gal4"),
+  vfb_ids = NA,
+  server = getOption("vfbr.server.r"),
+  ...
+)
 }
 \arguments{
 \item{query}{A single flycircuit identifier}
@@ -50,19 +56,19 @@ open_stack_viewer(getOption("vfbr.stack.downloads"), download_gmr_stacks(top10$i
 
 \dontrun{
 # to use ocpu instance as an API
-curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \
   -d 'query="FruMARCM-M002262_seg001"'
 # specify number of results to return
-curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \
   -d 'query="FruMARCM-M002262_seg001"&n=10'
 # all results
-curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \
   -d 'query="FruMARCM-M002262_seg001"&n=0'
 # with VFB id
-curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \
   -d 'query="VFB_00014755"&n=10'
 # with VFB id, all results
-curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \\
+curl http://r.virtualflybrain.org/ocpu/library/vfbr/R/vfb_nblast/json \
   -d 'query="VFB_00014755"&n=0'
 }
 }

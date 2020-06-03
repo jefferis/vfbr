@@ -4,9 +4,15 @@
 \alias{vfb_synonym_query}
 \title{Find canonical ontology term using VFB SOLR to query synonyms}
 \usage{
-vfb_synonym_query(query, exact = TRUE, quote = NA,
+vfb_synonym_query(
+  query,
+  exact = TRUE,
+  quote = NA,
   searchfields = c("synonym", "label"),
-  fields = "short_form label synonym", verbose = interactive(), ...)
+  fields = "short_form label synonym",
+  verbose = interactive(),
+  ...
+)
 }
 \arguments{
 \item{query}{A character vector containing one or more queries - see details.

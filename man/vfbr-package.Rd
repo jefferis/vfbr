@@ -5,9 +5,6 @@
 \alias{vfbr-package}
 \alias{vfbr}
 \title{Programmatic Access to the virtualflybrain.org website}
-\description{
-Programmatic Access to the virtualflybrain.org website
-}
 \section{Queries}{
 
 

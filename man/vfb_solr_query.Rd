@@ -4,11 +4,18 @@
 \alias{vfb_solr_query}
 \title{Query VFB via solr indexing system}
 \usage{
-vfb_solr_query(query = "*:*", filterquery = NULL,
-  fields = "label+short_form", sort = "score+desc",
-  defaultfield = "short_form", rows = 30L,
+vfb_solr_query(
+  query = "*:*",
+  filterquery = NULL,
+  fields = "label+short_form",
+  sort = "score+desc",
+  defaultfield = "short_form",
+  rows = 30L,
   path = "solr/ontology/select?wt=json",
-  server = getOption("vfbr.server.solr"), parse.json = TRUE, ...)
+  server = getOption("vfbr.server.solr"),
+  parse.json = TRUE,
+  ...
+)
 }
 \arguments{
 \item{query}{A key-value list specifying the query}
@@ -102,7 +109,8 @@ head(all_fc)
 \seealso{
 \code{\link[httr]{response}}
 
-Other query: \code{\link{vfb_neo4j_query}},
-  \code{\link{vfb_owl_query}}
+Other query: 
+\code{\link{vfb_neo4j_query}()},
+\code{\link{vfb_owl_query}()}
 }
 \concept{query}
