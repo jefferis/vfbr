@@ -2,7 +2,7 @@
 % Please edit documentation in R/vfb_extended_query.R
 \name{vfb_synonym_query}
 \alias{vfb_synonym_query}
-\title{Find canononical ontology term using VFB SOLR to query synonyms}
+\title{Find canonical ontology term using VFB SOLR to query synonyms}
 \usage{
 vfb_synonym_query(query, exact = TRUE, quote = NA,
   searchfields = c("synonym", "label"),
@@ -37,10 +37,10 @@ can use this e.g. to set the number of returned \code{rows}.}
 }
 \value{
 A data.frame containing one or more result rows, ordered according to
-  the solr result score, with attributres
+  the solr result score, with attributes
 }
 \description{
-Find canononical ontology term using VFB SOLR to query synonyms
+Find canonical ontology term using VFB SOLR to query synonyms
 }
 \details{
 Note that data.frame that is returned may contain a list in the
@@ -62,7 +62,7 @@ Note that data.frame that is returned may contain a list in the
   you do not find any results with an initial query using the default values.
 
   In general SOLR will break any text in fields like synonym into separate
-  tokens based on whitespace, hypens etc, so the value :
+  tokens based on whitespace, hyphens etc, so the value :
 
   \code{inter-antennal lobe tract}
 

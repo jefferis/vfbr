@@ -1,4 +1,4 @@
-#' Find canononical ontology term using VFB SOLR to query synonyms
+#' Find canonical ontology term using VFB SOLR to query synonyms
 #'
 #' @param query A character vector containing one or more queries - see details.
 #'   Wildcards (\code{?*}) can be used, and have a similar meaning to their use
@@ -20,14 +20,14 @@
 #' @param ... Additional arguments passed to \code{\link{vfb_solr_query}}. You
 #'   can use this e.g. to set the number of returned \code{rows}.
 #' @return A data.frame containing one or more result rows, ordered according to
-#'   the solr result score, with attributres
+#'   the solr result score, with attributes
 #' @section Query details: The \code{exact} and \code{quote} arguments have a
 #'   profound effect on how SOLR carries out searches. Setting both arguments to
 #'   \code{FALSE} gives the least specific search and you may want to do this if
 #'   you do not find any results with an initial query using the default values.
 #'
 #'   In general SOLR will break any text in fields like synonym into separate
-#'   tokens based on whitespace, hypens etc, so the value :
+#'   tokens based on whitespace, hyphens etc, so the value :
 #'
 #'   \code{inter-antennal lobe tract}
 #'
