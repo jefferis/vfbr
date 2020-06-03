@@ -19,6 +19,7 @@ Imports:
     memoise,
     rappdirs
 Suggests:
+    spelling,
     testthat,
     RNeo4j
 RoxygenNote: 7.1.0
@@ -26,3 +27,4 @@ Remotes: nicolewhite/RNeo4j
 URL: https://github.com/jefferis/vfbr
 BugReports: https://github.com/jefferis/vfbr/issues
 Encoding: UTF-8
+Language: en-GB
