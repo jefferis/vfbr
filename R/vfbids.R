@@ -8,7 +8,7 @@
 #'   when \code{fixed=FALSE}- see examples and \code{\link{vfb_solr_query}}
 #' @param mustWork logical: if \code{TRUE} then an error is given if there are
 #'   missing results; if {NA} then a warning; if \code{FALSE} then there will be
-#'   no message but mising values will still be denoted by \code{NA} values.
+#'   no message but missing values will still be denoted by \code{NA} values.
 #' @param ... Additional arguments passed to \code{\link{vfb_solr_query}}.
 #' @return A character vector of vfb ids (for \code{vfb_fromvfbids}) or external
 #'   identifiers (for \code{vfb_tovfbids}) in the same order as the input query.

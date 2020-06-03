@@ -17,7 +17,7 @@ when \code{fixed=FALSE}- see examples and \code{\link{vfb_solr_query}}}
 
 \item{mustWork}{logical: if \code{TRUE} then an error is given if there are
 missing results; if {NA} then a warning; if \code{FALSE} then there will be
-no message but mising values will still be denoted by \code{NA} values.}
+no message but missing values will still be denoted by \code{NA} values.}
 
 \item{ids}{One or more external identifiers. Solr wildcards can also be used
 when \code{fixed=FALSE}- see examples and \code{\link{vfb_solr_query}}}
