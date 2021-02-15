@@ -71,7 +71,7 @@ vfb_nblast<-function(query, n=50, target=c("FlyCircuit", "GMR-Gal4"),
     if(target=="GMR-Gal4")
       res[['id']]=gmr_vfbid(res[['id']])
     else
-      res[['id']]=vfb_tovfbids(res[['id']])
+      res[['id']]=vfb_tovfbids(res[['id']], fixed=FALSE)
   }
   res
 }
