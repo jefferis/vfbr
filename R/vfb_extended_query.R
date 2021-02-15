@@ -17,7 +17,8 @@
 #'   Setting \code{fields=""} implies all fields (but note that not all results
 #'   may have the same fields - see discussion in details)
 #' @param verbose Whether to print messages to the screen.
-#' @param ... Additional arguments passed to \code{\link{vfb_solr_query}}. You
+#' @param ... Additional arguments passed to \code{\link{pbsapply}} when there
+#'   are multiple input queries and eventually \code{\link{vfb_solr_query}}. You
 #'   can use this e.g. to set the number of returned \code{rows}.
 #' @return A data.frame containing one or more result rows, ordered according to
 #'   the solr result score, with attributes
@@ -66,12 +67,15 @@
 #'   query.
 #'
 #'   When \code{x} has length > 1 i.e. multiple query terms, then multiple calls
-#'   to \code{\link{vfb_solr_query}} are wrapped in a \code{\link[base]{sapply}}
-#'   statement. You can pass arguments to \code{sapply} in \code{...} such as
-#'   \code{simplify=FALSE} if you wish. By default the return value will be a
-#'   matrix with rows that you can index by field name and columns that you can
-#'   index by queries. However the form of this is not guaranteed if you ask for
-#'   fields that are present only for some of the results.
+#'   to \code{\link{vfb_solr_query}} are wrapped in a
+#'   \code{\link[pbapply]{pbsapply}} statement. You can pass arguments to
+#'   \code{sapply} in \code{...} such as \code{simplify=FALSE} if you wish. By
+#'   default the return value will be a matrix with rows that you can index by
+#'   field name and columns that you can index by queries. However the form of
+#'   this is not guaranteed if you ask for fields that are present only for some
+#'   of the results.
+#'
+#'   Note also that the
 #' @seealso \code{\link{vfb_solr_query}}, \code{\link{vfb_autocomplete_query}}
 #' @export
 #' @examples
@@ -106,12 +110,16 @@
 #' # wild card syntax to a regular expression
 #' mbondf$aso=sapply(mbondf$synonym, function(x) grep(glob2rx("MBON-??"), x, value=TRUE))
 #' }
+#' @importFrom pbapply pbsapply
 vfb_synonym_query<-function(query, exact=TRUE, quote=NA, searchfields=c("synonym","label"),
                             fields='short_form label synonym',
                             verbose=interactive(), ...){
-  if(length(query)>1) return(sapply(query, vfb_synonym_query, exact=exact,
-                                    searchfields=searchfields, fields=fields,
-                                    quote=quote, verbose=verbose, ...))
+  if(length(query)>1) {
+    res=pbsapply(query, vfb_synonym_query, exact=exact,
+    searchfields=searchfields, fields=fields,
+    quote=quote, verbose=verbose, ...)
+    return(res)
+  }
   searchfields=match.arg(searchfields, several.ok = TRUE)
   if(is.na(quote)){
     # quote=F unless exact=T and query does not contain wildcards

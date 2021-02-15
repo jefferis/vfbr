@@ -38,7 +38,8 @@ may have the same fields - see discussion in details)}
 
 \item{verbose}{Whether to print messages to the screen.}
 
-\item{...}{Additional arguments passed to \code{\link{vfb_solr_query}}. You
+\item{...}{Additional arguments passed to \code{\link{pbsapply}} when there
+are multiple input queries and eventually \code{\link{vfb_solr_query}}. You
 can use this e.g. to set the number of returned \code{rows}.}
 }
 \value{

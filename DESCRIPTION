@@ -17,7 +17,8 @@ Imports:
     rvest,
     xml2,
     memoise,
-    rappdirs
+    rappdirs,
+    pbapply
 Suggests:
     spelling,
     testthat,
