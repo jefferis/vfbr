@@ -7,7 +7,7 @@
 \usage{
 vfb_fromvfbids(vfbids, ..., mustWork = NA)
 
-vfb_tovfbids(ids, fixed = TRUE, ...)
+vfb_tovfbids(ids, synonyms = TRUE, fixed = TRUE, ...)
 }
 \arguments{
 \item{vfbids}{One or more vfb identifiers. Solr wildcards can also be used
@@ -22,8 +22,13 @@ no message but missing values will still be denoted by \code{NA} values.}
 \item{ids}{One or more external identifiers. Solr wildcards can also be used
 when \code{fixed=FALSE}- see examples and \code{\link{vfb_solr_query}}}
 
-\item{fixed}{Whether to insist on exact matches. When \code{fixed=FALSE} solr
-wildcards can be used.}
+\item{synonyms}{whether to compare with the synonym field rather than the
+canonical label.}
+
+\item{fixed}{Whether to insist on one exact match for each input identifier
+in \code{ids}. When \code{fixed=FALSE} solr wildcards can be used
+(returning an arbitrary number of identifiers) but query ids cannot be
+matched to returned ids.}
 }
 \value{
 A character vector of vfb ids (for \code{vfb_fromvfbids}) or external
@@ -51,9 +56,25 @@ vfb_fromvfbids(vfbids)
 \donttest{
 vfb_fromvfbids(c(vfbids, "VFB_10013392"))
 }
+## FlyCircuit ids
+# these "gene_name" ids are a secondary id on FlyCircuit
+fcgns=c("DvGlutMARCM-F1106_seg1", "DvGlutMARCM-F1448_seg1",
+  "FruMARCM-F001735_seg002", "THMARCM-160F_seg2")
+
+# note the difference in order between fixed = TRUE/FALSE
+vfb_tovfbids(fcgns, fixed=TRUE)
+vfb_tovfbids(fcgns, fixed=FALSE)
+# depends on searching synonym field
+vfb_tovfbids(fcgns, fixed=TRUE, synonyms=FALSE)
+vfb_tovfbids(fcids, fixed=TRUE)
+# these are the canonical form, so don't depend on searching synonym field
+vfb_tovfbids(fcids, synonyms=FALSE)
+
 # Some GMR GAL4 lines
 gmrs=c('93D09', '87F10')
 vfb_tovfbids(sprintf("GMR_\%s*", gmrs), fixed=FALSE)
+# unfortunately these don't work with fixed=TRUE to define ordering
+vfb_tovfbids(sprintf("GMR_\%s*", gmrs), fixed=TRUE)
 }
 \seealso{
 \code{\link{gmr_vfbid}}, \code{\link{vfb_solr_query}}, which powers
