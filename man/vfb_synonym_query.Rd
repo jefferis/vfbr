@@ -55,12 +55,15 @@ Note that data.frame that is returned may contain a list in the
   query.
 
   When \code{x} has length > 1 i.e. multiple query terms, then multiple calls
-  to \code{\link{vfb_solr_query}} are wrapped in a \code{\link[base]{sapply}}
-  statement. You can pass arguments to \code{sapply} in \code{...} such as
-  \code{simplify=FALSE} if you wish. By default the return value will be a
-  matrix with rows that you can index by field name and columns that you can
-  index by queries. However the form of this is not guaranteed if you ask for
-  fields that are present only for some of the results.
+  to \code{\link{vfb_solr_query}} are wrapped in a
+  \code{\link[pbapply]{pbsapply}} statement. You can pass arguments to
+  \code{sapply} in \code{...} such as \code{simplify=FALSE} if you wish. By
+  default the return value will be a matrix with rows that you can index by
+  field name and columns that you can index by queries. However the form of
+  this is not guaranteed if you ask for fields that are present only for some
+  of the results.
+
+  Note also that the
 }
 \section{Query details}{
  The \code{exact} and \code{quote} arguments have a

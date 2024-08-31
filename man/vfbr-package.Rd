@@ -5,21 +5,24 @@
 \alias{vfbr-package}
 \alias{vfbr}
 \title{Programmatic Access to the virtualflybrain.org website}
+\description{
+The Virtual Fly Brain project provides a website virtualflybrain.org containing neuroanatomical data for the fruit fly, Drosophila melanogaster, curated from published journal articles and bulk image data. This package enables queries against an experimental (as of time of writing) API.
+}
 \section{Queries}{
 
 
  \itemize{
 
- \item{\code{\link{vfb_solr_query}}} Allows you to query VFB's SOLR end
+ \item \code{\link{vfb_solr_query}} Allows you to query VFB's SOLR end
  point. This gives you programmatic access to the great majority of searches
  that you can perform interactively on the VFB website.
 
- \item{\code{\link{vfb_neo4j_query}}} Allows you to query VFB's Neo4J end
+ \item \code{\link{vfb_neo4j_query}} Allows you to query VFB's Neo4J end
  point. This gives you programmatic access to many sophisticated searches
  based on the VFB ontology, including searches that may not be easily
  accessible via the website.
 
- \item{\code{\link{vfb_synonym_query}}} A higher level function that allows
+ \item \code{\link{vfb_synonym_query}} A higher level function that allows
  you to search for canonical terms with synonyms matching a given query.
 
  }
@@ -31,26 +34,21 @@
  you have previously set a value (e.g. in your \code{\link[base]{Rprofile}}).
 
  \itemize{
+ \item \code{vfbr.server} URL of main VFB server
 
- \item{\code{vfbr.server}}{ URL of main VFB server}
+ \item \code{vfbr.server.neo4j} URL for Neo4J graph database queries
 
- \item{\code{vfbr.server.neo4j}}{ URL for Neo4J graph database queries}
+ \item \code{vfbr.server.solr} URL for SOLR queries
 
- \item{\code{vfbr.server.solr}}{ URL for SOLR queries}
+ \item \code{vfbr.server.owl} URL for OWL ontology queries
 
- \item{\code{vfbr.server.owl}}{ URL for OWL ontology queries}
+ \item \code{vfbr.server.gepetto} URL of VFB's gepetto server for 3D visualisation (see \code{\link{vfb_3dbrowser_url}}.)
 
- \item{\code{vfbr.server.gepetto}}{ URL of VFB's gepetto server for 3D
- visualisation (see \code{\link{vfb_3dbrowser_url}}.)}
+ \item \code{vfbr.server.r} URL for opencpu/R queries - not for users at the moment
 
- \item{\code{vfbr.server.r}}{ URL for opencpu/R queries - not for users at the moment}
+ \item \code{vfbr.stack.gmr_url} URL containing listing of registered GMR Gal4 confocal stacks. See \code{\link{gmr_stack_urls}}
 
- \item{\code{vfbr.stack.gmr_url}}{URL containing listing of registered GMR
- Gal4 confocal stacks. See \code{\link{gmr_stack_urls}}}
-
- \item{\code{vfbr.stack.downloads}}{Location of downloaded stacks. See
- \code{\link{download_gmr_stacks}}}
-
+ \item \code{vfbr.stack.downloads} Location of downloaded stacks. See \code{\link{download_gmr_stacks}}
  }
 }
 
@@ -67,5 +65,9 @@ See \url{http://virtualflybrain.org}
 }
 \seealso{
 \code{\link{vfb_solr_query}}
+}
+\author{
+\strong{Maintainer}: Gregory Jefferis \email{jefferis@gmail.com} (\href{https://orcid.org/0000-0002-0587-9355}{ORCID})
+
 }
 \keyword{package}
