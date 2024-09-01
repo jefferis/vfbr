@@ -1,6 +1,10 @@
 # vfbr
-[![Travis-CI Build Status](https://travis-ci.org/jefferis/vfbr.svg?branch=master)](https://travis-ci.org/jefferis/vfbr)
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/jefferis/vfbr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jefferis/vfbr/actions/workflows/R-CMD-check.yaml)
+[![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](https://jefferis.github.io/vfbr/reference/)
 
+<!-- badges: end -->
+  
 vfbr provides programmatic access to the [virtualflybrain.org](http://virtualflybrain.org)
 website.
 

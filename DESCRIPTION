@@ -25,7 +25,7 @@ Suggests:
     RNeo4j
 RoxygenNote: 7.3.2
 Remotes: nicolewhite/RNeo4j
-URL: https://github.com/jefferis/vfbr
+URL: https://github.com/jefferis/vfbr, https://jefferis.github.io/vfbr/
 BugReports: https://github.com/jefferis/vfbr/issues
 Encoding: UTF-8
 Language: en-GB
