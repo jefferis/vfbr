@@ -1,3 +1,7 @@
+url: http://jefferis.github.io/vfbr/
+template:
+  bootstrap: 5
+
 reference:
 - title: Package Help
   desc: Provides an overview of key functions and classes
