@@ -38,9 +38,8 @@ nrow(nclasses)
 head(nclasses)
 
 # Find all images with an associated neuronal class
-q=paste0("MATCH (n:Class:VFB { label : 'neuron' })",
-  "<-[:SUBCLASSOF*]-(p)<-[:INSTANCEOF]-(i:Individual)",
-  "RETURN distinct i.label, p.label;")
+q=paste("MATCH (p:Class:Neuron)<-[:INSTANCEOF]-(i:Individual:has_image)",
+  "RETURN distinct i.label, p.label, p.symbol;")
 nclasses_image=vfb_neo4j_query(q)
 nrow(nclasses_image)
 head(nclasses_image)
@@ -49,6 +48,8 @@ head(nclasses_image)
 length(unique(nclasses_image$p.label))
 
 # look at number of images for each neuronal class
+# NB some of these are rather generic classes where
+# a specific cell type annotation was not available.
 table_by_nclass <- table(nclasses_image$p.label)
 subset(as.data.frame(table_by_nclass), Freq>200)
 }
