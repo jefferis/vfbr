@@ -22,7 +22,7 @@ Imports:
 Suggests:
     spelling,
     testthat,
-    RNeo4j
+    neo2R
 RoxygenNote: 7.3.2
 Remotes: nicolewhite/RNeo4j
 URL: https://github.com/jefferis/vfbr, https://jefferis.github.io/vfbr/

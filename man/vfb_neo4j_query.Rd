@@ -14,7 +14,7 @@ vfb_neo4j_query(
 \arguments{
 \item{x}{A character query in Neo4J's cypher language}
 
-\item{...}{Additional query arguments of the form \code{key=value}}
+\item{...}{Additional arguments passed to \code{neo2R::cypher()}}
 
 \item{path}{The relative path on the server for the Neo4J endpoint}
 
