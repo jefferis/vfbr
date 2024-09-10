@@ -181,7 +181,7 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
 #' @details Under the hood, this uses the \code{RNeo4j::cypher} function to call
 #'   a Neo4J service running on the specified VFB server.
 #' @param x A character query in Neo4J's cypher language
-#' @param ... Additional query arguments of the form \code{key=value}
+#' @param ... Additional arguments passed to \code{neo2R::cypher()}
 #' @param path The relative path on the server for the Neo4J endpoint
 #' @param server The server's root URL
 #'
@@ -198,9 +198,8 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
 #' head(nclasses)
 #'
 #' # Find all images with an associated neuronal class
-#' q=paste0("MATCH (n:Class:VFB { label : 'neuron' })",
-#'   "<-[:SUBCLASSOF*]-(p)<-[:INSTANCEOF]-(i:Individual)",
-#'   "RETURN distinct i.label, p.label;")
+#' q=paste("MATCH (p:Class:Neuron)<-[:INSTANCEOF]-(i:Individual:has_image)",
+#'   "RETURN distinct i.label, p.label, p.symbol;")
 #' nclasses_image=vfb_neo4j_query(q)
 #' nrow(nclasses_image)
 #' head(nclasses_image)
@@ -209,17 +208,18 @@ vfb_solr_query<-function(query="*:*", filterquery=NULL,
 #' length(unique(nclasses_image$p.label))
 #'
 #' # look at number of images for each neuronal class
+#' # NB some of these are rather generic classes where
+#' # a specific cell type annotation was not available.
 #' table_by_nclass <- table(nclasses_image$p.label)
 #' subset(as.data.frame(table_by_nclass), Freq>200)
 #' }
 #' @references \url{https://neo4j.com/developer/cypher-query-language/}
 vfb_neo4j_query <- function(x, ..., path="db/data", server= getOption("vfbr.server.neo4j")){
   url=file.path(server, path)
-  if(!requireNamespace("RNeo4j", quietly = TRUE))
-    stop('You must install the suggested package RNeo4j to use vfb_neo4j_query!\n',
-         '  remotes::install_github("nicolewhite/RNeo4j")')
-  g <- try(RNeo4j::startGraph(url), silent = TRUE)
+  if(!requireNamespace("neo2R", quietly = TRUE))
+    stop('You must install the suggested package neo2R to use vfb_neo4j_query!\n')
+  g <- try(neo2R::startGraph(url), silent = TRUE)
   if(inherits(g, 'try-error'))
     stop("Unable to connect to VFB neo4j server: ", server)
-  RNeo4j::cypher(g, x)
+  neo2R::cypher(g, x, ...)
 }
