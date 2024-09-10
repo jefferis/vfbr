@@ -56,7 +56,7 @@
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional query arguments of the form <code>key=value</code></p></dd>
+<dd><p>Additional arguments passed to <code><a href="https://rdrr.io/pkg/neo2R/man/cypher.html" class="external-link">neo2R::cypher()</a></code></p></dd>
 
 
 <dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
@@ -73,7 +73,7 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Under the hood, this uses the <code><a href="https://rdrr.io/pkg/RNeo4j/man/cypher.html" class="external-link">RNeo4j::cypher</a></code> function to call
+    <p>Under the hood, this uses the <code>RNeo4j::cypher</code> function to call
   a Neo4J service running on the specified VFB server.</p>
     </div>
     <div class="section level2">
@@ -82,7 +82,7 @@
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/RNeo4j/man/RNeo4j.html" class="external-link">RNeo4j::RNeo4j</a></code>, <code><a href="https://rdrr.io/pkg/RNeo4j/man/cypher.html" class="external-link">RNeo4j::cypher</a></code> and
+    <div class="dont-index"><p><code>RNeo4j::RNeo4j</code>, <code>RNeo4j::cypher</code> and
   <a href="https://neo4j.com/docs/rest-docs/3.3/" class="external-link">https://neo4j.com/docs/rest-docs/3.3/</a></p>
 <p>Other query:
 <code><a href="vfb_owl_query.html">vfb_owl_query</a>()</code>,
@@ -94,33 +94,71 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># ask for all neuronal classes</span></span></span>
 <span class="r-in"><span><span class="va">nclasses</span><span class="op">=</span><span class="fu">vfb_neo4j_query</span><span class="op">(</span><span class="st">"MATCH (n:Neuron:Class) RETURN n.label"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>changing locked binding for ‘length.path’ in ‘httr’ whilst loading ‘RNeo4j’</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vfb_neo4j_query("MATCH (n:Neuron:Class) RETURN n.label"):</span> Unable to connect to VFB neo4j server: http://pdb.virtualflybrain.org</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">nclasses</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nclasses' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 14247</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">nclasses</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nclasses' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                             n.label</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                        adult Drosulfakinin neuron</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 adult natalisin small pars intercerebralis neuron</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      labellar taste bristle mechanosensory neuron</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                           wedge projection neuron</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5            wind sensitive wedge projection neuron</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                          interoceptive SEZ neuron</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Find all images with an associated neuronal class</span></span></span>
-<span class="r-in"><span><span class="va">q</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"MATCH (n:Class:VFB { label : 'neuron' })"</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"&lt;-[:SUBCLASSOF*]-(p)&lt;-[:INSTANCEOF]-(i:Individual)"</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"RETURN distinct i.label, p.label;"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">q</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"MATCH (p:Class:Neuron)&lt;-[:INSTANCEOF]-(i:Individual:has_image)"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"RETURN distinct i.label, p.label, p.symbol;"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">nclasses_image</span><span class="op">=</span><span class="fu">vfb_neo4j_query</span><span class="op">(</span><span class="va">q</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vfb_neo4j_query(q):</span> Unable to connect to VFB neo4j server: http://pdb.virtualflybrain.org</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">nclasses_image</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nclasses_image' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 98821</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">nclasses_image</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nclasses_image' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             i.label                 p.label p.symbol</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   WEDPN13_R (FlyEM-HB:5812989041) wedge projection neuron      WPN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   WEDPN13_R (FlyEM-HB:5813023929) wedge projection neuron      WPN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   WEDPN14_R (FlyEM-HB:1080886521) wedge projection neuron      WPN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 WEDPN17_c_R (FlyEM-HB:1224069121) wedge projection neuron      WPN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 WEDPN17_a_R (FlyEM-HB:1386858837) wedge projection neuron      WPN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   WEDPN15_R (FlyEM-HB:5813018784) wedge projection neuron      WPN</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># how many neuronal classes have images?</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">nclasses_image</span><span class="op">$</span><span class="va">p.label</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nclasses_image' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5968</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># look at number of images for each neuronal class</span></span></span>
+<span class="r-in"><span><span class="co"># NB some of these are rather generic classes where</span></span></span>
+<span class="r-in"><span><span class="co"># a specific cell type annotation was not available.</span></span></span>
 <span class="r-in"><span><span class="va">table_by_nclass</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">nclasses_image</span><span class="op">$</span><span class="va">p.label</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'nclasses_image' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">table_by_nclass</span><span class="op">)</span>, <span class="va">Freq</span><span class="op">&gt;</span><span class="fl">200</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'table_by_nclass' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                     Var1  Freq</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91                                             adult ALl1 lineage neuron   284</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106                                             adult DM6 lineage neuron   294</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114                                               adult GABAergic neuron  6534</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149                                       adult alpha'/beta' Kenyon cell   264</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1041                                            adult cholinergic neuron 15119</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1521                                           adult dopaminergic neuron  2431</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1572                       adult fan-shaped body 1 column-crepine neuron   254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1575 adult fan-shaped body 1 column-superior medial protocerebrum neuron   277</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1620                         adult fan-shaped body vertical delta neuron   354</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1624                                           adult fruitless MB neuron   682</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1700                                             adult gamma Kenyon cell  1040</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1701                                          adult glutamatergic neuron  5666</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2573               adult multiglomerular antennal lobe projection neuron   210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2658                                                        adult neuron 18026</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5060                                              alpha/beta Kenyon cell   629</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5061                                         alpha/beta core Kenyon cell  1019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5063                                      alpha/beta surface Kenyon cell   595</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5064                                 alpha/beta surface/core Kenyon cell   211</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5073                     antennal lobe projection neuron of ALl1 lineage   281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5217                                             embryonic/larval neuron  4104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5224                                              gamma main Kenyon cell   614</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5634                     larval mushroom body second order output neuron   208</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5708                                         lobula columnar neuron LC10   627</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5710                                         lobula columnar neuron LC12   439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5742                            lobula-lobula plate columnar neuron LLPC   328</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5764                        medial antennal lobe tract projection neuron   248</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5769                                        medulla columnar neuron MC61   347</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5792                                   mushroom body dopaminergic neuron  1933</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5835                                                              neuron  7288</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
