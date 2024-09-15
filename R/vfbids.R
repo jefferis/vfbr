@@ -47,23 +47,61 @@ vfb_fromvfbids<-function(vfbids, ..., mustWork=NA){
 
 #' @param ids One or more external identifiers. Solr wildcards can also be used
 #'   when \code{fixed=FALSE}- see examples and \code{\link{vfb_solr_query}}
-#' @param fixed Whether to insist on exact matches. When \code{fixed=FALSE} solr
-#'   wildcards can be used.
+#' @param fixed Whether to insist on one exact match for each input identifier
+#'   in \code{ids}. When \code{fixed=FALSE} solr wildcards can be used
+#'   (returning an arbitrary number of identifiers) but query ids cannot be
+#'   matched to returned ids.
+#'
+#' @param synonyms whether to compare with the synonym field rather than the
+#'   canonical label.
 #' @rdname vfb_fromvfbids
 #' @export
 #' @examples
+#' ## FlyCircuit ids
+#' # these "gene_name" ids are a secondary id on FlyCircuit
+#' fcgns=c("DvGlutMARCM-F1106_seg1", "DvGlutMARCM-F1448_seg1",
+#'   "FruMARCM-F001735_seg002", "THMARCM-160F_seg2")
+#'
+#' # note the difference in order between fixed = TRUE/FALSE
+#' vfb_tovfbids(fcgns, fixed=TRUE)
+#' vfb_tovfbids(fcgns, fixed=FALSE)
+#' # depends on searching synonym field
+#' vfb_tovfbids(fcgns, fixed=TRUE, synonyms=FALSE)
+#' vfb_tovfbids(fcids, fixed=TRUE)
+#' # these are the canonical form, so don't depend on searching synonym field
+#' vfb_tovfbids(fcids, synonyms=FALSE)
+#'
 #' # Some GMR GAL4 lines
 #' gmrs=c('93D09', '87F10')
 #' vfb_tovfbids(sprintf("GMR_%s*", gmrs), fixed=FALSE)
-vfb_tovfbids<-function(ids, fixed=TRUE, ...){
-  query_field=ifelse(fixed, "label_s:", "label:")
+#' # unfortunately these don't work with fixed=TRUE to define ordering
+#' vfb_tovfbids(sprintf("GMR_%s*", gmrs), fixed=TRUE)
+vfb_tovfbids<-function(ids, synonyms=TRUE, fixed=TRUE, ...){
+  query_field=ifelse(synonyms, "synonym_autosuggest:", "label_s:")
   q=paste0(query_field, ids, collapse = " ")
-  rdf=vfb_solr_query(filterquery="VFB_*",query=q, fields = "short_form+label", rows = Inf, ...)
+  rdf = vfb_solr_query(
+    filterquery = "VFB_*",
+    query = q,
+    #fetch synonyms if we need to match against them
+    fields = paste0("short_form+label",ifelse(synonyms,"+synonym","")),
+    rows = Inf,
+    ...
+  )
   if(nrow(rdf)==0) {
     if(fixed) rep(NA_character_, length(ids)) else character()
   } else if(fixed){
+    if(nrow(rdf)!=length(ids))
+      stop("mismatch between returned number of solr results and queries!")
     # make sure results are in correct order with NAs for missing results
-    rdf$short_form[match(ids, rdf$label)]
+    if(synonyms) {
+      # the synonym field may have multiple entries per row
+      indices=rep(seq_len(nrow(rdf)), sapply(rdf$synonym, length))
+      all_syns=unlist(rdf$synonym, use.names = FALSE)
+      targetdf=data.frame(index=indices, syn=all_syns, stringsAsFactors = FALSE)
+      qdf=data.frame(id=ids, stringsAsFactors = FALSE)
+      m=merge(qdf, targetdf, by.x='id', by.y='syn', all.x=TRUE, sort=FALSE)
+      rdf$short_form[m$index]
+    } else rdf$short_form[match(ids, rdf$label)]
   } else {
     # wild card results - ordering/missing values undefined
     rdf$short_form
